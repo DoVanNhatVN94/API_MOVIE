@@ -24,3 +24,6 @@ import
 (import React from 'react';
 import OwlCarousel from 'react-owl-carousel2';
 import 'react-owl-carousel2/style.css';) in component when using
+  
+# INSTALL ANT Design
+  npm i antd
