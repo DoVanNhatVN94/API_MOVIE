@@ -9,7 +9,7 @@ import { rootReducer } from "./RootReducer/RootReducer";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-import 'antd/dist/antd.css';
+
 
 const store = createStore(rootReducer);
 

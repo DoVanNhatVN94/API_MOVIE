@@ -1,12 +1,13 @@
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import HomePage from "./component/page/HomePage/HomePage";
-import AdminPage from "./component/page/AdminPage/AdminPage";
+import HomePage from "./page/HomePage/HomePage";
+import AdminPage from "./page/AdminPage/AdminPage";
 
-import DetailPage from "./component/page/DetailPage/DetailPage";
+import DetailPage from "./page/DetailPage/DetailPage";
 import { NavAndBookTicker } from "./component/Feutures/Temp/NavAndBookTicker";
-import Login from "./component/page/Login/Login";
-import Register from "./component/page/Register/Register";
+import Login from "./page/Login/Login";
+import Register from "./page/Register/Register";
+// import  'antd/dist/antd.css';
 
 function App() {
   return (
