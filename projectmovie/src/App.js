@@ -8,7 +8,6 @@ import { NavAndBookTicker } from "./component/Feutures/Temp/NavAndBookTicker";
 import Login from "./page/Login/Login";
 import Register from "./page/Register/Register";
 import  'antd/dist/antd.css';
-
 function App() {
   return (
     <BrowserRouter>
