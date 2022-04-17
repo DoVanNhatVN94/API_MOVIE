@@ -5,7 +5,7 @@ import App from "./App";
 
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import { rootReducer } from "./RootReducer/RootReducer";
+import { rootReducer } from "./redux/RootReducer/RootReducer";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
