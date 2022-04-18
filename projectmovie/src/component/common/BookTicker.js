@@ -40,7 +40,7 @@ export default function BookTicker() {
           TokenCybersoft: TOKEN_MOVIE,
         },
       });
-
+      console.log(result.data.content);
       await setMangPhim(result.data.content);
     } catch (error) {
       console.log(error);
