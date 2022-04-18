@@ -11,10 +11,12 @@ npm i react-redux --save
 # REACT-ROUTER-DOM VER 5.3.0
 npm i react-router-dom@5.3.0
 
-
+# INSTALL BOOTSTRAP
 npm install --save bootstrap 
 
 import (import 'bootstrap/dist/css/bootstrap.min.css';  ) in Index.js
+
+# INSTALL React owl carousel2
 
 npm install react-owl-carousel2
 
