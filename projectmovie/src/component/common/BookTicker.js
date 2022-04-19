@@ -8,7 +8,7 @@ import {
 
 export default function BookTicker() {
   let [mangPhim, setMangPhim] = useState([]);
-
+  
   useEffect(() => {
     console.log("didmount");
     callAPI();
@@ -18,7 +18,7 @@ export default function BookTicker() {
     //map duyet mangPhim
     return mangPhim.map((phim) => {
       return (
-        <div className="col-3" key={phim.maPhim}>
+        <div className="col-2" key={phim.maPhim}>
           <div className="card">
             <img src={phim.hinhAnh} className="card-img-top" alt="..." />
             <div className="card-body">
@@ -48,7 +48,7 @@ export default function BookTicker() {
   };
 
   return (
-    <div className="container row">
+    <div className="container-fluid row">
       {console.log("render")}
       {renderPhim()}
     </div>

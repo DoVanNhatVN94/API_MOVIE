@@ -1,12 +1,13 @@
-import React from 'react'
-import BookTicker from '../../component/common/BookTicker'
-import CarouselListMovie from './CarouselListMovie'
+import React from "react";
+import BookTicker from "../../component/common/BookTicker";
+import CarouselListMovie from "./CarouselListMovie";
+import Modal from "./Modal";
 
 export default function HomePage() {
   return (
     <div>
-      <CarouselListMovie/>
-      <BookTicker/>
+      <Modal/>
+      <CarouselListMovie />
     </div>
-  )
+  );
 }
