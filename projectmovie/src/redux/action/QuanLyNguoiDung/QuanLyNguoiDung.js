@@ -25,23 +25,4 @@ export const dangKy = (thongTinND) => {
   };
 };
 
-export const layMangDs = async (api, type) => {
-  return(dispatch2)=>{
-    try {
-    let result =  axios({
-      method: "get",
-      url: api,
-      headers: {
-        TokenCybersoft: TOKEN_MOVIE,
-      },
-    });
-    console.log(result.data.content);
-     dispatch2({
-      type: type,
-      DS: result.data.content,
-    });
-  } catch (error) {
-    console.log(error);
-  }}
-  
-};
+

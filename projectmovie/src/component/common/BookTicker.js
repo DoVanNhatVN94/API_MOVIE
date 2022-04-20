@@ -1,17 +1,8 @@
-import React, { useEffect} from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 
-
-
-
 export default function BookTicker() {
-  const {arrMovie}=useSelector(state=>state.ListMovieReducer)
-  
-  console.log(arrMovie);
-  useEffect(() => {
-    console.log("didmount");
-    // callAPI();
-  }, []);
+  const { arrMovie } = useSelector((state) => state.ListMovieReducer);
 
   const renderPhim = () => {
     //map duyet mangPhim
@@ -30,25 +21,8 @@ export default function BookTicker() {
     });
   };
 
-  // const callAPI = async () => {
-  //   try {
-  //     let result = await axios({
-  //       method: "get",
-  //       url: QUAN_LY_PHIM_LAY_DANH_SACH_PHIM,
-  //       headers: {
-  //         TokenCybersoft: TOKEN_MOVIE,
-  //       },
-  //     });
-  //     console.log(result.data.content);
-  //     await setMangPhim(result.data.content);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   return (
     <div className="container-fluid row">
-      {console.log("render")}
       {renderPhim()}
     </div>
   );
