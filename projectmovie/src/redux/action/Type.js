@@ -1,0 +1,1 @@
+export const capNhapDanhSachPhim = "CAP_NHAP_DANH_SACH_PHIM";
