@@ -5,7 +5,7 @@ import Modal from "./Modal";
 
 export default function HomePage() {
   return (
-    <div>
+    <div className="my-5">
       <Modal/>
       <CarouselListMovie />
     </div>
