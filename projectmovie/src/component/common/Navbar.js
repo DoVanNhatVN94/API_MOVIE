@@ -102,7 +102,7 @@ export default function Navbar() {
                   type:"OPEN_MODAL",
                   Component: <Register />,
                   handleForm: ()=>{
-                    alert("Xử lý khi mở form Login");
+                    alert("Xử lý khi mở form Register");
                 }
                 });
               }}

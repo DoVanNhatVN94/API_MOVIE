@@ -1,9 +1,17 @@
-.title  
-{  
-        margin-bottom: 20px;  
-        padding:20px  
-}  
-.img  
-{  
-        height: 260px;width:100%  
-}  
+.title {
+  margin-bottom: 20px;
+  padding: 20px;
+}
+.img {
+  height: 260px;
+  width: 100%;
+}
+button {
+  border: none;
+  width: 100%;
+  transition: all 0.5s;
+}
+
+button:hover{
+        opacity: 0.8;
+}

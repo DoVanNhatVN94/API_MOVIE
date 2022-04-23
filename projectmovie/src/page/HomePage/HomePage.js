@@ -1,13 +1,14 @@
 import React from "react";
 
 import CarouselListMovie from "./CarouselListMovie";
-import Modal from "./Modal";
+import Modal from "../../component/common/Modal";
+import BookTicker from "./BookTicker"
 
 export default function HomePage() {
   return (
-    <div>
-      <Modal/>
+    <div className="my-5">
       <CarouselListMovie />
+      <BookTicker/>
     </div>
   );
 }

@@ -9,7 +9,19 @@ export default function InforOfMovieTheater() {
 
   const dispatch = useDispatch();
 
-  const renderCardLogoRap = () => {
+ 
+  const rederCumRap = () => {
+    return arrRap.map((rap, index) => {
+      return (
+        <div className="card" key={`rap ${index}`}>
+          <div className="card-body">
+            <h5 className="card-title">{rap.tenCumRap}</h5>
+          </div>
+        </div>
+      );
+    });
+  };
+ const renderCardLogoRap = () => {
     return arrMT.map((rap, index) => {
       return (
         <div className="card" key={`logo ${index}`}>
@@ -24,18 +36,7 @@ export default function InforOfMovieTheater() {
       );
     });
   };
-  const rederCumRap = () => {
-    return arrRap.map((rap, index) => {
-      return (
-        <div className="card" key={`rap ${index}`}>
-          <div className="card-body">
-            <h5 className="card-title">{rap.tenCumRap}</h5>
-          </div>
-        </div>
-      );
-    });
-  };
-
+  
   return (
     <div className="container">
       <div className="row">
