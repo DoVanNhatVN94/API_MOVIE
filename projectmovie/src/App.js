@@ -9,6 +9,7 @@ import Login from "./page/Login/Login";
 import Register from "./page/Register/Register";
 import {createBrowserHistory} from 'history'
 import { UserTemplate } from "./component/Feutures/Temp/UserTemplate";
+import Modal from "./component/common/Modal";
 
 export const history = createBrowserHistory()
 
@@ -20,10 +21,11 @@ function App() {
         <NavAndBookTicker exact path="/" component={HomePage} />
         <NavAndBookTicker exact path="/home" component={HomePage} />
         <NavAndBookTicker exact path="/admin" component={AdminPage} />
-        <Route exact path="/detail/:id" component={DetailPage}/>
+        <NavAndBookTicker exact path="/detail/:id" component={DetailPage}/>
         <UserTemplate exact path="/login" component={Login}/>
         <UserTemplate exact path="/register" component={Register}/>
       </Switch>
+      <Modal/>
       </div>
       
     </Router>

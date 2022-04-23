@@ -1,0 +1,11 @@
+.detail_bg{
+    max-height: 100vh;
+    min-height: 600px;
+}
+
+.popup-youtube{
+    color: brown;
+}
+.popup-youtube:hover{
+    color: orange;
+}
