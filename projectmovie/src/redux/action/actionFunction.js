@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { TOKEN_MOVIE } from "../../util/setting";
 
 export const LayDS = (api,actionType) => {
@@ -12,6 +13,7 @@ export const LayDS = (api,actionType) => {
         
       });
       promise.then((result) => {
+        console.log(result.data.content);
           let action = {
               type:actionType,
               DS:result.data.content
@@ -24,3 +26,14 @@ export const LayDS = (api,actionType) => {
       });
     };
   };
+// export const callAPI = async () => {
+  
+//     try {
+//       let result = await manager.getDSPhim()
+
+//       await console.log(result)
+//     }
+//     catch (error) {
+//       //khi bị lỗi 
+//         console.log(error)
+//     }}

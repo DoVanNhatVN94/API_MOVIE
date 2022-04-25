@@ -1,10 +1,16 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { LayDS } from "../../redux/action/actionFunction";
+import { capNhapDanhSachPhim } from "../../redux/action/Type";
+import { QUAN_LY_PHIM_LAY_DANH_SACH_PHIM } from "../../util/setting";
 
 export default function BookTicker() {
   const { arrMovie } = useSelector((state) => state.ListMovieReducer);
+  const dispatch = useDispatch()
   const history = useHistory();
+  useEffect(()=>{dispatch(LayDS(QUAN_LY_PHIM_LAY_DANH_SACH_PHIM, capNhapDanhSachPhim));},[])
+  
   const renderPhim = () => {
     //map duyet mangPhim
     return arrMovie.map((phim) => {

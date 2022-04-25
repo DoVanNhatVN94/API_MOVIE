@@ -1,30 +1,32 @@
 import axios from 'axios'
-import { urlChiTietPhim } from '../../../API/API'
+import manager, { urlChiTietPhim } from '../../../API/API'
 import { TOKEN_MOVIE } from '../../../util/setting'
 import { layBanner, layChiTietPhim } from '../Type'
 
 export const LayDanhSachBanner=(props)=>{
-    return(dispatch2)=>{
-        const promise = axios({
+    return async(dispatch2)=>{
+        const promise = await axios({
             method:"get",
             url:"https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachBanner",
             headers:{
                 "TokenCybersoft":TOKEN_MOVIE
             }
         })
-        promise.then((result)=>{
+       await  promise.then((result)=>{
             console.log(result.data.content);
             dispatch2({
                 type:layBanner,
                 DS:result.data.content
             })
         })
-        promise.catch((error)=>{
+        await promise.catch((error)=>{
             console.log(error);
         })
 
     }
 }
+
+
 
 export const LayChiTietPhim =(maPhim)=>{
     return(dispatch2)=>{

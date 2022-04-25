@@ -15,15 +15,21 @@ import {
   QUAN_LY_PHIM_LAY_DANH_SACH_PHIM,
   QUAN_LY_RAP_LAY_THONG_TIN_HE_THONG_RAP,
   QUAN_LY_RAP_LAY_THONG_TIN_LICH_CHIEU_HE_THONG_RAP,
+  TOKEN_MOVIE,
 } from "../../../util/setting";
+import Footer from "../../common/Footer";
 
 import InforOfMovieTheater from "../../common/InforOfMovieTheater";
-import Navbar from "../../common/Navbar";
+import Header from "../../common/Header";
+import manager from "../../../API/API";
+import axios from "axios";
 
-export const NavAndBookTicker = (props) => {
+
+
+export const MainTemplate = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(LayDS(QUAN_LY_PHIM_LAY_DANH_SACH_PHIM, capNhapDanhSachPhim));
+    // dispatch(LayDS(QUAN_LY_PHIM_LAY_DANH_SACH_PHIM, capNhapDanhSachPhim));
     dispatch(
       LayDS(QUAN_LY_RAP_LAY_THONG_TIN_HE_THONG_RAP, layThongTinHeThongRap)
     );
@@ -33,9 +39,12 @@ export const NavAndBookTicker = (props) => {
         LayThongTinHeThongRap
       )
     );
+
     dispatch(layThongTinRapTheoMaRap());
-    dispatch(LayDanhSachBanner());
+    // dispatch(LayDanhSachBanner());
   }, []);
+  
+  
 
   return (
     <Route
@@ -44,9 +53,10 @@ export const NavAndBookTicker = (props) => {
       render={(propsRoute) => {
         return (
           <Fragment>
-            <Navbar />
+            <Header />
             <props.component {...propsRoute} />
             <InforOfMovieTheater />
+            <Footer/>
           </Fragment>
         );
       }}
