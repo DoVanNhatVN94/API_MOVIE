@@ -6,7 +6,7 @@ import React from "react";
 import { dangKy } from '../../redux/action/QuanLyNguoiDung/QuanLyNguoiDung'
 import { GROUP_ID } from '../../util/setting';
 
-export default function Register(props) {
+export default function Register() {
   let dispatch = useDispatch()
   const formik = useFormik({
     initialValues: {

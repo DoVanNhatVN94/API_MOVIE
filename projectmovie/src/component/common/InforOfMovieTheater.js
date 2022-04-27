@@ -1,15 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { LayDS } from "../../redux/action/actionFunction";
 import { layThongTinRapTheoMaRap } from "../../redux/action/QuanLyRap/QuanLyRap";
+import { LayThongTinHeThongRap } from "../../redux/action/Type";
+import { QUAN_LY_RAP_LAY_THONG_TIN_LICH_CHIEU_HE_THONG_RAP } from "../../util/setting";
 
 export default function InforOfMovieTheater() {
-  const { arrMT, arrLichChieuMT, arrRap } = useSelector(
+  const { arrMT, arrRap } = useSelector(
     (state) => state.ListMovieTheaterReducer
   );
 
   const dispatch = useDispatch();
 
-  const renderCardLogoRap = () => {
+  
+
+ 
+  const rederCumRap = () => {
+    return arrRap.map((rap, index) => {
+      return (
+        <div className="card" key={`rap ${index}`}>
+          <div className="card-body">
+            <h5 className="card-title">{rap.tenCumRap}</h5>
+          </div>
+        </div>
+      );
+    });
+  };
+ const renderCardLogoRap = () => {
     return arrMT.map((rap, index) => {
       return (
         <div className="card" key={`logo ${index}`}>
@@ -24,18 +41,7 @@ export default function InforOfMovieTheater() {
       );
     });
   };
-  const rederCumRap = () => {
-    return arrRap.map((rap, index) => {
-      return (
-        <div className="card" key={`rap ${index}`}>
-          <div className="card-body">
-            <h5 className="card-title">{rap.tenCumRap}</h5>
-          </div>
-        </div>
-      );
-    });
-  };
-
+  
   return (
     <div className="container">
       <div className="row">

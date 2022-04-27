@@ -1,75 +1,77 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import "../../asset/css/owl.css";
+import { LayDanhSachBanner } from "../../redux/action/QuanLyPhim/QuanLyPhim";
+import manager from "../../API/API";
 
-export default class CarouselListMovie extends Component {
-  render() {
-    return (
-      <div>
-        <div className="container-fluid">
-          <div className="row title" style={{ marginBottom: "20px" }}>
-            <div className="col-sm-12 btn btn-info">
-              Owl Carousel In React Application
-            </div>
-          </div>
-        </div>
-        <div className="container-fluid">
-          <OwlCarousel
-            items={5}
-            className="owl-theme"
-            autoPlay={true}
-            loop
-            nav
-            margin={8}
+export default function CarouselListMovie() {
+  const dispatch = useDispatch();
+  const { arrBanner } = useSelector((state) => state.ListMovieReducer);
+  const history = useHistory();
+
+  // manager
+  //   .getDSBanner()
+  //   .then((result) => {
+  //     console.log(result.data.content);
+  //     dispatch({
+  //       type: LayDanhSachBanner,
+  //       DS: result.data.content,
+  //     });
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
+  const callAPI = async () => {
+    try {
+      let result = await manager.getDSBanner()
+      console.log(result.data.content);
+      await  dispatch({
+              type: LayDanhSachBanner,
+              DS: result.data.content,
+            });
+    } 
+    catch (error) {
+      //khi bị lỗi 
+        console.log(error)
+    }}
+
+useEffect(()=>{
+  callAPI()
+},[])
+  const rederItem = () => {
+    return arrBanner.map((banner, index) => {
+      return (
+        <div key={`banner ${index}`}>
+          <button
+            onClick={() => {
+              history.push(`/detail/${banner.maPhim}`);
+            }}
           >
-            <div>
-              <img
-                className="img"
-                src="https://picsum.photos/200/300?random=1"
-              />
-            </div>
-            <div>
-              <img
-                className="img"
-                src="https://picsum.photos/200/300?random=2"
-              />
-            </div>
-            <div>
-              <img
-                className="img"
-                src="https://picsum.photos/200/300?random=3"
-              />
-            </div>
-            <div>
-              <img
-                className="img"
-                src="https://picsum.photos/200/300?random=4"
-              />
-            </div>
-            <div>
-              <img
-                className="img"
-                src="https://picsum.photos/200/300?random=5"
-              />
-            </div>
-            <div>
-              <img
-                className="img"
-                src="https://picsum.photos/200/300?random=6"
-              />
-            </div>
-            <div>
-              <img
-                className="img"
-                src="https://picsum.photos/200/300?random=7"
-              />
-            </div>
-          </OwlCarousel>
+            <img className="img" src={banner.hinhAnh} />
+          </button>
         </div>
+      );
+    });
+  };
+
+  return (
+    <div>
+      <div className="container-fluid">
+        <OwlCarousel
+          items={3}
+          className="owl-theme"
+          autoPlay={true}
+          loop
+          nav
+          margin={10}
+        >
+          {rederItem()}
+        </OwlCarousel>
       </div>
-    );
-  }
+    </div>
+  );
 }
-//aaa

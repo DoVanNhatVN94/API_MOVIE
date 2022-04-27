@@ -1,0 +1,14 @@
+button,a,p,h1,h2,h3,h4,h5,h6,span,ul{
+    margin: 0;
+    padding: 0;
+}
+li{
+    list-style-type: none;
+}
+ul{
+    padding-left: 0;
+}
+.App .navbar{
+    padding-bottom: 0;
+    padding-top: 0;
+}

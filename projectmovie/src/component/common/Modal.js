@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 export default function Modal() {
   let { Component, handleForm } = useSelector((state) => state.ModalReducer);
+  handleForm()
   return (
     <div
       className="modal fade"
@@ -31,24 +32,6 @@ export default function Modal() {
             {Component}
 
             {/* <Component /> */}
-          </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
-            <button
-              onClick={() => {
-                handleForm();
-              }}
-              type="button"
-              className="btn btn-primary"
-            >
-              Save changes
-            </button>
           </div>
         </div>
       </div>
