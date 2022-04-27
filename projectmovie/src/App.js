@@ -17,6 +17,12 @@ import { useEffect } from "react";
 import { ktNDLogin } from "./redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
 import { Cart } from "./component/common/Cart/Cart";
 
+// devNam
+import { AdminTemplate } from "./component/Feutures/Temp/AdminTemplate";
+import AdminListFilm from "./page/AdminPage/AdminListFilm";
+import AdminAddFilm from "./page/AdminPage/AdminAddFilm";
+
+
 export const history = createBrowserHistory();
 
 function App() {
@@ -45,6 +51,10 @@ function App() {
           <MainTemplate exact path="/bookmovie/:id" component={BookMovie} />
           <UserTemplate exact path="/login" component={Login} />
           <UserTemplate exact path="/register" component={Register} />
+
+          <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
+
+          <AdminTemplate exact path="/admin/films/addnew" component={AdminAddFilm} />
         </Switch>
         <Modal />
         <Cart />
