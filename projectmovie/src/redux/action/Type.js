@@ -12,4 +12,6 @@ export const layChiTietPhim = "LAY_CHI_TIET_PHIM"
 
 export const ktLogin = "KIEN_TRA_NGUOI_DUNG_LOGIN"
 
+export const layDSPhimAD = "LAY_DS_PHIM_AD"
+
 // export const 
