@@ -1,0 +1,24 @@
+
+.feature-section{
+  overflow-x:auto;
+  background: rgb(34, 39, 43);
+  max-width: 100%;
+  max-height: 100vh;
+  height: 500px;
+}
+
+.chair {
+  height: 50px;
+  background-color: rgb(34, 39, 43);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  
+
+  text-align: center;
+  cursor: pointer;
+  
+}
+.chair_bg_stand {
+  background-image: url(../../img/chair/seat-standard.png);
+}

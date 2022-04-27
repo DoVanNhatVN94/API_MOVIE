@@ -28,8 +28,7 @@ export const QUAN_LY_DAT_VE_LAY_DANH_SACH_PHONG_VE =
 export const QUAN_LY_NGUOI_DUNG_DANG_KY =
   "https://movienew.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy";
 
-export const QUAN_LY_NGUOI_DUNG_DANG_NHAP =
-  "https://movienew.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap";
+
 
 export const QUAN_LY_PHIM_THEM_PHIM_UPLOAD_HINH =
   "https://movienew.cybersoft.edu.vn/api/QuanLyPhim/ThemPhimUploadHinh";

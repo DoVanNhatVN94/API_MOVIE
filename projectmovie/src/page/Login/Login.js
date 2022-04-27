@@ -47,7 +47,7 @@ export default function Login(props) {
           handleSubmit(event);
         }}
       >
-        <div className="form-group">
+        <div className="mb-3">
           <label htmlFor="exampleInputEmail1">UserName</label>
           <input
             onChange={(event) => {
@@ -60,7 +60,7 @@ export default function Login(props) {
             aria-describedby="emailHelp"
           />
         </div>
-        <div className="form-group">
+        <div className="mb-3">
           <label htmlFor="exampleInputPassword1">Password</label>
           <input
             onChange={(event) => {
@@ -72,19 +72,22 @@ export default function Login(props) {
             id="exampleInputPassword1"
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
+        <div className=" row">
+          <button type="submit" className="btn btn-primary col-md-6 col-12 w-25 mx-auto" data-bs-dismiss="modal"
+              aria-label="Close">
+            Login
+          </button>
 
-        <button
-          onClick={() => {
-            history.goBack();
-          }}
-          type="button"
-          className="btn btn-primary"
-        >
-          Go Back
-        </button>
+          <button
+            onClick={() => {
+              history.goBack();
+            }}
+            type="button"
+            className="btn btn-primary col-md-6 col-12 w-25 mx-auto"
+          >
+            Go Back
+          </button>
+        </div>
       </form>
     </div>
   );

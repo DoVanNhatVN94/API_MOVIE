@@ -38,7 +38,7 @@ export default function Register() {
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
-        <div className="form-group">
+        <div className="mb-3">
           <label>Tai khoan</label>
           <input
             onChange={formik.handleChange}
@@ -51,7 +51,7 @@ export default function Register() {
          <div className="alert alert-danger">{formik.errors.taiKhoan}</div>
        ) : null}
         </div>
-        <div className="form-group">
+        <div className="mb-3">
           <label>Mat khau</label>
           <input
             onChange={formik.handleChange}
@@ -64,7 +64,7 @@ export default function Register() {
          <div className="alert alert-danger">{formik.errors.matKhau}</div>
        ) : null}
         </div>
-        <div className="form-group">
+        <div className="mb-3">
           <label>Email </label>
           <input
             onChange={formik.handleChange}
@@ -77,7 +77,7 @@ export default function Register() {
          <div className="alert alert-danger">{formik.errors.email}</div>
        ) : null}
         </div>
-        <div className="form-group">
+        <div className="mb-3">
           <label>Sdt </label>
           <input
             onChange={formik.handleChange}
@@ -90,7 +90,7 @@ export default function Register() {
          <div className="alert alert-danger">{formik.errors.soDt}</div>
        ) : null}
         </div>
-        <div className="form-group">
+        <div className="mb-3">
           <label>Ho Ten </label>
           <input
             onChange={formik.handleChange}

@@ -12,3 +12,13 @@ ul{
     padding-bottom: 0;
     padding-top: 0;
 }
+.ant-back-top-icon{
+    background-color: wheat;
+    transition: all 0.5s;
+}
+.ant-back-top-content{
+    transition: all 0.5s;
+}
+.ant-back-top-content:hover{
+    transform: scale(1.5);
+}
