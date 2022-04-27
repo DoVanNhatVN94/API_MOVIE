@@ -1,7 +1,7 @@
 import axios from "axios";
 import {
+  http,
   QUAN_LY_NGUOI_DUNG_DANG_KY,
-  QUAN_LY_NGUOI_DUNG_DANG_NHAP,
   TOKEN_MOVIE,
 } from "../../../util/setting";
 import { history } from "../../../App";
@@ -32,23 +32,16 @@ export const dangKy = (thongTinND) => {
 
 export const dangNhap = (thongTinND) => {
   return (dispatch2) => {
-    let promise = axios({
-      method: "post",
-      url: QUAN_LY_NGUOI_DUNG_DANG_NHAP,
-      headers: {
-        TokenCybersoft: TOKEN_MOVIE,
-      },
-      data: thongTinND,
-    });
+    const promise = http.post('/api/QuanLyNguoiDung/DangNhap',thongTinND)
     promise.then((result) => {
-      console.log(result.data.messages);
-      const data = JSON.stringify(result.data.content.accessToken);
-      localStorage.setItem("accessToken", data);
-      history.replace();
-    });
-    promise.catch((error) => {
-      console.log(error);
-    });
+        console.log(result.data.messages);
+        const data = JSON.stringify(result.data.content.accessToken);
+        localStorage.setItem("accessToken", data);
+        history.replace();
+      });
+      promise.catch((error) => {
+        console.log(error);
+      });
   };
 };
 
@@ -59,7 +52,8 @@ export const ktNDLogin = () => {
       console.log(result.data.content);
       dispatch2({
         type: ktLogin,
-        user: result.data.content
+        user: result.data.content,
+        
       })
       
       

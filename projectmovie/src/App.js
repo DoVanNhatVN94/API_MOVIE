@@ -1,4 +1,5 @@
 import "./App.css";
+import { BackTop } from 'antd';
 import { Router, Switch, Redirect } from "react-router-dom";
 import HomePage from "./page/HomePage/HomePage";
 import AdminPage from "./page/AdminPage/AdminPage";
@@ -14,30 +15,29 @@ import BookMovie from "./page/BookMovie/BookMovie";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { ktNDLogin } from "./redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
+import { Cart } from "./component/common/Cart/Cart";
 
 export const history = createBrowserHistory();
 
 function App() {
-  const login = localStorage.getItem("accessToken");
-  // console.log(login);
   const dispatch = useDispatch();
 
-  // const { thongTinND } = useSelector((state) => state.UserReducer);
+  const { thongTinND } = useSelector((state) => state.UserReducer);
+  const ktLogin = thongTinND.maLoaiNguoiDung === "QuanTri";
 
-  // console.log(thongTinND);
-{ dispatch(ktNDLogin())}
- 
+  useEffect(() => {
+    dispatch(ktNDLogin());
+  }, []);
+
   return (
-    
     <Router history={history}>
-      
       <div className="App container-fluid">
         <Switch>
           <Redirect from="home" to="/" exact />
           <MainTemplate
             exact
             path="/"
-            component={login ? HomePage : AdminPage}
+            component={ktLogin ? AdminPage : HomePage}
           />
           <MainTemplate exact path="/home" component={HomePage} />
           <MainTemplate exact path="/admin" component={AdminPage} />
@@ -47,6 +47,8 @@ function App() {
           <UserTemplate exact path="/register" component={Register} />
         </Switch>
         <Modal />
+        <Cart />
+        <BackTop />
       </div>
     </Router>
   );

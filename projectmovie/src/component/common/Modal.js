@@ -2,8 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 export default function Modal() {
-  let { Component, handleForm } = useSelector((state) => state.ModalReducer);
-  handleForm()
+  let { Component,id } = useSelector((state) => state.ModalReducer);
   return (
     <div
       className="modal fade"
@@ -16,17 +15,16 @@ export default function Modal() {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
-              Modal title
+              {id}
             </h5>
             <button
               type="button"
-              className="close"
-              data-dismiss="modal"
+              className="btn-close"
+              data-bs-dismiss="modal"
               aria-label="Close"
-            >
-              <span aria-hidden="true">×</span>
-            </button>
+            />
           </div>
+
           <div className="modal-body">
             {/* {props.component} */}
             {Component}

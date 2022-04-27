@@ -1,5 +1,5 @@
 import axios from 'axios'
-import manager, { urlChiTietPhim } from '../../../API/API'
+import { urlChiTietPhim } from '../../../API/API'
 import { TOKEN_MOVIE } from '../../../util/setting'
 import { layBanner, layChiTietPhim } from '../Type'
 
