@@ -18,11 +18,8 @@ class Manager {
         return http.post('/api/QuanLyPhim/ThemPhimUploadHinh', formData)
     }
     
-<<<<<<< HEAD
     // devNam
 
-=======
->>>>>>> devNam5
     getTTlichChieuPhim=(maPhim)=>{
         return http.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`)
     }  
