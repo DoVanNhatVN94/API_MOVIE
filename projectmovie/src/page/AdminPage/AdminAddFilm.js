@@ -1,4 +1,7 @@
 import React, { Fragment, useState } from 'react';
+import { GROUP_ID } from '../../util/setting';
+import { useDispatch } from 'react-redux'; 
+import { themPhimMoi } from '../../redux/action/QuanLyPhim/ThemPhimMoiAD';
 import {
     Form,
     Input,
@@ -16,16 +19,31 @@ import {
 import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
 
 const FormSizeDemo = () => {
+
+    let dispatch = useDispatch();
+
     const [componentSize, setComponentSize] = useState('default');
-    const [user,setUserAccount] = useState({});
+    const [user, setUserAccount] = useState({
+        maNhom:GROUP_ID,
+        SapChieu: false,
+        DangChieu: false,
+        Hot: false,
+        danhGia: 0
+    });
     console.log(user)
 
     const onFormLayoutChange = ({ size }) => {
         setComponentSize(size);
     };
 
-    function onChange(e) {
-        console.log(`checked = ${e.target.checked}`);
+    function onChange(event) {
+        console.log(event)
+        let { name } = event.target;
+
+        setUserAccount({
+            ...user,
+            [name]: event.target.checked
+        })
     }
 
     const handleInput = (event) => {
@@ -35,6 +53,11 @@ const FormSizeDemo = () => {
             ...user,
             [name]: value
         })
+    }
+
+    const addNewMovie = (values) => {
+        let action = themPhimMoi(values);
+        dispatch(action)
     }
 
     return (
@@ -69,23 +92,31 @@ const FormSizeDemo = () => {
                 <Form.Item label="Trailer">
                     <Input name='trailer' onChange={(event) => {
                         handleInput(event)
-                    }}/>
+                    }} />
                 </Form.Item>
                 <Form.Item label="Mô tả">
-                    <Input />
+                    <Input name='moTa' onChange={(event) => {
+                        handleInput(event)
+                    }} />
                 </Form.Item>
                 <Form.Item label="Ngày khởi chiếu">
-                    <DatePicker />
+                    <Input name='ngayKhoiChieu' onChange={(event) => {
+                        handleInput(event)
+                    }} />
                 </Form.Item>
-                <Form.Item label="Tình trạng">
-                    <Radio value={1}>Đang chiếu</Radio>
-                    <Radio value={2}>Sắp chiếu</Radio>
+                <Form.Item label="Sắp chiếu">
+                    <Checkbox name='SapChieu' onChange={onChange}></Checkbox>
+                </Form.Item>
+                <Form.Item label="Đang chiếu">
+                    <Checkbox name='DangChieu' onChange={onChange}></Checkbox>
                 </Form.Item>
                 <Form.Item label="Hot">
-                    <Checkbox onChange={onChange}></Checkbox>
+                    <Checkbox name='Hot' onChange={onChange}></Checkbox>
                 </Form.Item>
                 <Form.Item label="Số sao">
-                    <Input />
+                    <Input name='danhGia' onChange={(event) => {
+                        handleInput(event)
+                    }} />
                 </Form.Item>
                 <Form.Item label="Hình ảnh">
                     <Upload name="logo" action="/upload.do" listType="picture">
@@ -93,7 +124,9 @@ const FormSizeDemo = () => {
                     </Upload>
                 </Form.Item>
                 <Form.Item label="Tác vụ">
-                    <Button type="primary">Thêm phim</Button>
+                    <Button onClick={() => { 
+                        addNewMovie(user)
+                     }} type="primary">Thêm phim</Button>
                 </Form.Item>
             </Form>
         </Fragment>

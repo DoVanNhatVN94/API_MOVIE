@@ -1,9 +1,20 @@
 import React, { Fragment, useEffect } from 'react'
+import { Button, Table } from 'antd';
+import { Input, Space } from 'antd';
+import { DeleteOutlined, SearchOutlined, EditOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux'
 import { layDSPhimAdmin } from '../../redux/action/QuanLyPhim/QuanLyPhimAD';
+import { NavLink } from 'react-router-dom';
+import { history } from '../../App';
+
+const { Search } = Input;
+
+const onSearch = value => console.log(value);
 
 export default function AdminListFilm() {
+
     let { arrMovie } = useSelector(state => state.ListMovieReducer);
+    console.log(arrMovie)
 
     let dispatch = useDispatch();
 
@@ -16,41 +27,81 @@ export default function AdminListFilm() {
         dispatch(actionFunc);
     }
 
-    const renderDSPhim = () => {
-        return arrMovie.map((phim) => {
-            return (
-                <tr key={phim.maPhim}>
-                    <td>{phim.maPhim}</td>
-                    <td>
-                        <img className='img-fluid' src={phim.hinhAnh} alt="" />
-                    </td>
-                    <td>{phim.tenPhim}</td>
-                    <td>{phim.moTa}</td>
-                    <td>
-                        <button className='btn btn-danger'>Xóa</button>
-                        <button className='btn btn-info'>Cập nhật</button>
-                    </td>
-                </tr>
-            )
-        })
+    const columns = [
+        {
+            title: 'Mã phim',
+            dataIndex: 'maPhim',
+            sorter: (a, b) => a.maPhim - b.maPhim,
+            sortDirections: ['descend', 'ascend'],
+            width: '15%'
+        },
+        {
+            title: 'Hình ảnh',
+            dataIndex: 'hinhAnh',
+            render: (text, film) => {
+                return <Fragment>
+                    <img src={film.hinhAnh} alt={film.tenPhim} width={50} height={50} onError={(e) => { e.target.onError = null; e.target.src = 'https://picsum.photos/50' }} />
+                </Fragment>
+            },
+            width: '15%'
+        },
+        {
+            title: 'Tên phim',
+            dataIndex: 'tenPhim',
+            sorter: (a, b) => {
+                let tenPhimA = a.tenPhim.toLowerCase().trim();
+                let tenPhimB = b.tenPhim.toLowerCase().trim();
+                if (tenPhimB > tenPhimA) {
+                    return 1
+                }
+                return -1
+            },
+            sortDirections: ['descend', 'ascend'],
+            width: '20%'
+        },
+        {
+            title: 'Mô tả phim',
+            dataIndex: 'moTa',
+            render: (text, film) => {
+                return <Fragment>
+                    {film.moTa.length > 50 ? film.moTa.substr(0, 50) + ' ...' : film.moTa}
+                </Fragment>
+            },
+            width: '30%'
+        },
+        {
+            title: 'Hành động',
+            dataIndex: 'moTa',
+            render: (text, film) => {
+                return <Fragment>
+                    <NavLink to='/edit' style={{ color: 'blue', fontSize: 25, paddingRight: 10 }}><EditOutlined /></NavLink>
+                    <NavLink to='/delete' style={{ color: 'red', fontSize: 25 }}><DeleteOutlined /></NavLink>
+                </Fragment>
+            },
+            width: '20%'
+        },
+    ];
+
+    const data = arrMovie;
+
+    function onChange(pagination, filters, sorter, extra) {
+        console.log('params', pagination, filters, sorter, extra);
     }
+
     return (
-        <Fragment>
-            <h2>Quản lý phim</h2>
-            <table className="table text-center">
-                <thead>
-                    <tr>
-                        <th scope="col">Mã phim</th>
-                        <th scope="col">Hình ảnh</th>
-                        <th scope="col">Tên phim</th>
-                        <th scope="col">Mô tả</th>
-                        <th scope="col">Hành động</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {renderDSPhim()}
-                </tbody>
-            </table>
-        </Fragment>
+        <div>
+            <h2 className='mb-5'>Quản lý phim</h2>
+            <Button className='mb-4' onClick={() => { 
+                history.push('/admin/films/addnew')
+             }}>Thêm phim</Button>
+            <Search
+                className='mb-4'
+                placeholder="input search text"
+                enterButton={<SearchOutlined />}
+                size="large"
+                onSearch={onSearch}
+            />
+            <Table columns={columns} dataSource={data} onChange={onChange} />
+        </div>
     )
 }

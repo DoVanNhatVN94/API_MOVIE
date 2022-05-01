@@ -39,3 +39,11 @@ ul {
   background-repeat: no-repeat;
   background-position: center; */
 }
+
+.ant-back-top-content:hover{
+    transform: scale(1.5);
+}
+.App a{
+ text-decoration: none;
+}
+
