@@ -53,8 +53,8 @@ function App() {
           <UserTemplate exact path="/register" component={Register} />
 
           <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
-
           <AdminTemplate exact path="/admin/films/addnew" component={AdminAddFilm} />
+
         </Switch>
         <Modal />
         <Cart />

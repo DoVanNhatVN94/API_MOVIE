@@ -22,3 +22,6 @@ ul{
 .ant-back-top-content:hover{
     transform: scale(1.5);
 }
+.App a{
+ text-decoration: none;
+}
