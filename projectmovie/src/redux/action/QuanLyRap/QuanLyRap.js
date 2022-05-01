@@ -1,25 +1,35 @@
-import axios from "axios";
-import { TOKEN_MOVIE } from "../../../util/setting";
-import { layThongTinRap } from "../Type";
 
-export const layThongTinRapTheoMaRap = (maRap = "CGV") => {
+import manager from "../../../API/API";
+import { layThongTinRap, layTTLichChieuPhim } from "../Type";
+
+
+export const QLRLayThongTinLichChieuPhim = (maPhim) => {
   return (dispatch2) => {
-    const promise = axios({
-      method: "get",
-      url: `https://movienew.cybersoft.edu.vn/api/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${maRap}`,
-      headers: {
-        TokenCybersoft: TOKEN_MOVIE,
-      },
+    const promise = manager.getTTlichChieuPhim(maPhim);
+    promise.then((result) => {
+      console.log(result.data.content);
+      dispatch2({
+        type: layTTLichChieuPhim,
+        data: result.data.content,
+      });
     });
-    promise.then((result)=>{
-        console.log(result.data.content);
-        dispatch2({
-            type:layThongTinRap,
-            DS:result.data.content
-        })
-    })
-    promise.catch((error)=>{
-        console.log(error);
-    })
+    promise.catch((error) => {
+      console.log(error);
+    });
   };
 };
+// export const QLRLayThongTinHeThongRap = (maRap = "CGV") => {
+//   return (dispatch2) => {
+//     const promise = manager.getTTCumRapTheoHeThong(maRap);
+//     promise.then((result) => {
+//       console.log(result.data.content);
+//       dispatch2({
+//         type: layThongTinRap,
+//         data: result.data.content,
+//       });
+//     });
+//     promise.catch((error)=>{
+//       console.log(error);
+//     })
+//   };
+// };

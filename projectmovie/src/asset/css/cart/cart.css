@@ -90,7 +90,7 @@
   color: wheat;
 }
 
-h2 {
+.side_nav h2 {
   color: wheat;
   -ms-flex-item-align: center;
   -ms-grid-row-align: center;

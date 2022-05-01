@@ -10,7 +10,6 @@ import { rootReducer } from "./redux/RootReducer/RootReducer";
 import 'bootstrap/dist/css/bootstrap.css';
 import "./index.css";
 
-
 const store = createStore(rootReducer,applyMiddleware(thunk));
 
 const rootElement = document.getElementById("root");

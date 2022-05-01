@@ -1,6 +1,7 @@
 import "./App.css";
-import { BackTop } from 'antd';
-import { Router, Switch, Redirect } from "react-router-dom";
+import { BackTop, Button, Space } from "antd";
+import { PoweroffOutlined } from "@ant-design/icons";
+import { Router, Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./page/HomePage/HomePage";
 import AdminPage from "./page/AdminPage/AdminPage";
 
@@ -13,7 +14,7 @@ import { UserTemplate } from "./component/Feutures/Temp/UserTemplate";
 import Modal from "./component/common/Modal";
 import BookMovie from "./page/BookMovie/BookMovie";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, Suspense, lazy } from "react";
 import { ktNDLogin } from "./redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
 import { Cart } from "./component/common/Cart/Cart";
 
@@ -21,40 +22,60 @@ import { Cart } from "./component/common/Cart/Cart";
 import { AdminTemplate } from "./component/Feutures/Temp/AdminTemplate";
 import AdminListFilm from "./page/AdminPage/AdminListFilm";
 import AdminAddFilm from "./page/AdminPage/AdminAddFilm";
+import { DetailTemplate } from "./component/Feutures/Temp/DetailTemplate";
 
+const BookTemplateLazy = lazy(() =>
+  import("./component/Feutures/Temp/BookTemplate")
+);
 
 export const history = createBrowserHistory();
 
 function App() {
   const dispatch = useDispatch();
 
-  const { thongTinND } = useSelector((state) => state.UserReducer);
-  const ktLogin = thongTinND.maLoaiNguoiDung === "QuanTri";
-
+  const maND = JSON.parse(localStorage.getItem("maLoaiNguoiDung"));
+  const checkLogin = maND === "QuanTri";
+dispatch(ktNDLogin());
   useEffect(() => {
-    dispatch(ktNDLogin());
-  }, []);
+    
+  }, [maND]);
+  console.log(checkLogin);
 
   return (
     <Router history={history}>
-      <div className="App container-fluid">
+      <div className="App">
         <Switch>
-          <Redirect from="home" to="/" exact />
-          <MainTemplate
-            exact
-            path="/"
-            component={ktLogin ? AdminPage : HomePage}
-          />
-          <MainTemplate exact path="/home" component={HomePage} />
-          <MainTemplate exact path="/admin" component={AdminPage} />
-          <MainTemplate exact path="/detail/:id" component={DetailPage} />
-          <MainTemplate exact path="/bookmovie/:id" component={BookMovie} />
+          
+          <Route exact path="/">
+            {checkLogin?<Redirect to='admin'/>:<Redirect to='home'/>}
+          </Route>
+
           <UserTemplate exact path="/login" component={Login} />
           <UserTemplate exact path="/register" component={Register} />
+          <MainTemplate exact path="/home" component={HomePage} />
+          <MainTemplate exact path="/admin" component={AdminPage} />
+          <DetailTemplate exact path="/detail/:id" component={DetailPage} />
+          <Suspense
+            fallback={
+              <Space style={{ width: "100%" }}>
+                <Button type="primary" icon={<PoweroffOutlined />} loading />
+              </Space>
+            }
+          >
+            <BookTemplateLazy
+              exact
+              path="/bookmovie/:id"
+              component={BookMovie}
+            />
+          </Suspense>
 
           <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
 
-          <AdminTemplate exact path="/admin/films/addnew" component={AdminAddFilm} />
+          <AdminTemplate
+            exact
+            path="/admin/films/addnew"
+            component={AdminAddFilm}
+          />
         </Switch>
         <Modal />
         <Cart />

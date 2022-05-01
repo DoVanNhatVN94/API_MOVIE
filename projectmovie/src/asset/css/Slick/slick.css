@@ -1,0 +1,19 @@
+.btn_button{
+    background-color: black;
+
+    height: 50vh;
+    min-height: 500px;
+    transition: all 0.5s;
+}
+.btn_button:hover{
+    transform: scale(0.9);
+}
+.slick_tenPhim{
+    font-size: 16px;
+    color: wheat;
+    
+}
+.slick_body{
+    background-color: black;
+    width: 100%;
+}
