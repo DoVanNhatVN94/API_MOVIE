@@ -1,10 +1,13 @@
 import React, { Fragment } from "react";
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 
 import Footer from "../../common/Footer";
 import HeaDer from "../../common/Header";
 
-export const MainTemplate = (props) => {
+const BookTemplate = (props) => {
+  const ktLogin = localStorage.getItem("accessToken");
+  console.log();
+  if (!ktLogin) return <Redirect to="/login" />;
   return (
     <Route
       exact
@@ -12,12 +15,13 @@ export const MainTemplate = (props) => {
       render={(propsRoute) => {
         return (
           <Fragment>
-            <HeaDer />
+              <HeaDer/>
             <props.component {...propsRoute} />
-            <Footer />
+            <Footer/>
           </Fragment>
         );
       }}
     />
   );
 };
+export default BookTemplate

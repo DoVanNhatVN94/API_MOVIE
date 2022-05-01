@@ -13,7 +13,7 @@ export default function DetailPage(props) {
 
   const { detailMovie } = useSelector((state) => state.ListMovieReducer);
 
-  console.log("thong tin phim lay ddc",detailMovie);
+
 
   useEffect(() => {
     dispatch(LayChiTietPhim(match.params.id));

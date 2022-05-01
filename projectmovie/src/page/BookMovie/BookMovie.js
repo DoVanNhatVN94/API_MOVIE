@@ -2,6 +2,7 @@ import React from "react";
 import "../../asset/css/BookMovie/BookMovie.css";
 
 export default function BookMovie() {
+  
   const arrChair = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const renderChair = (maGhe) => {
     return arrChair.map((chair, index) => {

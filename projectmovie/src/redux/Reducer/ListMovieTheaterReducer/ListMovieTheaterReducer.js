@@ -1,9 +1,11 @@
-import { LayThongTinHeThongRap, layThongTinHeThongRap, layThongTinRap,  } from "../../action/Type";
+import { layThongTinHeThongRap, layThongTinRap, layTTLichChieuPhim,  } from "../../action/Type";
 
 const ListMT = {
-  arrMT: [],
-  arrLichChieuMT:['1'],
-  arrRap:[]
+  arrRap:[],
+  objLichChieuTheoMaPhim:{
+    heThongRapChieu:[],
+  },
+  arrLC:[ ]
 };
 
 export const ListMovieTheaterReducer = (state = ListMT, action) => {
@@ -12,13 +14,14 @@ export const ListMovieTheaterReducer = (state = ListMT, action) => {
       state.arrMT = action.DS;
     return {...state}
 
-    case LayThongTinHeThongRap:
-      state.arrLichChieuMT = action.DS
-      return {...state} 
-
     case layThongTinRap:
-      state.arrRap=action.DS
+      state.arrRap=action.data
       return {...state}  
+
+    case layTTLichChieuPhim:
+      state.objLichChieuTheoMaPhim={...action.data}
+      state.arrRap=[...action.data.heThongRapChieu[0].cumRapChieu]
+      return {...state}
     default:
       return { ...state };
   }

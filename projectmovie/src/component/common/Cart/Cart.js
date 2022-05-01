@@ -7,7 +7,7 @@ import "../../../asset/css/cart/cart.css";
 export function Cart() {
   const [on,setOn] = useState(true)
   const list = localStorage.getItem("list")
-  console.log(list);
+
 
   const buy=()=>{
 
