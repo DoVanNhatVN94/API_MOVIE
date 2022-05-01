@@ -1,28 +1,76 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { LayDS } from "../../redux/action/actionFunction";
-import { capNhapDanhSachPhim } from "../../redux/action/Type";
-import { QUAN_LY_PHIM_LAY_DANH_SACH_PHIM } from "../../util/setting";
+
+import { QLRLayThongTinLichChieuPhim } from "../../redux/action/QuanLyRap/QuanLyRap";
+
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "../../asset/css/Slick/slick.css";
+import { ActionLayDSPhim } from "../../redux/action/QuanLyPhim/QuanLyPhim";
 
 export default function BookTicker() {
   const { arrMovie } = useSelector((state) => state.ListMovieReducer);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const history = useHistory();
-  useEffect(()=>{dispatch(LayDS(QUAN_LY_PHIM_LAY_DANH_SACH_PHIM, capNhapDanhSachPhim));},[])
-  
+  useEffect(() => {
+    dispatch(ActionLayDSPhim());
+  }, []);
+
+  const settings = {
+
+    dots: true,
+    infinite: true,
+    slidesToShow: 5,
+    slidesToScroll: 5,
+    autoplay: true,
+    speed: 3000,
+    autoplaySpeed: 2000,
+    // cssEase: "linear",
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   const renderPhim = () => {
     //map duyet mangPhim
     return arrMovie.map((phim) => {
       return (
-        <div className="col-2" key={phim.maPhim}>
-          <button onClick={() => {
-            history.push(`/detail/${phim.maPhim}`)
-          }} className="card">
+        <div className="slick_item" key={phim.maPhim}>
+          <button
+            onClick={() => {
+              dispatch(QLRLayThongTinLichChieuPhim(phim.maPhim));
+              history.push(`/detail/${phim.maPhim}`);
+            }}
+            className="card btn_button"
+          >
             <img src={phim.hinhAnh} className="card-img-top" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title">{phim.tenPhim}</h5>
-              <p className="card-text">{phim.moTa}</p>
+            <div className="card-body slick_body">
+              <h5 className="card-title slick_tenPhim">{phim.tenPhim}</h5>
             </div>
           </button>
         </div>
@@ -30,5 +78,9 @@ export default function BookTicker() {
     });
   };
 
-  return <div className="container-fluid row">{renderPhim()}</div>;
+  return (
+    <div className="container py-3">
+      <Slider {...settings}>{renderPhim()}</Slider>
+    </div>
+  );
 }

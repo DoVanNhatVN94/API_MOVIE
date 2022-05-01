@@ -6,7 +6,7 @@ import {
 } from "../../../util/setting";
 import { history } from "../../../App";
 import manager from "../../../API/API";
-import { ktLogin } from "../Type";
+import { ktLogin, loginError, loginSuccess } from "../Type";
 
 export const dangKy = (thongTinND) => {
   return (dispatch2) => {
@@ -32,16 +32,30 @@ export const dangKy = (thongTinND) => {
 
 export const dangNhap = (thongTinND) => {
   return (dispatch2) => {
-    const promise = http.post('/api/QuanLyNguoiDung/DangNhap',thongTinND)
+    const promise = http.post("/api/QuanLyNguoiDung/DangNhap", thongTinND);
     promise.then((result) => {
-        console.log(result.data.messages);
-        const data = JSON.stringify(result.data.content.accessToken);
-        localStorage.setItem("accessToken", data);
-        history.replace();
+      const data = JSON.stringify(result.data.content.accessToken);
+      const ma = JSON.stringify(result.data.content.maLoaiNguoiDung);
+      localStorage.setItem("accessToken", data);
+      localStorage.setItem("maLoaiNguoiDung", ma);
+      dispatch2({
+        type: ktLogin,
+        user: result.data.content,
       });
-      promise.catch((error) => {
-        console.log(error);
+      dispatch2({
+        type: loginSuccess,
+        message: result.data.message,
       });
+      if(history.location.pathname=="/login")
+      history.goBack()
+    });
+    promise.catch((error) => {
+      console.log(error);
+      dispatch2({
+        type: loginError,
+        message: "Tài Khoản Hoặc Mật Khẩu Không Đúng",
+      });
+    });
   };
 };
 
@@ -49,14 +63,10 @@ export const ktNDLogin = () => {
   return (dispatch2) => {
     const promise = manager.postNDlogin();
     promise.then((result) => {
-      console.log(result.data.content);
       dispatch2({
         type: ktLogin,
         user: result.data.content,
-        
-      })
-      
-      
+      });
     });
     promise.catch((error) => {
       console.log(error);

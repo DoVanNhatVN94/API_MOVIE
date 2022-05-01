@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { dangNhap } from "../../redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
+import { Form, Input, Button, Checkbox } from "antd";
+import Register from "../Register/Register";
 
 export default function Login(props) {
+  
   let [user, setUserAccount] = useState({
     taiKhoan: "",
     matKhau: "",
   });
 
-  const history = useHistory();
+  // const history = useHistory();
   const dispatch = useDispatch();
   const hanleInput = (event) => {
     let { value, name } = event.target;
@@ -19,76 +21,108 @@ export default function Login(props) {
       [name]: value,
     });
   };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // if(user.username ==="cyber"){
-    //đăng nhap thành công
-    // Home1 -> Login push Home2
-    // => back tro lai Login
-    // props.history.push("/home");
-
-    //Home1 -> Login replace Home2
-    //=> back tro lai Home1
-    //     history.replace("/home");
-    // }else{
-
-    //   alert("Tài khoản không đúng")
-    // }
-
+  console.log(user);
+  const onFinish = (values) => {
+    const { taiKhoan, matKhau } = values;
+    setUserAccount({
+      taiKhoan: taiKhoan,
+      matKhau: matKhau,
+    });
     dispatch(dangNhap(user));
-    history.push("/home");
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
   };
 
   return (
-    <div className="container">
-      <form
-        onSubmit={(event) => {
-          handleSubmit(event);
+    <Form
+      name="basic"
+      labelCol={{
+        span: 8,
+      }}
+      wrapperCol={{
+        span: 16,
+      }}
+      initialValues={{
+        remember: true,
+      }}
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      autoComplete="off"
+    >
+      <Form.Item
+        label="Username"
+        name="taiKhoan"
+        rules={[
+          {
+            required: true,
+            message: "Please input your username!",
+          },
+        ]}
+      >
+        <Input
+          name="taiKhoan"
+          onChange={(event) => {
+            hanleInput(event);
+          }}
+        />
+      </Form.Item>
+
+      <Form.Item
+        label="Password"
+        name="matKhau"
+        rules={[
+          {
+            required: true,
+            message: "Please input your password!",
+          },
+        ]}
+      >
+        <Input.Password
+          name="matKhau"
+          onChange={(event) => {
+            hanleInput(event);
+          }}
+        />
+      </Form.Item>
+
+      <Form.Item
+        name="remember"
+        valuePropName="checked"
+        wrapperCol={{
+          offset: 8,
+          span: 16,
         }}
       >
-        <div className="mb-3">
-          <label htmlFor="exampleInputEmail1">UserName</label>
-          <input
-            onChange={(event) => {
-              hanleInput(event);
-            }}
-            name="taiKhoan"
-            type="text"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputPassword1">Password</label>
-          <input
-            onChange={(event) => {
-              hanleInput(event);
-            }}
-            name="matKhau"
-            type="password"
-            className="form-control"
-            id="exampleInputPassword1"
-          />
-        </div>
-        <div className=" row">
-          <button type="submit" className="btn btn-primary col-md-6 col-12 w-25 mx-auto" data-bs-dismiss="modal"
-              aria-label="Close">
-            Login
-          </button>
+        <Checkbox>Remember me</Checkbox>
+      </Form.Item>
 
-          <button
-            onClick={() => {
-              history.goBack();
-            }}
-            type="button"
-            className="btn btn-primary col-md-6 col-12 w-25 mx-auto"
-          >
-            Go Back
-          </button>
-        </div>
-      </form>
-    </div>
+      <Form.Item
+        wrapperCol={{
+          offset: 8,
+          span: 16,
+        }}
+      >
+        <Button type="primary" htmlType="submit"  data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop">
+          login
+        </Button>
+        <Button
+          type="success"
+          htmlType="button"
+          onClick={() => {
+            dispatch({
+              type: "OPEN_MODAL",
+              Component: <Register />,
+              id: "Register",
+            });
+          }}
+        >
+          Register
+        </Button>
+        
+      </Form.Item>
+    </Form>
   );
 }

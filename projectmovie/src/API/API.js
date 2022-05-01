@@ -17,6 +17,15 @@ class Manager {
     themPhimUploadHinh = (formData) => {
         return http.post('/api/QuanLyPhim/ThemPhimUploadHinh', formData)
     }
+    
+    // devNam
+
+    getTTlichChieuPhim=(maPhim)=>{
+        return http.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`)
+    }  
+    // getTTCumRapTheoHeThong=(maRap)=>{
+    //     return http.get(`/api/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${maRap}`)
+    // }
 }
 const manager = new Manager()
 export default manager

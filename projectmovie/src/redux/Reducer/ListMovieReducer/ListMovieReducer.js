@@ -1,4 +1,4 @@
-import { capNhapDanhSachPhim, layBanner, layChiTietPhim, layDSPhimAD } from "../../action/Type";
+import { layBanner, layChiTietPhim, layDSPhimAD, TypeLayDSPHIM } from "../../action/Type";
 
 const ListMovie = {
   arrMovie: [],
@@ -8,7 +8,7 @@ const ListMovie = {
 
 export const ListMovieReducer = (state = ListMovie, action) => {
   switch (action.type) {
-    case capNhapDanhSachPhim:
+    case TypeLayDSPHIM:
       state.arrMovie = action.DS;
 
       return { ...state };

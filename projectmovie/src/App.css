@@ -1,27 +1,49 @@
-button,a,p,h1,h2,h3,h4,h5,h6,span,ul{
-    margin: 0;
-    padding: 0;
+button,
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+ul {
+  margin: 0;
+  padding: 0;
 }
-li{
-    list-style-type: none;
+li {
+  list-style-type: none;
 }
-ul{
-    padding-left: 0;
+ul {
+  padding-left: 0;
 }
-.App .navbar{
-    padding-bottom: 0;
-    padding-top: 0;
+.App .navbar {
+  padding-bottom: 0;
+  padding-top: 0;
 }
-.ant-back-top-icon{
-    background-color: wheat;
-    transition: all 0.5s;
+.ant-back-top-icon {
+  background-color: wheat;
+  transition: all 0.5s;
 }
-.ant-back-top-content{
-    transition: all 0.5s;
+.ant-back-top-content {
+  transition: all 0.5s;
 }
+.ant-back-top-content:hover {
+  transform: scale(1.5);
+}
+.App {
+  /* background-image: url(./asset/img/bg/death-stranding_gp02.jpg); */
+  background-color: rgba(0, 0, 0, 0.681);
+  /* background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center; */
+}
+
 .ant-back-top-content:hover{
     transform: scale(1.5);
 }
 .App a{
  text-decoration: none;
 }
+
