@@ -22,6 +22,7 @@ import { Cart } from "./component/common/Cart/Cart";
 import { AdminTemplate } from "./component/Feutures/Temp/AdminTemplate";
 import AdminListFilm from "./page/AdminPage/AdminListFilm";
 import AdminAddFilm from "./page/AdminPage/AdminAddFilm";
+import AdminShowTime from "./page/AdminPage/AdminShowTime";
 import { DetailTemplate } from "./component/Feutures/Temp/DetailTemplate";
 
 const BookTemplateLazy = lazy(() =>
@@ -35,9 +36,9 @@ function App() {
 
   const maND = JSON.parse(localStorage.getItem("maLoaiNguoiDung"));
   const checkLogin = maND === "QuanTri";
-dispatch(ktNDLogin());
+  dispatch(ktNDLogin());
   useEffect(() => {
-    
+
   }, [maND]);
   console.log(checkLogin);
 
@@ -45,16 +46,18 @@ dispatch(ktNDLogin());
     <Router history={history}>
       <div className="App">
         <Switch>
-          
+
           <Route exact path="/">
-            {checkLogin?<Redirect to='admin'/>:<Redirect to='home'/>}
+            {checkLogin ? <Redirect to='admin' /> : <Redirect to='home' />}
           </Route>
 
           <UserTemplate exact path="/login" component={Login} />
           <UserTemplate exact path="/register" component={Register} />
           <MainTemplate exact path="/home" component={HomePage} />
-          <MainTemplate exact path="/admin" component={AdminPage} />
+          <AdminTemplate exact path="/admin" component={AdminPage} />
           <DetailTemplate exact path="/detail/:id" component={DetailPage} />
+          <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
+          <AdminTemplate exact path="/admin/films/addnew" component={AdminAddFilm} />
           <Suspense
             fallback={
               <Space style={{ width: "100%" }}>
@@ -68,15 +71,6 @@ dispatch(ktNDLogin());
               component={BookMovie}
             />
           </Suspense>
-
-          <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
-
-
-          <AdminTemplate
-            exact
-            path="/admin/films/addnew"
-            component={AdminAddFilm}
-          />
 
         </Switch>
         <Modal />

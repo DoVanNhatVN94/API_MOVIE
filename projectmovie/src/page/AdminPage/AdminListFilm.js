@@ -33,7 +33,7 @@ export default function AdminListFilm() {
             dataIndex: 'maPhim',
             sorter: (a, b) => a.maPhim - b.maPhim,
             sortDirections: ['descend', 'ascend'],
-            width: '15%'
+            width: '15%',
         },
         {
             title: 'Hình ảnh',
@@ -43,7 +43,7 @@ export default function AdminListFilm() {
                     <img src={film.hinhAnh} alt={film.tenPhim} width={50} height={50} onError={(e) => { e.target.onError = null; e.target.src = 'https://picsum.photos/50' }} />
                 </Fragment>
             },
-            width: '15%'
+            width: '15%',
         },
         {
             title: 'Tên phim',
@@ -57,7 +57,7 @@ export default function AdminListFilm() {
                 return -1
             },
             sortDirections: ['descend', 'ascend'],
-            width: '20%'
+            width: '20%',
         },
         {
             title: 'Mô tả phim',
@@ -67,18 +67,18 @@ export default function AdminListFilm() {
                     {film.moTa.length > 50 ? film.moTa.substr(0, 50) + ' ...' : film.moTa}
                 </Fragment>
             },
-            width: '30%'
+            width: '30%',
         },
         {
             title: 'Hành động',
-            dataIndex: 'moTa',
+            dataIndex: 'hanhDong',
             render: (text, film) => {
                 return <Fragment>
                     <NavLink to='/edit' style={{ color: 'blue', fontSize: 25, paddingRight: 10 }}><EditOutlined /></NavLink>
                     <NavLink to='/delete' style={{ color: 'red', fontSize: 25 }}><DeleteOutlined /></NavLink>
                 </Fragment>
             },
-            width: '20%'
+            width: '20%',
         },
     ];
 
@@ -91,9 +91,9 @@ export default function AdminListFilm() {
     return (
         <div>
             <h2 className='mb-5'>Quản lý phim</h2>
-            <Button className='mb-4' onClick={() => { 
+            <Button className='mb-4' onClick={() => {
                 history.push('/admin/films/addnew')
-             }}>Thêm phim</Button>
+            }}>Thêm phim</Button>
             <Search
                 className='mb-4'
                 placeholder="input search text"
@@ -101,7 +101,7 @@ export default function AdminListFilm() {
                 size="large"
                 onSearch={onSearch}
             />
-            <Table columns={columns} dataSource={data} onChange={onChange} />
+            <Table columns={columns} dataSource={data} onChange={onChange}/>
         </div>
     )
 }
