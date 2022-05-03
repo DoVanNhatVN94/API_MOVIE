@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 button,
 a,
 p,
@@ -11,6 +16,9 @@ span,
 ul {
   margin: 0;
   padding: 0;
+}
+p {
+  margin-bottom: 0;
 }
 li {
   list-style-type: none;
@@ -34,16 +42,15 @@ ul {
 }
 .App {
   /* background-image: url(./asset/img/bg/death-stranding_gp02.jpg); */
-  background-color: rgba(0, 0, 0, 0.681);
+
   /* background-size: contain;
   background-repeat: no-repeat;
   background-position: center; */
 }
 
-.ant-back-top-content:hover{
-    transform: scale(1.5);
+.ant-back-top-content:hover {
+  transform: scale(1.5);
 }
-.App a{
- text-decoration: none;
+.App a {
+  text-decoration: none;
 }
-

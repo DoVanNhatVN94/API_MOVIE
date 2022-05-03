@@ -3,6 +3,7 @@ import { ktLogin, loginError, loginSuccess } from "../../action/Type";
 const user = {
   thongTinND: {},
   message: "",
+  
 };
 
 export const UserReducer = (state = user, action) => {

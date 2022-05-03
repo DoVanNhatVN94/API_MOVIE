@@ -13,8 +13,8 @@ import { createBrowserHistory } from "history";
 import { UserTemplate } from "./component/Feutures/Temp/UserTemplate";
 import Modal from "./component/common/Modal";
 import BookMovie from "./page/BookMovie/BookMovie";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, Suspense, lazy } from "react";
+import { useDispatch } from "react-redux";
+import { Suspense, lazy } from "react";
 import { ktNDLogin } from "./redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
 import { Cart } from "./component/common/Cart/Cart";
 
@@ -23,6 +23,7 @@ import { AdminTemplate } from "./component/Feutures/Temp/AdminTemplate";
 import AdminListFilm from "./page/AdminPage/AdminListFilm";
 import AdminAddFilm from "./page/AdminPage/AdminAddFilm";
 import { DetailTemplate } from "./component/Feutures/Temp/DetailTemplate";
+import Loading from "./component/Loading/Loading";
 
 const BookTemplateLazy = lazy(() =>
   import("./component/Feutures/Temp/BookTemplate")
@@ -35,19 +36,17 @@ function App() {
 
   const maND = JSON.parse(localStorage.getItem("maLoaiNguoiDung"));
   const checkLogin = maND === "QuanTri";
-dispatch(ktNDLogin());
-  useEffect(() => {
-    
-  }, [maND]);
+  dispatch(ktNDLogin());
+
   console.log(checkLogin);
 
   return (
     <Router history={history}>
       <div className="App">
+        <Loading/>
         <Switch>
-          
           <Route exact path="/">
-            {checkLogin?<Redirect to='admin'/>:<Redirect to='home'/>}
+            {checkLogin ? <Redirect to="admin" /> : <Redirect to="home" />}
           </Route>
 
           <UserTemplate exact path="/login" component={Login} />
@@ -71,13 +70,11 @@ dispatch(ktNDLogin());
 
           <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
 
-
           <AdminTemplate
             exact
             path="/admin/films/addnew"
             component={AdminAddFilm}
           />
-
         </Switch>
         <Modal />
         <Cart />

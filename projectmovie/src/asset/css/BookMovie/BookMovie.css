@@ -1,24 +1,72 @@
-
-.feature-section{
-  overflow-x:auto;
-  background: rgb(34, 39, 43);
-  max-width: 100%;
-  max-height: 100vh;
-  height: 500px;
+.bookmovie_cart {
+  background-color: white;
 }
 
+
+.feature-section {
+
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  padding-bottom: 50px;
+}
+.feature-section .row .col-1 {
+  padding-left: 0;
+  padding-right: 0;
+}
+.screen-thumb img {
+  width: 80%;
+}
+.shadow_manHinh{
+  background: transparent;
+  border-bottom: 50px solid rgba(0, 0, 0, 0.774);
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  height: 0;
+  width: 70%;
+  opacity: .2;
+ 
+}
+.allChair {
+  width: 100%;
+}
 .chair {
-  height: 50px;
-  background-color: rgb(34, 39, 43);
+  height: 40px;
+  width: 40px;
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  
 
   text-align: center;
+  color: black;
   cursor: pointer;
-  
 }
+.chair_bg {
+  background-image: url(../../img/chair/seat.png);
+}
+.chair_bg_vip {
+  background-image: url(../../img/chair/seat-vip.png);
+}
+
 .chair_bg_stand {
   background-image: url(../../img/chair/seat-standard.png);
+}
+.chair_bg_selected {
+  background-image: url(../../img/chair/seat-selected.png);
+  cursor: no-drop;
+}
+.chair_bg_user {
+  background-image: url(../../img/chair/seat-sw.png) ;
+}
+.chair_bg_guest {
+  background-image: url(../../img/chair/seat-selected.png);
+  background-color: black;
+  cursor: no-drop;
+}
+@media screen and (max-width: 1115px) {
+  .chair {
+    height: 30px;
+    width: 30px;
+    font-size: 12px;
+  }
 }

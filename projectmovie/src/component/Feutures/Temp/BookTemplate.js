@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { Redirect, Route } from "react-router-dom";
 
-import Footer from "../../common/Footer";
 import HeaDer from "../../common/Header";
 
 const BookTemplate = (props) => {
@@ -15,13 +14,13 @@ const BookTemplate = (props) => {
       render={(propsRoute) => {
         return (
           <Fragment>
-              <HeaDer/>
+            <HeaDer />
             <props.component {...propsRoute} />
-            <Footer/>
+            
           </Fragment>
         );
       }}
     />
   );
 };
-export default BookTemplate
+export default BookTemplate;
