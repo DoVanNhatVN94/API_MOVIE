@@ -2,16 +2,24 @@ import { http } from "../util/setting"
 
 export const urlChiTietPhim = "https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayThongTinPhim?MaPhim="
 
- class Manager {
-    getDSPhim= ()=>{
+class Manager {
+    getDSPhim = () => {
         return http.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP02`)
     }
-    getDSBanner=()=>{
+    getDSBanner = () => {
         return http.get('/api/QuanLyPhim/LayDanhSachBanner')
     }
-    postNDlogin=()=>{
+    postNDlogin = () => {
         return http.post('/api/QuanLyNguoiDung/ThongTinTaiKhoan')
-    } 
+    }
+
+    // devNam
+    themPhimUploadHinh = (formData) => {
+        return http.post('/api/QuanLyPhim/ThemPhimUploadHinh', formData)
+    }
+    
+    // devNam
+
     getTTlichChieuPhim=(maPhim)=>{
         return http.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`)
     }  
@@ -26,5 +34,5 @@ export const urlChiTietPhim = "https://movienew.cybersoft.edu.vn/api/QuanLyPhim/
         return http.post('/api/QuanLyNguoiDung/ThongTinTaiKhoan')
     }
 }
-const  manager = new Manager()
+const manager = new Manager()
 export default manager

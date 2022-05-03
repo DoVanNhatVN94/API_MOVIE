@@ -90,7 +90,6 @@ export const AdminTemplate = (props) => {
                         <div
                             className="site-layout-background"
                             style={{
-                                padding: 24,
                                 minHeight: 360,
                             }}
                         >
