@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouteMatch } from "react-router-dom";
+import { NavLink, useRouteMatch } from "react-router-dom";
 
 import { layThongTinRap } from "../../redux/action/Type";
 
@@ -60,7 +60,12 @@ export default function InforOfMovieTheater() {
             <div className="card-body col-11">
               <h5 className="card-title">{rap.tenCumRap}</h5>
               <div className="row">{rap.lichChieuPhim?.slice(0,12).map((lc,index)=>{
-                return <div className="col-1 text-danger" key={`lc ${index}`}>{moment(lc.ngayChieuGioChieu).format('hh:mm:A') }</div>
+                return <div className="col-1 text-danger" key={`lc ${index}`}>
+                  <NavLink to={`/bookmovie/${lc.maLichChieu}`}>
+                    {moment(lc.ngayChieuGioChieu).format('hh:mm:A') }
+                  </NavLink>
+                  
+                  </div>
               })}</div>
             </div>
           </div>

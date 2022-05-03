@@ -2,14 +2,15 @@ import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import { Result, Button } from "antd";
+
 export default function Modal() {
-  const history = useHistory()
+  const history = useHistory();
   let { Component, id } = useSelector((state) => state.ModalReducer);
   const { message } = useSelector((state) => state.UserReducer);
   const maND = JSON.parse(localStorage.getItem("maLoaiNguoiDung"));
-  
+  const check = localStorage.getItem("accessToken");
   const checkButtonLogin = () => {
-    const check = localStorage.getItem("accessToken");
     if (check == null)
       return (
         <button
@@ -46,26 +47,11 @@ export default function Modal() {
               />
             </div>
 
-            <div className="modal-body">
-              {/* {props.component} */}
-              {Component}
-
-              {/* <Component /> */}
-            </div>
+            <div className="modal-body">{Component}</div>
           </div>
         </div>
       </div>
       <div>
-        {/* Button trigger modal */}
-        {/* <button
-          type="button"
-          className="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#staticBackdrop"
-        >
-          Launch static backdrop modal
-        </button> */}
-        {/* Modal */}
         <div
           className="modal fade"
           id="staticBackdrop"
@@ -77,31 +63,27 @@ export default function Modal() {
         >
           <div className="modal-dialog">
             <div className="modal-content">
-              <div className="modal-header">
+              <div className="modal-header mx-auto">
                 <h1
                   className="modal-title text-success"
                   id="staticBackdropLabel"
                 >
-                  {message}
+                  {check == null ? (
+                     message 
+                  ) : (
+                    <Result status="success" title={message} />
+                  )}
                 </h1>
-                {/* <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                /> */}
               </div>
-              {/* <div className="modal-body">...</div> */}
+
               <div className="modal-footer">
                 <button
                   type="button"
                   className="btn btn-outline-secondary"
                   data-bs-dismiss="modal"
-                  onClick={()=>{
-                    console.log(maND=="QuanTri");
-                    if(maND=="QuanTri")
-                    history.push("/admin")
-                    
+                  onClick={() => {
+                    console.log(maND == "QuanTri");
+                    if (maND == "QuanTri") history.push("/admin");
                   }}
                 >
                   Close

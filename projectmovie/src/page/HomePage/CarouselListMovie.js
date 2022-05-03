@@ -27,7 +27,7 @@ useEffect(()=>{
               history.push(`/detail/${banner.maPhim}`);
             }}
           >
-            <img className="img" src={banner.hinhAnh} />
+            <img className="img" src={banner.hinhAnh} alt="" />
           </button>
         </div>
       );

@@ -46,8 +46,7 @@ export const dangNhap = (thongTinND) => {
         type: loginSuccess,
         message: result.data.message,
       });
-      if(history.location.pathname=="/login")
-      history.goBack()
+      if (history.location.pathname === "/login") history.goBack();
     });
     promise.catch((error) => {
       console.log(error);
@@ -63,6 +62,7 @@ export const ktNDLogin = () => {
   return (dispatch2) => {
     const promise = manager.postNDlogin();
     promise.then((result) => {
+      console.log("login", result.status);
       dispatch2({
         type: ktLogin,
         user: result.data.content,
@@ -73,3 +73,4 @@ export const ktNDLogin = () => {
     });
   };
 };
+

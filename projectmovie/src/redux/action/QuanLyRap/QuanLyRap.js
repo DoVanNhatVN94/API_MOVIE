@@ -1,6 +1,6 @@
 
 import manager from "../../../API/API";
-import { layThongTinRap, layTTLichChieuPhim } from "../Type";
+import {layTTLichChieuPhim } from "../Type";
 
 
 export const QLRLayThongTinLichChieuPhim = (maPhim) => {
