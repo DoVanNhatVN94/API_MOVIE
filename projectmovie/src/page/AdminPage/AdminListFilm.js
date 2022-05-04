@@ -23,7 +23,7 @@ export default function AdminListFilm() {
     }, [])
 
     const callAPI = () => {
-        const actionFunc = layDSPhimAdmin("GP02");
+        const actionFunc = layDSPhimAdmin();
         dispatch(actionFunc);
     }
 

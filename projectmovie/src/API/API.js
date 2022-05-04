@@ -1,38 +1,47 @@
-import { http } from "../util/setting"
-
-export const urlChiTietPhim = "https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayThongTinPhim?MaPhim="
+import { http } from "../util/setting";
 
 class Manager {
-    getDSPhim = () => {
-        return http.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP02`)
-    }
-    getDSBanner = () => {
-        return http.get('/api/QuanLyPhim/LayDanhSachBanner')
-    }
-    postNDlogin = () => {
-        return http.post('/api/QuanLyNguoiDung/ThongTinTaiKhoan')
-    }
+  //Lay DS PHIM Cho user va admin
+  getDSPhim = () => {
+    return http.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP02`);
+  };
+  getDSBanner = () => {
+    return http.get("/api/QuanLyPhim/LayDanhSachBanner");
+  };
+  postNDlogin = () => {
+    return http.post("/api/QuanLyNguoiDung/ThongTinTaiKhoan");
+  };
+  postLogin = (user) => {
+    return http.post("/api/QuanLyNguoiDung/DangNhap", user);
+  };
+  postDangKy = (user) => {
+    return http.post("/api/QuanLyNguoiDung/DangKy", user);
+  };
 
-    // devNam
-    themPhimUploadHinh = (formData) => {
-        return http.post('/api/QuanLyPhim/ThemPhimUploadHinh', formData)
-    }
-    
-    // devNam
+  // devNam
+  themPhimUploadHinh = (formData) => {
+    return http.post("/api/QuanLyPhim/ThemPhimUploadHinh", formData);
+  };
 
-    getTTlichChieuPhim=(maPhim)=>{
-        return http.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`)
-    }  
-    postDatVe=(ttDatVe)=>{
-        return http.post(`/api/QuanLyDatVe/DatVe`,ttDatVe)
-    }
-    
-    getChiTietPhongVe = (maLichChieu) => {
-        return http.get(`/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maLichChieu}`)
-    }
-    postLichSuDatVe = ()=>{
-        return http.post('/api/QuanLyNguoiDung/ThongTinTaiKhoan')
-    }
+  getChiTietPhim = (maPhim) => {
+    return http.get(`/api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`);
+  };
+
+  getTTlichChieuPhim = (maPhim) => {
+    return http.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`);
+  };
+  postDatVe = (ttDatVe) => {
+    return http.post(`/api/QuanLyDatVe/DatVe`, ttDatVe);
+  };
+
+  getChiTietPhongVe = (maLichChieu) => {
+    return http.get(
+      `/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maLichChieu}`
+    );
+  };
+  postLichSuDatVe = () => {
+    return http.post("/api/QuanLyNguoiDung/ThongTinTaiKhoan");
+  };
 }
-const manager = new Manager()
-export default manager
+const manager = new Manager();
+export default manager;

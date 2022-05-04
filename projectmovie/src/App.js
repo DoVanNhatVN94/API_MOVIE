@@ -44,12 +44,10 @@ function App() {
   return (
     <Router history={history}>
       <div className="App">
-        <Loading/>
+        <Loading />
         <Switch>
-
           <Route exact path="/">
             {checkLogin ? <Redirect to="admin" /> : <Redirect to="home" />}
-
           </Route>
 
           <UserTemplate exact path="/login" component={Login} />
@@ -58,7 +56,11 @@ function App() {
           <AdminTemplate exact path="/admin" component={AdminPage} />
           <DetailTemplate exact path="/detail/:id" component={DetailPage} />
           <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
-          <AdminTemplate exact path="/admin/films/addnew" component={AdminAddFilm} />
+          <AdminTemplate
+            exact
+            path="/admin/films/addnew"
+            component={AdminAddFilm}
+          />
           <Suspense
             fallback={
               <Space style={{ width: "100%" }}>
@@ -73,7 +75,6 @@ function App() {
             />
           </Suspense>
 
-
           <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
 
           <AdminTemplate
@@ -81,7 +82,6 @@ function App() {
             path="/admin/films/addnew"
             component={AdminAddFilm}
           />
-
         </Switch>
         <Modal />
         <Cart />
