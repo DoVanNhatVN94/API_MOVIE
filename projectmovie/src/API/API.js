@@ -7,6 +7,7 @@ class Manager {
   getDSPhim = () => {
     return http.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP02`);
   };
+  
   getDSBanner = () => {
     return http.get("/api/QuanLyPhim/LayDanhSachBanner");
   };
@@ -24,6 +25,9 @@ class Manager {
   themPhimUploadHinh = (formData) => {
     return http.post("/api/QuanLyPhim/ThemPhimUploadHinh", formData);
   };
+  layDanhSachPhimAD =(tenPhim)=>{
+    return http.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP02&tenPhim${tenPhim}`)
+  }
 
   getChiTietPhim = (maPhim) => {
     return http.get(`/api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`);
