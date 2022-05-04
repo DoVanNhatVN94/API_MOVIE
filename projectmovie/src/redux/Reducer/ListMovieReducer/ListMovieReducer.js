@@ -1,9 +1,10 @@
-import { layBanner, layChiTietPhim, layDSPhimAD, TypeLayDSPHIM } from "../../action/Type";
+import { layBanner, layChiTietPhim, layDSPhimAD, TypeLayDSPHIM,layThongTinPhimAD } from "../../action/Type";
 
 const ListMovie = {
   arrMovie: [],
   arrBanner: [],
-  detailMovie: { a: "2" }
+  detailMovie: { a: "2" },
+  thongTinPhimAD:{}
 };
 
 export const ListMovieReducer = (state = ListMovie, action) => {
@@ -27,6 +28,10 @@ export const ListMovieReducer = (state = ListMovie, action) => {
 
       return { ...state };
 
+    case layThongTinPhimAD:
+      state.thongTinPhimAD = action.layThongTinPhim
+
+      return { ...state };
     default:
       return { ...state };
   }

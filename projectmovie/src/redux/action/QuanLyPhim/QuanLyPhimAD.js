@@ -1,30 +1,71 @@
 import axios from 'axios'
+import manager from "../../../API/API"
 import { TOKEN_MOVIE } from '../../../util/setting'
+import { layThongTinPhimAD,layDSPhimAD } from '../Type'
+import { history } from '../../../App'
 
-export const layDSPhimAdmin = (maNhom="GP01") => {
-    //trả về 1 hàm chưa gọi
-    return (dispatch2) => {
-        let promise = axios({
-            method: "get",
-            url: `https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=${maNhom}`,
-            headers: {
-                "TokenCybersoft": TOKEN_MOVIE
-            }
-        });
-        promise.then((result) => {
-            //lấy data thành công
+export const layDSPhimAdmin = (tenPhim='') => {
 
+    return async (dispatch) => {
+        try {
+            let result = await manager.layDanhSachPhimAD(tenPhim);
+            // console.log(result.data.content);
             let action = {
-                type: "LAY_DS_PHIM_AD",
+                type: layDSPhimAD,
                 mangPhim: result.data.content
             }
-            // sau khi lấy data thành công thì đẩy data lên reducer
-            dispatch2(action);
-        });
-
-        promise.catch((error) => {
-            console.log(error);
-        })
+            dispatch(action)
+        } catch (error) {
+            console.log(error)
+        }
     }
+}
 
+// LAY_THONG_TIN_PHIM_AD
+export const thongTinPhimAction = (maPhim) => {
+    return async (dispatch) => {
+        try {
+            let result = await manager.layThongTinPhim(maPhim);
+            // console.log(result.data.content);
+            let action = {
+                type: layThongTinPhimAD,
+                layThongTinPhim: result.data.content
+            }
+            dispatch(action)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+
+// Cập nhật phim AD
+export const capNhatPhimUploadAction = (formData) => {
+    return async (dispatch) => {
+        try {
+            let result = await manager.capNhatPhimUpload(formData);
+            alert('Cập nhật phim thành công');
+            console.log(result.data.content);
+
+            // dispatch(layDSPhimAdmin());
+            history.push('/admin/films');
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export const xoaPhimAction = (maPhim) => {
+    return async (dispatch) => {
+        try {
+            let result = await manager.xoaPhim(maPhim);
+            console.log(result.data.content);
+            alert('Xóa phim thành công');
+            dispatch(layDSPhimAdmin());
+            history.push('/admin/films');
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
