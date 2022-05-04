@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { themPhimMoi, themPhimUploadHinhAction } from '../../redux/action/QuanLyPhim/ThemPhimMoiAD';
 import { Formik, useFormik } from 'formik';
 import * as Yup from 'yup';
-import moment from 'moment';
+import moment, { min } from 'moment';
 
 import {
     Form,
