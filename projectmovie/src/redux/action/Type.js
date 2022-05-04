@@ -15,7 +15,8 @@ export const ktLogin = "KIEN_TRA_NGUOI_DUNG_LOGIN";
 export const loginSuccess = "LOGIN_THANH_CONG";
 export const loginError = "LOGIN_LOI";
 
-export const layDSPhimAD = "LAY_DS_PHIM_AD";
+export const layDSPhimAD = "LAY_DS_PHIM_AD"
+export const layThongTinPhimAD = "LAY_THONG_TIN_PHIM_AD"
 
 export const layTTLichChieuPhim = "LAY_THONG_TIN_LICH_CHIEU_PHIM";
 

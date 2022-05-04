@@ -1,4 +1,6 @@
+
 import { http } from "../util/setting";
+
 
 class Manager {
   //Lay DS PHIM Cho user va admin
@@ -27,6 +29,7 @@ class Manager {
     return http.get(`/api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`);
   };
 
+
   getTTlichChieuPhim = (maPhim) => {
     return http.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`);
   };
@@ -42,6 +45,7 @@ class Manager {
   postLichSuDatVe = () => {
     return http.post("/api/QuanLyNguoiDung/ThongTinTaiKhoan");
   };
+
 }
 const manager = new Manager();
 export default manager;

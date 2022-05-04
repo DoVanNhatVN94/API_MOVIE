@@ -3,13 +3,11 @@ import { Button, Table } from 'antd';
 import { Input, Space } from 'antd';
 import { DeleteOutlined, SearchOutlined, EditOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux'
-import { layDSPhimAdmin } from '../../redux/action/QuanLyPhim/QuanLyPhimAD';
+import { layDSPhimAdmin, xoaPhimAction } from '../../redux/action/QuanLyPhim/QuanLyPhimAD';
 import { NavLink } from 'react-router-dom';
 import { history } from '../../App';
 
 const { Search } = Input;
-
-const onSearch = value => console.log(value);
 
 export default function AdminListFilm() {
 
@@ -25,6 +23,11 @@ export default function AdminListFilm() {
     const callAPI = () => {
         const actionFunc = layDSPhimAdmin();
         dispatch(actionFunc);
+    }
+
+    const onSearch = (value) => {
+        console.log(value);
+        dispatch(layDSPhimAdmin(value))
     }
 
     const columns = [
@@ -74,8 +77,13 @@ export default function AdminListFilm() {
             dataIndex: 'hanhDong',
             render: (text, film) => {
                 return <Fragment>
-                    <NavLink to='/edit' style={{ color: 'blue', fontSize: 25, paddingRight: 10 }}><EditOutlined /></NavLink>
-                    <NavLink to='/delete' style={{ color: 'red', fontSize: 25 }}><DeleteOutlined /></NavLink>
+                    <NavLink key={1} to={`/admin/films/edit/${film.maPhim}`} style={{ color: 'blue', fontSize: 25, paddingRight: 10 }}><EditOutlined /></NavLink>
+                    <span onClick={() => {
+                        if (window.confirm('Bạn có chắc muốn xóa phim ' + film.tenPhim + ' không?')) {
+                            dispatch(xoaPhimAction(film.maPhim));
+                        }
+
+                    }} key={2} style={{ color: 'red', fontSize: 25, cursor: 'pointer' }}><DeleteOutlined /></span>
                 </Fragment>
             },
             width: '20%',
@@ -91,7 +99,7 @@ export default function AdminListFilm() {
     return (
         <div>
             <h2 className='mb-5'>Quản lý phim</h2>
-            <Button className='mb-4' onClick={() => {
+            <Button style={{ width: 150 }} className='mb-4' onClick={() => {
                 history.push('/admin/films/addnew')
             }}>Thêm phim</Button>
             <Search
@@ -101,7 +109,7 @@ export default function AdminListFilm() {
                 size="large"
                 onSearch={onSearch}
             />
-            <Table columns={columns} dataSource={data} onChange={onChange}/>
+            <Table columns={columns} dataSource={data} onChange={onChange} rowKey={'maPhim'} />
         </div>
     )
 }
