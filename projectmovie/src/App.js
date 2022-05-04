@@ -22,7 +22,7 @@ import { Cart } from "./component/common/Cart/Cart";
 import { AdminTemplate } from "./component/Feutures/Temp/AdminTemplate";
 import AdminListFilm from "./page/AdminPage/AdminListFilm";
 import AdminAddFilm from "./page/AdminPage/AdminAddFilm";
-import AdminShowTime from "./page/AdminPage/AdminShowTime";
+import AdminEditFilm from "./page/AdminPage/AdminEditFilm";
 import { DetailTemplate } from "./component/Feutures/Temp/DetailTemplate";
 import Loading from "./component/Loading/Loading";
 
@@ -59,6 +59,7 @@ function App() {
           <DetailTemplate exact path="/detail/:id" component={DetailPage} />
           <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
           <AdminTemplate exact path="/admin/films/addnew" component={AdminAddFilm} />
+          <AdminTemplate exact path="/admin/films/edit/:id" component={AdminEditFilm} />
           <Suspense
             fallback={
               <Space style={{ width: "100%" }}>
