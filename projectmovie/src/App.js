@@ -17,7 +17,6 @@ import { useDispatch } from "react-redux";
 import { Suspense, lazy } from "react";
 import { ktNDLogin } from "./redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
 
-
 // devNam
 import { AdminTemplate } from "./component/Feutures/Temp/AdminTemplate";
 import AdminListFilm from "./page/AdminPage/AdminListFilm";
@@ -51,12 +50,20 @@ function App() {
           <UserTemplate exact path="/login" component={Login} />
           <UserTemplate exact path="/register" component={Register} />
           <MainTemplate exact path="/home" component={HomePage} />
-          <AdminTemplate exact path="/admin" component={AdminListFilm} />
+          <AdminTemplate exact path="/admin" component={AdminPage} />
           <DetailTemplate exact path="/detail/:id" component={DetailPage} />
           <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
 
-          <AdminTemplate exact path="/admin/films/addnew" component={AdminAddFilm} />
-          <AdminTemplate exact path="/admin/films/edit/:id" component={AdminEditFilm} />
+          <AdminTemplate
+            exact
+            path="/admin/films/addnew"
+            component={AdminAddFilm}
+          />
+          <AdminTemplate
+            exact
+            path="/admin/films/edit/:id"
+            component={AdminEditFilm}
+          />
 
           <Suspense
             fallback={
@@ -72,16 +79,16 @@ function App() {
             />
           </Suspense>
 
-          <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
+          {/* <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
 
           <AdminTemplate
             exact
             path="/admin/films/addnew"
             component={AdminAddFilm}
-          />
+          /> */}
         </Switch>
         <Modal />
-        
+
         <BackTop />
       </div>
     </Router>
