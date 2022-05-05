@@ -23,6 +23,7 @@ import { AdminTemplate } from "./component/Feutures/Temp/AdminTemplate";
 import AdminListFilm from "./page/AdminPage/AdminListFilm";
 import AdminAddFilm from "./page/AdminPage/AdminAddFilm";
 import AdminEditFilm from "./page/AdminPage/AdminEditFilm";
+import AdminShowTime from "./page/AdminPage/AdminShowTime";
 import { DetailTemplate } from "./component/Feutures/Temp/DetailTemplate";
 import Loading from "./component/Loading/Loading";
 
@@ -60,6 +61,7 @@ function App() {
           <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
           <AdminTemplate exact path="/admin/films/addnew" component={AdminAddFilm} />
           <AdminTemplate exact path="/admin/films/edit/:id" component={AdminEditFilm} />
+          <AdminTemplate exact path="/admin/films/showtime/:id" component={AdminShowTime} />
           <Suspense
             fallback={
               <Space style={{ width: "100%" }}>
@@ -75,13 +77,13 @@ function App() {
           </Suspense>
 
 
-          <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
+          {/* <AdminTemplate exact path="/admin/films" component={AdminListFilm} /> */}
 
-          <AdminTemplate
+          {/* <AdminTemplate
             exact
             path="/admin/films/addnew"
             component={AdminAddFilm}
-          />
+          /> */}
 
         </Switch>
         <Modal />

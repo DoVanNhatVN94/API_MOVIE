@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react'
 import { Button, Table } from 'antd';
 import { Input, Space } from 'antd';
-import { DeleteOutlined, SearchOutlined, EditOutlined } from '@ant-design/icons';
+import { DeleteOutlined, SearchOutlined, EditOutlined,CalendarOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux'
 import { layDSPhimAdmin, xoaPhimAction } from '../../redux/action/QuanLyPhim/QuanLyPhimAD';
 import { NavLink } from 'react-router-dom';
@@ -83,7 +83,8 @@ export default function AdminListFilm() {
                             dispatch(xoaPhimAction(film.maPhim));
                         }
 
-                    }} key={2} style={{ color: 'red', fontSize: 25, cursor: 'pointer' }}><DeleteOutlined /></span>
+                    }} key={2} style={{ color: 'red', fontSize: 25, paddingRight: 10, cursor: 'pointer' }}><DeleteOutlined /></span>
+                    <NavLink key={3} to={`/admin/films/showtime/${film.maPhim}`} style={{ color: 'green', fontSize: 25, paddingRight: 10 }}><CalendarOutlined /></NavLink>
                 </Fragment>
             },
             width: '20%',
@@ -93,7 +94,7 @@ export default function AdminListFilm() {
     const data = arrMovie;
 
     function onChange(pagination, filters, sorter, extra) {
-        console.log('params', pagination, filters, sorter, extra);
+        // console.log('params', pagination, filters, sorter, extra);
     }
 
     return (
