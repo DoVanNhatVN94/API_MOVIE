@@ -22,6 +22,7 @@ import { AdminTemplate } from "./component/Feutures/Temp/AdminTemplate";
 import AdminListFilm from "./page/AdminPage/AdminListFilm";
 import AdminAddFilm from "./page/AdminPage/AdminAddFilm";
 import AdminEditFilm from "./page/AdminPage/AdminEditFilm";
+import AdminShowTime from "./page/AdminPage/AdminShowTime";
 import { DetailTemplate } from "./component/Feutures/Temp/DetailTemplate";
 import Loading from "./component/Loading/Loading";
 
@@ -54,6 +55,7 @@ function App() {
           <DetailTemplate exact path="/detail/:id" component={DetailPage} />
           <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
 
+
           <AdminTemplate
             exact
             path="/admin/films/addnew"
@@ -79,13 +81,6 @@ function App() {
             />
           </Suspense>
 
-          {/* <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
-
-          <AdminTemplate
-            exact
-            path="/admin/films/addnew"
-            component={AdminAddFilm}
-          /> */}
         </Switch>
         <Modal />
 

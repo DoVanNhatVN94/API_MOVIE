@@ -3,6 +3,7 @@ import { GROUP_ID, http } from "../util/setting";
 
 
 class Manager {
+
   //Lay DS PHIM Cho user va admin
   getDSPhim = () => {
     return http.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUP_ID}`);
@@ -22,16 +23,38 @@ class Manager {
   };
 
   // devNam
-  themPhimUploadHinh = (formData) => {
-    return http.post("/api/QuanLyPhim/ThemPhimUploadHinh", formData);
-  };
-  layDanhSachPhimAD =(tenPhim)=>{
-    return http.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP02&tenPhim${tenPhim}`)
-  }
+  layDanhSachPhimAD = (tenPhim) => {
+        if (tenPhim.trim() !== '') {
+            return http.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUP_ID}&tenPhim=${tenPhim}`)
+        }
+        return http.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUP_ID}`)
+    }
+    themPhimUploadHinh = (formData) => {
+        return http.post('/api/QuanLyPhim/ThemPhimUploadHinh', formData)
+    }
+    layThongTinPhim = (maPhim) => {
+        return http.get(`/api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`)
+    }
+    capNhatPhimUpload = (formData) => {
+        return http.post('/api/QuanLyPhim/CapNhatPhimUpload', formData)
+    }
+    xoaPhim = (maPhim) => {
+        return http.delete(`api/QuanLyPhim/XoaPhim?MaPhim=${maPhim}`)
+    }
 
-  getChiTietPhim = (maPhim) => {
-    return http.get(`/api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`);
-  };
+
+    layDanhSachHeThongRap = () => {
+        return http.get(`/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${GROUP_ID}`)
+    }
+    layThongTinLichChieuPhim = (maPhim) => {
+        return http.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`)
+    }
+    layThongTinhHeThongRap = () => {
+        return http.get(`/api/QuanLyRap/LayThongTinHeThongRap`)
+    }
+    layThongTinCumRap = (maHeThongRap) => {
+        return http.get(`/api/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${maHeThongRap}`)
+    }
 
 
 
@@ -53,7 +76,6 @@ class Manager {
   postLichSuDatVe = () => {
     return http.post("/api/QuanLyNguoiDung/ThongTinTaiKhoan");
   };
-
 }
 const manager = new Manager();
 export default manager;
