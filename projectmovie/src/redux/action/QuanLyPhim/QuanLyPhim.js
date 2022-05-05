@@ -1,20 +1,19 @@
-import axios from "axios";
-import manager, { urlChiTietPhim } from "../../../API/API";
-import { TOKEN_MOVIE } from "../../../util/setting";
+import manager from "../../../API/API";
 import { layBanner, layChiTietPhim, TypeLayDSPHIM } from "../Type";
 
 export const ActionLayDSPhim = () => {
-  return (dispatch2) => {
-    const promise = manager.getDSPhim();
-    promise.then((result) => {
+  return async (dispatch2) => {
+    try {
+      const result = await manager.getDSPhim();
+      if (result.status === 200)
       dispatch2({
         type: TypeLayDSPHIM,
         DS: result.data.content,
       });
-    });
-    promise.catch((error) => {
-      console.log(error);
-    });
+    } catch (error) {
+      console.log("error", error);
+      console.log("error", error.response?.data);
+    }
   };
 };
 
@@ -22,34 +21,31 @@ export const ActionQLPLayDSBanner = () => {
   return async (dispatch2) => {
     try {
       const result = await manager.getDSBanner();
-    await  dispatch2({
+      if (result.status === 200)
+      await dispatch2({
         type: layBanner,
         DS: result.data.content,
       });
     } catch (error) {
-      console.log(error);
+      console.log("error", error);
+      console.log("error", error.response?.data);
     }
   };
 };
 
 export const LayChiTietPhim = (maPhim) => {
-  return (dispatch2) => {
-    const promise = axios({
-      method: "get",
-      url: `${urlChiTietPhim}${maPhim}`,
-      headers: {
-        TokenCybersoft: TOKEN_MOVIE,
-      },
-    });
-    promise.then((result) => {
-      console.log(result.data.content);
-      dispatch2({
-        type: layChiTietPhim,
-        ob: result.data.content,
-      });
-    });
-    promise.catch((error) => {
-      console.log(error);
-    });
+  return async (dispatch2) => {
+    try {
+      const result = await manager.getChiTietPhim(maPhim);
+      if (result.status === 200) {
+        dispatch2({
+          type: layChiTietPhim,
+          ob: result.data.content,
+        });
+      }
+    } catch (error) {
+      console.log("error", error);
+      console.log("error", error.response?.data);
+    }
   };
 };

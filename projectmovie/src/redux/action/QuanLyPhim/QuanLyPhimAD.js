@@ -1,6 +1,7 @@
-import axios from 'axios'
+
+
 import manager from "../../../API/API"
-import { TOKEN_MOVIE } from '../../../util/setting'
+
 import { layThongTinPhimAD,layDSPhimAD } from '../Type'
 import { history } from '../../../App'
 
@@ -69,3 +70,4 @@ export const xoaPhimAction = (maPhim) => {
         }
     }
 }
+

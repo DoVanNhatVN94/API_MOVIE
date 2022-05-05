@@ -20,7 +20,7 @@ export default function Header() {
       return (
         <Fragment>
           <button
-            className="btn btn-outline-info"
+            className="btn btn-outline-info m-1"
             type="button"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
@@ -36,7 +36,7 @@ export default function Header() {
             Login
           </button>
           <button
-            className="btn btn-outline-light"
+            className="btn btn-outline-light m-1" 
             type="button"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
@@ -57,7 +57,7 @@ export default function Header() {
       return (
         <Fragment>
           <button
-            className="btn btn-outline-primary d-flex justify-content-center align-items-center"
+            className="btn btn-outline-info d-flex justify-content-center align-items-center m-1"
             type="button"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
@@ -69,11 +69,11 @@ export default function Header() {
               });
             }}
           >
-            {<UserOutlined />}
+            {<UserOutlined /> }
             {thongTinND.hoTen}
           </button>
           <button
-            className="btn btn-outline-danger"
+            className="btn btn-outline-danger m-1"
             onClick={() => {
               localStorage.clear();
               history.push("/home");
@@ -86,7 +86,7 @@ export default function Header() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-light  bg-dark">
       <div className="container-fluid px-4 px-lg-5 m-auto">
         <div className="w-75"></div>
         <div className="w-25 d-flex ">{checkButtonLogin()}</div>
