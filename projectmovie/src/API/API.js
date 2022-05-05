@@ -1,11 +1,11 @@
 
-import { http } from "../util/setting";
+import { GROUP_ID, http } from "../util/setting";
 
 
 class Manager {
   //Lay DS PHIM Cho user va admin
   getDSPhim = () => {
-    return http.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP02`);
+    return http.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUP_ID}`);
   };
   
   getDSBanner = () => {
@@ -34,6 +34,10 @@ class Manager {
   };
 
 
+
+  getThongTinLichCHieuPhimHeThongRap=()=>{
+    return http.get(`/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${GROUP_ID}`)
+  }
   getTTlichChieuPhim = (maPhim) => {
     return http.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`);
   };

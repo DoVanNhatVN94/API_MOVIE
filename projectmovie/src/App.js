@@ -16,7 +16,7 @@ import BookMovie from "./page/BookMovie/BookMovie";
 import { useDispatch } from "react-redux";
 import { Suspense, lazy } from "react";
 import { ktNDLogin } from "./redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
-import { Cart } from "./component/common/Cart/Cart";
+
 
 // devNam
 import { AdminTemplate } from "./component/Feutures/Temp/AdminTemplate";
@@ -39,8 +39,6 @@ function App() {
   const checkLogin = maND === "QuanTri";
   dispatch(ktNDLogin());
 
-  console.log(checkLogin);
-
   return (
     <Router history={history}>
       <div className="App">
@@ -53,7 +51,7 @@ function App() {
           <UserTemplate exact path="/login" component={Login} />
           <UserTemplate exact path="/register" component={Register} />
           <MainTemplate exact path="/home" component={HomePage} />
-          <AdminTemplate exact path="/admin" component={AdminPage} />
+          <AdminTemplate exact path="/admin" component={AdminListFilm} />
           <DetailTemplate exact path="/detail/:id" component={DetailPage} />
           <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
 
@@ -83,7 +81,7 @@ function App() {
           />
         </Switch>
         <Modal />
-        <Cart />
+        
         <BackTop />
       </div>
     </Router>

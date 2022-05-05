@@ -5,6 +5,7 @@ export const ActionLayDSPhim = () => {
   return async (dispatch2) => {
     try {
       const result = await manager.getDSPhim();
+      if (result.status === 200)
       dispatch2({
         type: TypeLayDSPHIM,
         DS: result.data.content,
@@ -20,6 +21,7 @@ export const ActionQLPLayDSBanner = () => {
   return async (dispatch2) => {
     try {
       const result = await manager.getDSBanner();
+      if (result.status === 200)
       await dispatch2({
         type: layBanner,
         DS: result.data.content,

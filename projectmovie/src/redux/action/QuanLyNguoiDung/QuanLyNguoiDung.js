@@ -19,22 +19,23 @@ export const dangNhap = (thongTinND) => {
   return async (dispatch2) => {
     try {
       const result = await manager.postLogin(thongTinND);
-      const data = JSON.stringify(result.data.content.accessToken);
-      const ma = JSON.stringify(result.data.content.maLoaiNguoiDung);
-      localStorage.setItem("accessToken", data);
-      localStorage.setItem("maLoaiNguoiDung", ma);
+      if (result.status === 200) {
+        const data = JSON.stringify(result.data.content.accessToken);
+        const ma = JSON.stringify(result.data.content.maLoaiNguoiDung);
+        localStorage.setItem("accessToken", data);
+        localStorage.setItem("maLoaiNguoiDung", ma);
 
-      dispatch2({
-        type: ktLogin,
-        user: result.data.content,
-      });
+        dispatch2({
+          type: ktLogin,
+          user: result.data.content,
+        });
 
-      dispatch2({
-        type: loginSuccess,
-        message: result.data.message,
-      });
-
-      if (history.location.pathname === "/login") history.goBack();
+        dispatch2({
+          type: loginSuccess,
+          message: result.data.message,
+        });
+        if (history.location.pathname === "/login") history.goBack();
+      }
     } catch (error) {
       console.log("error", error);
       console.log("error", error.response?.data);
@@ -50,10 +51,11 @@ export const ktNDLogin = () => {
   return async (dispatch2) => {
     try {
       const result = await manager.postNDlogin();
-      dispatch2({
-        type: ktLogin,
-        user: result.data.content,
-      });
+      if (result.status === 200)
+        dispatch2({
+          type: ktLogin,
+          user: result.data.content,
+        });
     } catch (error) {
       console.log("error", error);
       console.log("error", error.response?.data);
