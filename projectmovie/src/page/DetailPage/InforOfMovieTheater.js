@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useRouteMatch } from "react-router-dom";
 
 import { layThongTinRap } from "../../redux/action/Type";
+import { QLRLayThongTinLichChieuPhim } from "../../redux/action/QuanLyRap/QuanLyRap";
 
 import moment from "moment";
 import { Tabs } from "antd";
@@ -13,36 +14,17 @@ export default function InforOfMovieTheater() {
   const { TabPane } = Tabs;
   const match = useRouteMatch();
   const dispatch = useDispatch();
+
   const { arrRap, objLichChieuTheoMaPhim } = useSelector(
     (state) => state.ListMovieTheaterReducer
   );
-  // var _ = require('lodash');
-  // const a =_.split('a-b-c', '-', 3);
-  // console.log(a);
-  // // => ['a', 'b']
-  const string ="2019-01-01T10:10:00"
-    const date = moment(string)
-    console.log(date._d);
-
-  console.log(arrRap, objLichChieuTheoMaPhim);
-
+  const { detailMovie } = useSelector((state) => state.ListMovieReducer);
+  console.log(detailMovie);
   useEffect(() => {
-    // dispatch(QLRLayThongTinHeThongRap());
+    dispatch(QLRLayThongTinLichChieuPhim(match.params.id));
   }, []);
 
-  // const rederLichCHieu = (rap) => {
-  //   const arr = [];
 
-  //   rap.map((lichChieu) => {
-  //       arr.push(moment(lichChieu.ngayChieuGioChieu)._d);
-  //     });
-  //     console.log("mang sau khi format",arr);
-
-
-  //   return arr.map((lichChieu,index)=>{
-  //   return  <button key={`lc ${index}`}>{lichChieu}</button>
-  //   })
-  // };
 
   const rederCumRap = () => {
     return arrRap.map((rap, index) => {
@@ -59,14 +41,17 @@ export default function InforOfMovieTheater() {
             </div>
             <div className="card-body col-11">
               <h5 className="card-title">{rap.tenCumRap}</h5>
-              <div className="row">{rap.lichChieuPhim?.slice(0,12).map((lc,index)=>{
-                return <div className="col-1 text-danger" key={`lc ${index}`}>
-                  <NavLink to={`/bookmovie/${lc.maLichChieu}`}>
-                    {moment(lc.ngayChieuGioChieu).format('hh:mm:A') }
-                  </NavLink>
-                  
-                  </div>
-              })}</div>
+              <div className="row">
+                {rap.lichChieuPhim?.slice(0, 12).map((lc, index) => {
+                  return (
+                    <div className="col-1 text-danger" key={`lc ${index}`}>
+                      <NavLink to={`/bookmovie/${lc.maLichChieu}`}>
+                        {moment(lc.ngayChieuGioChieu).format("hh:mm:A")}
+                      </NavLink>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
@@ -75,6 +60,10 @@ export default function InforOfMovieTheater() {
   };
 
   const renderCardLogoRap = () => {
+    if(objLichChieuTheoMaPhim.heThongRapChieu.length === 0)
+    return <div className="mx-auto p-5"><h3 className="text-center text-danger">Hiện Phim Đã Dừng Chiếu</h3>
+    <h4>Cảm Ơn Quý Khách Đã Quan Tâm Bộ Phim Này</h4></div>
+    else
     return objLichChieuTheoMaPhim.heThongRapChieu.map((rap, index) => {
       return (
         <TabPane
@@ -104,37 +93,26 @@ export default function InforOfMovieTheater() {
     });
   };
 
-  const callback = (key) => {
-    console.log(key);
-  };
 
   return (
     <div className="container">
-      <Tabs defaultActiveKey="1" centered style={{ color: "white" }}>
+      <Tabs defaultActiveKey="1" centered>
         <TabPane
           tab={
             <span>
               <VideoCameraOutlined />
-              Thông Tin Lich Chiếu
+              Thông Tin Lịch Chiếu
             </span>
           }
           key="1"
           icon
         >
-          <Tabs defaultActiveKey="1" onChange={callback} tabPosition={"left"}>
+          <Tabs defaultActiveKey="1" tabPosition={"left"}>
             {renderCardLogoRap()}
           </Tabs>
         </TabPane>
-        <TabPane
-          tab="Thông Tin Phim"
-          key="2"
-          style={{ height: "200px", color: "red" }}
-        >
-          Content of Tab Pane 2
-        </TabPane>
-        <TabPane tab="Dánh Giá" key="3">
-          Content of Tab Pane 3
-        </TabPane>
+
+        <TabPane tab="Dánh Giá" key="2"></TabPane>
       </Tabs>
       {/*  */}
     </div>

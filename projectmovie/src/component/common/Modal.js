@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { Result, Button } from "antd";
+import { Result } from "antd";
 
 export default function Modal() {
   const history = useHistory();

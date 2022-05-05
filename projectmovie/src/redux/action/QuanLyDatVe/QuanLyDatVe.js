@@ -19,7 +19,11 @@ export const UserDatVe = (ttDatVe) => {
 
       await dispatch2(hideLoading);
       let thongTinND = getState().UserReducer.thongTinND;
-      await connection.invoke("datGheThanhCong", thongTinND.taiKhoan,ttDatVe.maLichChieu);
+      await connection.invoke(
+        "datGheThanhCong",
+        thongTinND.taiKhoan,
+        ttDatVe.maLichChieu
+      );
     } catch (error) {
       console.log("error", error);
       console.log("error", error.response?.data);
@@ -31,16 +35,19 @@ export const UserDatVe = (ttDatVe) => {
 export const LayChiTietDatVeAction = (maLichChieu) => {
   return async (dispatch2) => {
     try {
+      dispatch2(displayLoading);
       const result = await manager.getChiTietPhongVe(maLichChieu);
       if (result.status === 200) {
-        dispatch2({
+        await dispatch2({
           type: LayChiTietDatVe,
           chiTietPhongVe: result.data.content,
         });
       }
+      await dispatch2(hideLoading);
     } catch (error) {
       console.log("error", error);
       console.log("error", error.response?.data);
+      await dispatch2(hideLoading);
     }
   };
 };
