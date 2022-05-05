@@ -19,7 +19,7 @@ export const ListMovieReducer = (state = ListMovie, action) => {
       return { ...state };
 
     case layChiTietPhim:
-      state.detailMovie = action.ob
+      state.detailMovie = action.detailMovie
 
       return { ...state };
 

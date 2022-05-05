@@ -8,6 +8,10 @@ class Manager {
   getDSPhim = () => {
     return http.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUP_ID}`);
   };
+//LayChiTietPhim
+  getChiTietPhim=(maPhim)=>{
+    return http.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`)
+  }
   
   getDSBanner = () => {
     return http.get("/api/QuanLyPhim/LayDanhSachBanner");
@@ -43,12 +47,14 @@ class Manager {
     }
 
 
+    //Rap
+
     layDanhSachHeThongRap = () => {
         return http.get(`/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${GROUP_ID}`)
     }
-    layThongTinLichChieuPhim = (maPhim) => {
-        return http.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`)
-    }
+    // layThongTinLichChieuPhim = (maPhim) => {
+    //     return http.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`)
+    // }
     layThongTinhHeThongRap = () => {
         return http.get(`/api/QuanLyRap/LayThongTinHeThongRap`)
     }
@@ -61,9 +67,9 @@ class Manager {
   getThongTinLichCHieuPhimHeThongRap=()=>{
     return http.get(`/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${GROUP_ID}`)
   }
-  getTTlichChieuPhim = (maPhim) => {
-    return http.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`);
-  };
+  // getTTlichChieuPhim = (maPhim) => {
+  //   return http.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`);
+  // };
   postDatVe = (ttDatVe) => {
     return http.post(`/api/QuanLyDatVe/DatVe`, ttDatVe);
   };

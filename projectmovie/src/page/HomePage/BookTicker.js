@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {ArrowRightOutlined ,ArrowLeftOutlined} from "@ant-design/icons"
-import { QLRLayThongTinLichChieuPhim } from "../../redux/action/QuanLyRap/QuanLyRap";
+
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../asset/css/Slick/slick.css";
-import { ActionLayDSPhim } from "../../redux/action/QuanLyPhim/QuanLyPhim";
+import { ActionLayDSPhim, QLRLayChiTietPhim } from "../../redux/action/QuanLyPhim/QuanLyPhim";
 
 export default function BookTicker() {
   const { arrMovie } = useSelector((state) => state.ListMovieReducer);
@@ -67,7 +67,7 @@ export default function BookTicker() {
         <div className="slick_item" key={phim.maPhim}>
           <button
             onClick={() => {
-              dispatch(QLRLayThongTinLichChieuPhim(phim.maPhim));
+              dispatch(QLRLayChiTietPhim(phim.maPhim));
               history.push(`/detail/${phim.maPhim}`);
             }}
             className="card btn_button"
