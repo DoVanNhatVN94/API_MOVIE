@@ -1,18 +1,12 @@
-import React, { Fragment, useEffect } from "react";
-import { Button, Table } from "antd";
-import { Input } from "antd";
-import {
-  DeleteOutlined,
-  SearchOutlined,
-  EditOutlined,
-} from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  layDSPhimAdmin,
-  xoaPhimAction,
-} from "../../redux/action/QuanLyPhim/QuanLyPhimAD";
-import { NavLink } from "react-router-dom";
-import { history } from "../../App";
+
+import React, { Fragment, useEffect } from 'react'
+import { Button, Table } from 'antd';
+import { Input, Space } from 'antd';
+import { DeleteOutlined, SearchOutlined, EditOutlined,CalendarOutlined } from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux'
+import { layDSPhimAdmin, xoaPhimAction } from '../../redux/action/QuanLyPhim/QuanLyPhimAD';
+import { NavLink } from 'react-router-dom';
+import { history } from '../../App';
 
 const { Search } = Input;
 
@@ -127,38 +121,36 @@ export default function AdminListFilm() {
       width: "20%",
     },
   ];
-
-  const data = arrMovie;
+                    }} key={2} style={{ color: 'red', fontSize: 25, paddingRight: 10, cursor: 'pointer' }}><DeleteOutlined /></span>
+                    <NavLink key={3} to={`/admin/films/showtime/${film.maPhim}`} style={{ color: 'green', fontSize: 25, paddingRight: 10 }}><CalendarOutlined /></NavLink>
+                </Fragment>
+            },
+            width: '20%',
+        },
+    ];
 
   function onChange(pagination, filters, sorter, extra) {
     console.log("params", pagination, filters, sorter, extra);
   }
 
-  return (
-    <div>
-      <h2 className="mb-5">Quản lý phim</h2>
-      <Button
-        style={{ width: 150 }}
-        className="mb-4"
-        onClick={() => {
-          history.push("/admin/films/addnew");
-        }}
-      >
-        Thêm phim
-      </Button>
-      <Search
-        className="mb-4"
-        placeholder="input search text"
-        enterButton={<SearchOutlined />}
-        size="large"
-        onSearch={onSearch}
-      />
-      <Table
-        columns={columns}
-        dataSource={data}
-        onChange={onChange}
-        rowKey={"maPhim"}
-      />
-    </div>
-  );
+    function onChange(pagination, filters, sorter, extra) {
+        // console.log('params', pagination, filters, sorter, extra);
+    }
+
+    return (
+        <div>
+            <h2 className='mb-5'>Quản lý phim</h2>
+            <Button style={{ width: 150 }} className='mb-4' onClick={() => {
+                history.push('/admin/films/addnew')
+            }}>Thêm phim</Button>
+            <Search
+                className='mb-4'
+                placeholder="input search text"
+                enterButton={<SearchOutlined />}
+                size="large"
+                onSearch={onSearch}
+            />
+            <Table columns={columns} dataSource={data} onChange={onChange} rowKey={'maPhim'} />
+        </div>
+    )
 }
