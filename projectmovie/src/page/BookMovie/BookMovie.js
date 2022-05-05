@@ -14,6 +14,7 @@ import { SuLyGheKhachDat, SuLySauKhiDatVe } from "../../redux/action/Type";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
 import { connection } from "../..";
+import { ktNDLogin } from "../../redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
 const { TabPane } = Tabs;
 
 export default function BookMovie(props) {
@@ -29,6 +30,7 @@ export default function BookMovie(props) {
   console.log("danhSachGheDangDat", danhSachGheDangDat);
   console.log("danhSachGheKhachDangDat", danhSachGheKhachDangDat);
   useEffect(() => {
+    dispatch(ktNDLogin())
     dispatch(LayChiTietDatVeAction(props.match.params.id));
 
     connection.on("datVeThanhCong", () => {
@@ -155,7 +157,7 @@ export default function BookMovie(props) {
     return thongTinDatVe?.map((item, index) => {
       return (
         <Fragment key={`item ${index}`}>
-          <div className="card col-3">
+          <div className="card col-3 ">
             <img
             alt=""
               src={item.hinhAnh}
@@ -185,8 +187,8 @@ export default function BookMovie(props) {
                 </span>
               </div>
               <p className=" card-text "></p>
-              <Button type="primary" onClick={showModal}>
-                Open Modal
+              <Button type="success" onClick={showModal}>
+                Danh Sách Ghế
               </Button>
               <Modal
                 visible={isModalVisible}

@@ -4,16 +4,14 @@ import { useHistory, useRouteMatch } from "react-router-dom";
 import { LayChiTietPhim } from "../../redux/action/QuanLyPhim/QuanLyPhim";
 
 import "../../asset/css/DetailPage/DetailPage.css";
+import moment from "moment";
 
 export default function DetailPage(props) {
   const match = useRouteMatch();
-  const history =useHistory()
 
   const dispatch = useDispatch();
 
   const { detailMovie } = useSelector((state) => state.ListMovieReducer);
-
-
 
   useEffect(() => {
     dispatch(LayChiTietPhim(match.params.id));
@@ -44,31 +42,38 @@ export default function DetailPage(props) {
                 </div>
                 <div className="col-lg-9 col-sm-8">
                   <div className="details-banner-info">
-                    <h3 style={{ color: "#22272b" }}>{detailMovie.tenPhim}</h3>
+                    <h2 style={{ color: "#22272b" }}>{detailMovie.tenPhim}</h2>
                     <p style={{ color: "#22272b" }} />
-
-                    
                   </div>
                   <div className="movie-details-page-box">
-                   
-                      <div className="tab-content" id="pills-tabContent">
-                        <div className="row">
-                          <div className="col-md-12">
-                            <div className="tab-body">
-                              <p>{detailMovie.moTa}</p>
-                            </div>
+                    <div className="tab-content" id="pills-tabContent">
+                      <div className="row">
+                        <div className="col-md-12">
+                          <div className="tab-body w-75">
+                            <p>{detailMovie.moTa}</p>
+                          </div>
+                        </div> 
+                        <div className="col-md-12">
+                          <div className="tab-body">
+                            <p>Ngày Khởi Chiếu <span className="text-primary">{moment(detailMovie.ngayKhoiChieu).format('hh:mm A - DD/MM/YYYY')}</span></p>
                           </div>
                         </div>
+                        <div className="col-md-12">
+                          <div className="tab-body w-75">
+                            <p>Đánh Giá : <span className=" fs-1 text-success">{detailMovie.danhGia}</span>/10</p>
+                          </div>
+                        </div> 
                       </div>
-                  
+                    </div>
+
                     <div className="detail_btn row w-50">
-                    <a href={detailMovie.trailer} className="col-6 btn btn-outline-primary">
-                      <i className="fa fa-play" />
-                      Trailer
-                    </a>
-                    <button type="button" className="btn btn-outline-success col-6" onClick={()=>{
-                      history.push(`/bookmovie/01`)
-                    }}>Add</button>
+                      <a
+                        href={detailMovie.trailer}
+                        className="col-6 btn btn-outline-primary"
+                      >
+                        <i className="fa fa-play" />
+                        Trailer
+                      </a>
                     </div>
                   </div>
                 </div>

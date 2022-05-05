@@ -3,7 +3,7 @@ import { layBanner, layChiTietPhim, layDSPhimAD, TypeLayDSPHIM,layThongTinPhimAD
 const ListMovie = {
   arrMovie: [],
   arrBanner: [],
-  detailMovie: { a: "2" },
+  detailMovie: {},
   thongTinPhimAD:{}
 };
 
