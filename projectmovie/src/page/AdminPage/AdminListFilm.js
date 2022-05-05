@@ -97,6 +97,8 @@ export default function AdminListFilm() {
         // console.log('params', pagination, filters, sorter, extra);
     }
 
+    
+
     return (
         <div>
             <h2 className='mb-5'>Quản lý phim</h2>
