@@ -55,7 +55,6 @@ function App() {
           <DetailTemplate exact path="/detail/:id" component={DetailPage} />
           <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
 
-
           <AdminTemplate
             exact
             path="/admin/films/addnew"
@@ -80,7 +79,6 @@ function App() {
               component={BookMovie}
             />
           </Suspense>
-
         </Switch>
         <Modal />
 

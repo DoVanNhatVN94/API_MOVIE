@@ -18,17 +18,23 @@ import { ktNDLogin } from "../../redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
 const { TabPane } = Tabs;
 
 export default function BookMovie(props) {
+  console.log(props.match.params.id);
   var _ = require("lodash");
   const history = useHistory();
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  
   const { thongTinND } = useSelector((state) => state.UserReducer);
   const { chiTietPhongVe, danhSachGheDangDat, danhSachGheKhachDangDat } =
     useSelector((state) => state.QuanLyDatVeReducer);
+
   const { thongTinPhim, danhSachGhe } = chiTietPhongVe;
   const { thongTinDatVe } = thongTinND;
+
   console.log("danhSachGheDangDat", danhSachGheDangDat);
   console.log("danhSachGheKhachDangDat", danhSachGheKhachDangDat);
+
   useEffect(() => {
     dispatch(ktNDLogin())
     dispatch(LayChiTietDatVeAction(props.match.params.id));
@@ -40,11 +46,11 @@ export default function BookMovie(props) {
 
     connection.on("loadDanhSachGheDaDat", (dsGheKhachDat) => {
       console.log("dsGheKhachDat", dsGheKhachDat);
-      dsGheKhachDat = dsGheKhachDat.filter(
+      dsGheKhachDat = dsGheKhachDat?.filter(
         (item) => item.taiKhoan !== thongTinND.taiKhoan
       );
 
-      let arrGheKhachDat = dsGheKhachDat.reduce((result, item, index) => {
+      let arrGheKhachDat = dsGheKhachDat?.reduce((result, item, index) => {
         let arrGhe = JSON.parse(item.danhSachGhe);
         console.log("arrGhe", arrGhe);
 
@@ -67,7 +73,7 @@ export default function BookMovie(props) {
   }, []);
 
   const clearGhe = function (event) {
-    connection.invoke("huyDat", thongTinND.taiKhoan, props.match.params.id);
+    connection.invoke("huyDat", thongTinND?.taiKhoan, props.match.params.id);
   };
 
   const info = () => {

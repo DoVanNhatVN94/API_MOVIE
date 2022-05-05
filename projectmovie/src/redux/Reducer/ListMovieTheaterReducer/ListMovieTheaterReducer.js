@@ -6,10 +6,10 @@ import {
 } from "../../action/Type";
 
 const ListMT = {
-  arrRap: [],
-  objLichChieuTheoMaPhim: {
-    heThongRapChieu: [],
-  },
+  // arrRap: [],
+  // objLichChieuTheoMaPhim: {
+  //   heThongRapChieu: [],
+  // },
   arrLC: [],
   DSCumRap: [],
 };
@@ -24,10 +24,10 @@ export const ListMovieTheaterReducer = (state = ListMT, action) => {
       state.arrRap = action.data;
       return { ...state };
 
-    case layTTLichChieuPhim:
-      state.objLichChieuTheoMaPhim = { ...action.data };
-      state.arrRap = [...action.data.heThongRapChieu[0].cumRapChieu];
-      return { ...state };
+    // case layTTLichChieuPhim:
+    //   state.objLichChieuTheoMaPhim = { ...action.data };
+    //   state.arrRap = [...action.data.heThongRapChieu[0].cumRapChieu];
+    //   return { ...state };
 
     case LayThongTinLichChieuHeThongRapType:
       state.DSCumRap = [...action.DSCumRap];
