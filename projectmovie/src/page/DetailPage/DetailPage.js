@@ -5,6 +5,7 @@ import {  QLRLayChiTietPhim } from "../../redux/action/QuanLyPhim/QuanLyPhim";
 
 import "../../asset/css/DetailPage/DetailPage.css";
 import moment from "moment";
+import { ktNDLogin } from "../../redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
 
 export default function DetailPage(props) {
   const match = useRouteMatch();
@@ -12,8 +13,9 @@ export default function DetailPage(props) {
   const dispatch = useDispatch();
 
   const { detailMovie } = useSelector((state) => state.ListMovieReducer);
-  console.log(detailMovie);
+
   useEffect(() => {
+    dispatch(ktNDLogin());
     dispatch(QLRLayChiTietPhim(match.params.id));
   }, []);
 

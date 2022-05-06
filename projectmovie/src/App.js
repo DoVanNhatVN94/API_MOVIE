@@ -23,10 +23,12 @@ import { AdminTemplate } from "./component/Feutures/Temp/AdminTemplate";
 import AdminListFilm from "./page/AdminPage/AdminListFilm";
 import AdminAddFilm from "./page/AdminPage/AdminAddFilm";
 import AdminEditFilm from "./page/AdminPage/AdminEditFilm";
+
 import AdminShowTime from "./page/AdminPage/AdminShowTime";
 import QuanLyNguoiDungAD from "./page/AdminPage/QuanLyNguoiDungAD";
 import AdminEditUser from "./page/AdminPage/AdminEditUser";
 import AdminAddUser from "./page/AdminPage/AdminAddUser";
+
 import { DetailTemplate } from "./component/Feutures/Temp/DetailTemplate";
 import Loading from "./component/Loading/Loading";
 
@@ -38,6 +40,16 @@ export const history = createBrowserHistory();
 
 function App() {
   const dispatch = useDispatch();
+  const style = {
+    height: 40,
+    width: 40,
+    lineHeight: '40px',
+    borderRadius: 4,
+    backgroundColor: 'wheat',
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 14,
+  };
 
   const maND = JSON.parse(localStorage.getItem("maLoaiNguoiDung"));
   const checkLogin = maND === "QuanTri";
@@ -79,8 +91,10 @@ function App() {
           </Suspense>
         </Switch>
         <Modal />
-
-        <BackTop />
+<BackTop>
+<div style={style}>UP</div>
+</BackTop>
+        
       </div>
     </Router>
   );
