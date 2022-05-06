@@ -16,6 +16,8 @@ export const ListMovieReducer = (state = ListMovie, action) => {
 
     case TypeLayDSPHIM:
       state.arrMovie = action.DS;
+      return { ...state };
+
 
     case capNhapDanhSachPhim:
       state.arrMovie = action.DS
@@ -29,6 +31,7 @@ export const ListMovieReducer = (state = ListMovie, action) => {
     case layBanner:
       state.arrBanner = action.DS;
       return { ...state };
+
     case layChiTietPhim:
 
       state.detailMovie = action.detailMovie
