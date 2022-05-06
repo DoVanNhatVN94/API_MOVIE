@@ -1,9 +1,11 @@
+
 import {
   layThongTinHeThongRap,
   LayThongTinLichChieuHeThongRapType,
   layThongTinRap,
   
 } from "../../action/Type";
+
 
 const ListMT = {
   arrLC: [],
@@ -14,7 +16,9 @@ export const ListMovieTheaterReducer = (state = ListMT, action) => {
   switch (action.type) {
     case layThongTinHeThongRap:
       state.arrMT = action.DS;
+
       return { ...state };
+
 
     case layThongTinRap:
       state.arrRap = action.data;

@@ -1,10 +1,14 @@
+
 import { CapNhapNDMessage, ktLogin, LAY_DANH_SACH_NGUOI_DUNG_AD, LAY_THONG_TIN_NGUOI_DUNG_AD, loginError, loginSuccess } from "../../action/Type";
+
 
 const user = {
   thongTinND: {},
   message: "",
+
   danhSachND: [],
-  thongTinNDAdmin: {}
+  thongTinNDAdmin: {},
+
 };
 
 export const UserReducer = (state = user, action) => {
@@ -23,10 +27,12 @@ export const UserReducer = (state = user, action) => {
       state.message = action.message;
 
       return { ...state };
+
       case CapNhapNDMessage:
         state.message = action.message;
   
         return { ...state };
+
 
     case LAY_DANH_SACH_NGUOI_DUNG_AD:
       state.danhSachND = action.danhSachND;
@@ -34,6 +40,7 @@ export const UserReducer = (state = user, action) => {
       return { ...state };
     case LAY_THONG_TIN_NGUOI_DUNG_AD:
       state.thongTinNDAdmin = action.layThongTinND;
+
 
       return { ...state };
     default:

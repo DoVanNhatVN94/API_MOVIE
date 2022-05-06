@@ -1,3 +1,4 @@
+
 import manager from "../../../API/API";
 import { displayLoading, hideLoading } from "../LoadingAction/LoadingAction";
 import { layBanner, layChiTietPhim, TypeLayDSPHIM } from "../Type";
@@ -53,3 +54,4 @@ export const QLRLayChiTietPhim = (maPhim) => {
     }
   };
 };
+
