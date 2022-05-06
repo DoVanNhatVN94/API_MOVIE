@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="col-lg-4 col-sm-6">
             <div className="single-footer-widget">
               <a href="/home">
-                <img src="https://movienew.cybersoft.edu.vn/hinhanh/loki-2022_gp02.png" className="img-fluid" alt="footer logo" />
+                <h4>API MOVIE</h4>
               </a>
               <div className="footer-contact">
                 <p>
@@ -99,12 +99,12 @@ export default function Footer() {
                 <ul className="apps-list">
                   <li>
                     <a href="#">
-                      <img src="" alt="" />
+                      <img src="https://i.imgur.com/lC22izJ.png" className=" img-fluid"  alt="" />
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <img src="" alt="" />
+                    <img src="https://i.imgur.com/lC22izJ.png" className=" img-fluid"  alt="" />
                     </a>
                   </li>
                 </ul>

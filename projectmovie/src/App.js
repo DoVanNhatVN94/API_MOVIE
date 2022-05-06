@@ -1,6 +1,8 @@
 import "./App.css";
 
-import { Router, Switch, Redirect } from "react-router-dom";
+import { BackTop, Button, Space } from "antd";
+import { PoweroffOutlined } from "@ant-design/icons";
+import { Router, Switch, Route, Redirect } from "react-router-dom";
 
 import HomePage from "./page/HomePage/HomePage";
 import AdminPage from "./page/AdminPage/AdminPage";
@@ -14,19 +16,50 @@ import { createBrowserHistory } from "history";
 import { UserTemplate } from "./component/Feutures/Temp/UserTemplate";
 import Modal from "./component/common/Modal";
 import BookMovie from "./page/BookMovie/BookMovie";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Suspense, lazy } from "react";
 import { ktNDLogin } from "./redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
+
+
+// devNam
+import { AdminTemplate } from "./component/Feutures/Temp/AdminTemplate";
+// import AdminPage from "./page/AdminPage/AdminPage";
+import AdminListFilm from "./page/AdminPage/AdminListFilm";
+import AdminAddFilm from "./page/AdminPage/AdminAddFilm";
+import AdminEditFilm from "./page/AdminPage/AdminEditFilm";
+
+import AdminShowTime from "./page/AdminPage/AdminShowTime";
+import QuanLyNguoiDungAD from "./page/AdminPage/QuanLyNguoiDungAD";
+import AdminEditUser from "./page/AdminPage/AdminEditUser";
+import AdminAddUser from "./page/AdminPage/AdminAddUser";
+
+import { DetailTemplate } from "./component/Feutures/Temp/DetailTemplate";
+import Loading from "./component/Loading/Loading";
+
+const BookTemplateLazy = lazy(() =>
+  import("./component/Feutures/Temp/BookTemplate")
+);
 
 
 export const history = createBrowserHistory();
 
 function App() {
+
   const login = localStorage.getItem("accessToken");
 
-  const dispatch = useDispatch();
 
-  const { thongTinND } = useSelector((state) => state.UserReducer);
+  const dispatch = useDispatch();
+  const style = {
+    height: 40,
+    width: 40,
+    lineHeight: '40px',
+    borderRadius: 4,
+    backgroundColor: 'wheat',
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 14,
+  };
+
 
   useEffect(() => { dispatch(ktNDLogin()) }, [])
 
@@ -47,10 +80,38 @@ function App() {
           <MainTemplate exact path="/admin" component={AdminPage} />
           <MainTemplate exact path="/detail/:id" component={DetailPage} />
           <MainTemplate exact path="/bookmovie/:id" component={BookMovie} />
+
           <UserTemplate exact path="/login" component={Login} />
           <UserTemplate exact path="/register" component={Register} />
+          <MainTemplate exact path="/home" component={HomePage} />
+          <AdminTemplate exact path="/admin" component={AdminPage} />
+          <DetailTemplate exact path="/detail/:id" component={DetailPage} />
+          <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
+          <AdminTemplate exact path="/admin/films/addnew" component={AdminAddFilm} />
+          <AdminTemplate exact path="/admin/films/edit/:id" component={AdminEditFilm} />
+          <AdminTemplate exact path="/admin/user/edit/:id" component={AdminEditUser} />
+          <AdminTemplate exact path="/admin/user/addnew" component={AdminAddUser} />
+          <AdminTemplate exact path="/admin/films/showtime/:id" component={AdminShowTime} />
+          <AdminTemplate exact path="/admin/user" component={QuanLyNguoiDungAD} />
+          <Suspense
+            fallback={
+              <Space style={{ width: "100%" }}>
+                <Button type="primary" icon={<PoweroffOutlined />} loading />
+              </Space>
+            }
+          >
+            <BookTemplateLazy
+              exact
+              path="/bookmovie/:id"
+              component={BookMovie}
+            />
+          </Suspense>
         </Switch>
         <Modal />
+<BackTop>
+<div style={style}>UP</div>
+</BackTop>
+        
       </div>
 
     </Router>
