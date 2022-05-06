@@ -43,11 +43,13 @@ function App() {
   const style = {
     height: 40,
     width: 40,
+
     lineHeight: '40px',
     borderRadius: 4,
     backgroundColor: 'wheat',
     color: '#fff',
     textAlign: 'center',
+
     fontSize: 14,
   };
 
@@ -70,12 +72,14 @@ function App() {
           <AdminTemplate exact path="/admin" component={AdminPage} />
           <DetailTemplate exact path="/detail/:id" component={DetailPage} />
           <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
+
           <AdminTemplate exact path="/admin/films/addnew" component={AdminAddFilm} />
           <AdminTemplate exact path="/admin/films/edit/:id" component={AdminEditFilm} />
           <AdminTemplate exact path="/admin/user/edit/:id" component={AdminEditUser} />
           <AdminTemplate exact path="/admin/user/addnew" component={AdminAddUser} />
           <AdminTemplate exact path="/admin/films/showtime/:id" component={AdminShowTime} />
           <AdminTemplate exact path="/admin/user" component={QuanLyNguoiDungAD} />
+
           <Suspense
             fallback={
               <Space style={{ width: "100%" }}>
@@ -91,10 +95,12 @@ function App() {
           </Suspense>
         </Switch>
         <Modal />
+
 <BackTop>
 <div style={style}>UP</div>
 </BackTop>
         
+
       </div>
     </Router>
   );
