@@ -99,12 +99,12 @@ export default function Footer() {
                 <ul className="apps-list">
                   <li>
                     <a href="#">
-                      <img src="" alt="" />
+                      <img src="https://i.imgur.com/lC22izJ.png" className=" img-fluid"  alt="" />
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <img src="" alt="" />
+                    <img src="https://i.imgur.com/lC22izJ.png" className=" img-fluid"  alt="" />
                     </a>
                   </li>
                 </ul>

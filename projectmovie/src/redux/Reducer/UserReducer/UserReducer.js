@@ -1,4 +1,4 @@
-import { ktLogin, loginError, loginSuccess } from "../../action/Type";
+import { CapNhapNDMessage, ktLogin, loginError, loginSuccess } from "../../action/Type";
 
 const user = {
   thongTinND: {},
@@ -10,7 +10,7 @@ export const UserReducer = (state = user, action) => {
   switch (action.type) {
     case ktLogin:
       state.thongTinND = action.user;
-
+  
       return { ...state };
 
     case loginSuccess:
@@ -19,6 +19,11 @@ export const UserReducer = (state = user, action) => {
       return { ...state };
 
     case loginError:
+      state.message = action.message;
+
+      return { ...state };
+
+    case CapNhapNDMessage:
       state.message = action.message;
 
       return { ...state };

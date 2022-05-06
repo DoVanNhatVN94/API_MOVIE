@@ -11,7 +11,7 @@ export default function Modal() {
   const maND = JSON.parse(localStorage.getItem("maLoaiNguoiDung"));
   const check = localStorage.getItem("accessToken");
   const checkButtonLogin = () => {
-    if (check == null)
+    if (check === null)
       return (
         <button
           type="button"
@@ -36,7 +36,7 @@ export default function Modal() {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
+              <h5 className="modal-title text-success" id="exampleModalLabel">
                 {id}
               </h5>
               <button
@@ -82,8 +82,8 @@ export default function Modal() {
                   className="btn btn-outline-secondary"
                   data-bs-dismiss="modal"
                   onClick={() => {
-                    console.log(maND == "QuanTri");
-                    if (maND == "QuanTri") history.push("/admin");
+                    console.log(maND === "QuanTri");
+                    if (maND === "QuanTri") history.push("/admin");
                   }}
                 >
                   Close

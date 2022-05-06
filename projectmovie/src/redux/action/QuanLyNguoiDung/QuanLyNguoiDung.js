@@ -1,13 +1,36 @@
 import { history } from "../../../App";
 import manager from "../../../API/API";
-import { ktLogin, loginError, loginSuccess } from "../Type";
+import { ktLogin, loginError, loginSuccess, CapNhapNDMessage } from "../Type";
+import { displayLoading, hideLoading } from "../LoadingAction/LoadingAction";
 
 export const dangKy = (thongTinND) => {
   return async (dispatch2) => {
     try {
       const result = await manager.postDangKy(thongTinND);
-      console.log({ result });
-      history.push("/login");
+      if (result.status === 200) {
+        console.log({ result });
+        history.push("/login");
+      }
+    } catch (error) {
+      console.log("error", error);
+      console.log("error", error.response?.data);
+    }
+  };
+};
+
+export const capNhapND = (thongTinND) => {
+  return async (dispatch2) => {
+    try {
+      const result = await manager.putCapNhapThongTinND(thongTinND);
+        await dispatch2({
+          type: CapNhapNDMessage,
+          message: result.data.message,
+        });
+        dispatch2({
+          type: ktLogin,
+          user: result.data.content,
+        });
+     
     } catch (error) {
       console.log("error", error);
       console.log("error", error.response?.data);
@@ -50,15 +73,18 @@ export const dangNhap = (thongTinND) => {
 export const ktNDLogin = () => {
   return async (dispatch2) => {
     try {
+      dispatch2(displayLoading)
       const result = await manager.postNDlogin();
       if (result.status === 200)
-        dispatch2({
+      await  dispatch2({
           type: ktLogin,
           user: result.data.content,
         });
+        dispatch2(hideLoading)
     } catch (error) {
       console.log("error", error);
       console.log("error", error.response?.data);
+      dispatch2(hideLoading)
     }
   };
 };

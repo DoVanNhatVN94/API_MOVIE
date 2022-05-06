@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Tabs, Radio, Space } from "antd";
+import { Tabs } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { TTLichChieuHTR } from "../../redux/action/QuanLyRap/QuanLyRap";
 import { useHistory } from "react-router-dom";
@@ -10,7 +10,7 @@ export default function BookTickerTheater() {
   const dispatch = useDispatch();
   const history = useHistory()
   const { DSCumRap } = useSelector((state) => state.ListMovieTheaterReducer);
-  console.log(DSCumRap);
+  
   useEffect(() => {
     dispatch(TTLichChieuHTR());
   }, []);
@@ -82,7 +82,7 @@ export default function BookTickerTheater() {
   };
 
   return (
-    <div className="container">
+    <div className="container overflow-auto">
       <Tabs tabPosition={"left"}>{rederHeThongRap()}</Tabs>
     </div>
   );

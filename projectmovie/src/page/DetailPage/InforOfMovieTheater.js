@@ -1,7 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useRouteMatch } from "react-router-dom";
+import {  useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 
-import { layThongTinRap } from "../../redux/action/Type";
 
 import moment from "moment";
 import { Tabs } from "antd";
@@ -13,7 +12,7 @@ export default function InforOfMovieTheater() {
   const { heThongRapChieu } = useSelector(
     (state) => state.ListMovieReducer.detailMovie
   );
-  console.log(heThongRapChieu);
+  
 
   const renderLichChieu = (lichChieuPhim) => {
     return lichChieuPhim?.slice(0, 12).map((lichChieu, index) => {
@@ -101,7 +100,7 @@ export default function InforOfMovieTheater() {
               <h4>Cảm Ơn Quý Khách Đã Quan Tâm Tới Bộ Phim Này</h4>
             </div>
           ) : (
-            <Tabs defaultActiveKey="1" tabPosition={"left"}>
+            <Tabs defaultActiveKey="0" tabPosition={"left"}>
               {renderCardLogoRap()}
             </Tabs>
           )}

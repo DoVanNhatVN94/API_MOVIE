@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 import { UserOutlined } from "@ant-design/icons";
 
@@ -20,7 +20,7 @@ export default function Header() {
       return (
         <Fragment>
           <button
-            className="btn btn-outline-info m-1"
+            className="btn btn-outline-info m-1 "
             type="button"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
@@ -36,7 +36,7 @@ export default function Header() {
             Login
           </button>
           <button
-            className="btn btn-outline-light m-1" 
+            className="btn btn-outline-dark m-1 "
             type="button"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
@@ -69,7 +69,7 @@ export default function Header() {
               });
             }}
           >
-            {<UserOutlined /> }
+            {<UserOutlined />}
             {thongTinND.hoTen}
           </button>
           <button
@@ -86,11 +86,43 @@ export default function Header() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light  bg-dark">
-      <div className="container-fluid px-4 px-lg-5 m-auto">
-        <div className="w-75"></div>
-        <div className="w-25 d-flex ">{checkButtonLogin()}</div>
-      </div>
-    </nav>
+    <Fragment>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light border-secondary border-bottom">
+        <div className="container-fluid">
+          <a className="navbar-brand fs-3" href="#">
+            API MOVIE CYBERSOFT
+          </a>
+          <button
+            className="navbar-toggler w-25"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon" />
+          </button>
+          <div
+            className="collapse navbar-collapse w-75"
+            id="navbarSupportedContent"
+          >
+            <ul className="navbar-nav w-75 m-auto px-3">
+              <li className="nav-item">
+                <NavLink
+                  activeClassName="myActive"
+                  activeStyle={{ color: "wheat", border: "2px solid wheat" }}
+                  className="nav-link p-3 text-center fs-4"
+                  to="/home"
+                >
+                  Home
+                </NavLink>
+              </li>
+            </ul>
+            <form className="d-flex w-50 m-auto">{checkButtonLogin()}</form>
+          </div>
+        </div>
+      </nav>
+    </Fragment>
   );
 }
