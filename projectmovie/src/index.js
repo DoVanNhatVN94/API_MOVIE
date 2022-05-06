@@ -10,7 +10,7 @@ import * as signalR from "@aspnet/signalr";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "./index.css";
-import { DOMAIN, DOMAIN_BE } from "./util/setting";
+import { DOMAIN } from "./util/setting";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 

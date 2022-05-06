@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Modal, Tabs } from "antd";
+import { Modal, Tabs } from "antd";
 
 import { CloseOutlined, UserOutlined } from "@ant-design/icons";
 import "../../asset/css/BookMovie/BookMovie.css";
@@ -12,19 +12,18 @@ import {
 } from "../../redux/action/QuanLyDatVe/QuanLyDatVe";
 import { SuLyGheKhachDat, SuLySauKhiDatVe } from "../../redux/action/Type";
 import moment from "moment";
-import { useHistory } from "react-router-dom";
+
 import { connection } from "../..";
 import { ktNDLogin } from "../../redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
+import { useHistory } from "react-router-dom";
 const { TabPane } = Tabs;
 
 export default function BookMovie(props) {
-  console.log(props.match.params.id);
   var _ = require("lodash");
+
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  
   const { thongTinND } = useSelector((state) => state.UserReducer);
   const { chiTietPhongVe, danhSachGheDangDat, danhSachGheKhachDangDat } =
     useSelector((state) => state.QuanLyDatVeReducer);
@@ -32,11 +31,8 @@ export default function BookMovie(props) {
   const { thongTinPhim, danhSachGhe } = chiTietPhongVe;
   const { thongTinDatVe } = thongTinND;
 
-  console.log("danhSachGheDangDat", danhSachGheDangDat);
-  console.log("danhSachGheKhachDangDat", danhSachGheKhachDangDat);
-
   useEffect(() => {
-    dispatch(ktNDLogin())
+    dispatch(ktNDLogin());
     dispatch(LayChiTietDatVeAction(props.match.params.id));
 
     connection.on("datVeThanhCong", () => {
@@ -45,14 +41,12 @@ export default function BookMovie(props) {
     connection.invoke("loadDanhSachGhe", props.match.params.id);
 
     connection.on("loadDanhSachGheDaDat", (dsGheKhachDat) => {
-      console.log("dsGheKhachDat", dsGheKhachDat);
       dsGheKhachDat = dsGheKhachDat?.filter(
         (item) => item.taiKhoan !== thongTinND.taiKhoan
       );
 
       let arrGheKhachDat = dsGheKhachDat?.reduce((result, item, index) => {
         let arrGhe = JSON.parse(item.danhSachGhe);
-        console.log("arrGhe", arrGhe);
 
         return [...result, ...arrGhe];
       }, []);
@@ -88,6 +82,7 @@ export default function BookMovie(props) {
       content: "Đặt Vé Thành Công",
     });
   };
+
   const rederReducer = (array1) => {
     const initialValue = 0;
     const sumWithInitial = array1.reduce(
@@ -123,7 +118,6 @@ export default function BookMovie(props) {
         <Fragment key={`chair ${index}`}>
           <button
             onClick={() => {
-              console.log("chair", chair);
               const action = datGheAction(chair, props.match.params.id);
               dispatch(action);
             }}
@@ -147,25 +141,13 @@ export default function BookMovie(props) {
     });
   };
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
   const renderLichSuDatVe = () => {
     return thongTinDatVe?.map((item, index) => {
       return (
         <Fragment key={`item ${index}`}>
           <div className="card col-3 ">
             <img
-            alt=""
+              alt=""
               src={item.hinhAnh}
               className="card-img-top"
               style={{ height: 300 }}
@@ -179,41 +161,38 @@ export default function BookMovie(props) {
                 </span>
               </div>
               <div className="card-text">
-                Tên Rạp:
+                Tên Cụm Rạp:
                 <span className=" text-danger ml-1">
                   {" "}
                   {item.danhSachGhe[0].tenHeThongRap}
                 </span>
               </div>
               <div className="card-text">
-                Tên Rạp:
+                Rạp Số :
                 <span className=" text-danger ml-1">
                   {" "}
                   {item.danhSachGhe[0].tenRap}
                 </span>
               </div>
               <p className=" card-text "></p>
-              <Button type="success" onClick={showModal}>
-                Danh Sách Ghế
-              </Button>
-              <Modal
-                visible={isModalVisible}
-                onOk={handleOk}
-                onCancel={handleCancel}
-              >
-                <div className=" p-3">
-                  {item.danhSachGhe.map((chair, index) => {
-                    return (
-                      <span
-                        className="text-primary p-1 m-1 bg-info"
-                        key={`so ghe ${index}`}
-                      >
-                        {chair.tenGhe}
-                      </span>
-                    );
-                  })}
-                </div>
-              </Modal>
+              <div className=" p-1 row">
+                <h6 className="text-center">Ghế bạn đã đặt</h6>
+                {item.danhSachGhe.map((chair, index) => {
+                  return (
+                    <span
+                      style={{
+                        color: "white",
+                        backgroundColor: "brown",
+                        borderRadius: "5px",
+                      }}
+                      className=" m-1 py-1 col-2 "
+                      key={`so ghe ${index}`}
+                    >
+                      {chair.tenGhe}
+                    </span>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </Fragment>
@@ -222,12 +201,7 @@ export default function BookMovie(props) {
   };
   return (
     <Fragment>
-      <Tabs
-        defaultActiveKey="1"
-        onChange={() => {
-          console.log("change");
-        }}
-      >
+      <Tabs defaultActiveKey="1">
         <TabPane tab="* Chọn Ghế & Đặt Vé" key="1">
           <div className="row bookmovie vh-100">
             <div className="feature-section pt-2 pb-2 container col-md-9 text-center">
@@ -317,7 +291,7 @@ export default function BookMovie(props) {
               <hr />
               <div className="row">
                 <div className="col-8 py-1">
-                  {_.sortBy(danhSachGheDangDat, ["stt"]).map((chair, index) => {
+                  {_.sortBy(danhSachGheDangDat, ["stt"])?.map((chair, index) => {
                     if (danhSachGheDangDat !== [])
                       return (
                         <Fragment key={`chai dd ${index}`}>
@@ -346,37 +320,38 @@ export default function BookMovie(props) {
                 <p>Số Điện Thoại</p>
                 <h5>{thongTinND?.soDT}</h5>
               </div>
-              <button
-                onClick={() => {
-                  console.log(danhSachGheDangDat.lenght === 0);
-                  if (danhSachGheDangDat.length === 0) {
-                    info();
-                  } else {
-                    const ttDatVe = {
-                      maLichChieu: props.match.params.id,
-                      danhSachVe: [...danhSachGheDangDat],
-                    };
-                    dispatch(UserDatVe(ttDatVe));
-                    success();
-                    history.goBack();
-                  }
-                }}
-                className="text-center btn btn-outline-success p-3"
-              >
-                ĐẶT VÉ
-              </button>
-              <button
-                onClick={() => {
-                  dispatch({
-                    type: SuLySauKhiDatVe,
-                    data: [],
-                  });
-                  history.push("/home");
-                }}
-                className="text-center btn btn-outline-danger p-3 mt-2"
-              >
-                Hủy
-              </button>
+              <div className="btnButton">
+                <button
+                  onClick={() => {
+                    if (danhSachGheDangDat.length === 0) {
+                      info();
+                    } else {
+                      const ttDatVe = {
+                        maLichChieu: props.match.params.id,
+                        danhSachVe: [...danhSachGheDangDat],
+                      };
+                      dispatch(UserDatVe(ttDatVe));
+                      success();
+                      history.goBack();
+                    }
+                  }}
+                  className="text-center btn btn-outline-success p-3"
+                >
+                  ĐẶT VÉ
+                </button>
+                <button
+                  onClick={() => {
+                    dispatch({
+                      type: SuLySauKhiDatVe,
+                      data: [],
+                    });
+                    history.push("/home");
+                  }}
+                  className="text-center btn btn-outline-danger p-3 mt-2"
+                >
+                  Hủy
+                </button>
+              </div>
             </div>
           </div>
         </TabPane>

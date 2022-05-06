@@ -120,8 +120,7 @@ export default function Login(props) {
           }}
         >
           Register
-        </Button>
-        
+        </Button>   
       </Form.Item>
     </Form>
   );
