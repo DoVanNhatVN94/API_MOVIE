@@ -1,5 +1,9 @@
 # API_MOVIE
 
+# GROUP : GP02
+
+# MEMBER : ĐỖ VĂN NHẬT | PHẠM HẢI NAM
+
 # LINK DEPLOY : https://api-movie-iota.vercel.app/home
 
 # INSTALL REACT PROJECT

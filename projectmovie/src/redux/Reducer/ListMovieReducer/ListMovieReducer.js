@@ -13,17 +13,25 @@ const ListMovie = {
 
 export const ListMovieReducer = (state = ListMovie, action) => {
   switch (action.type) {
+
     case TypeLayDSPHIM:
       state.arrMovie = action.DS;
       return { ...state };
 
+
+    case capNhapDanhSachPhim:
+      state.arrMovie = action.DS
+      return { ...state };
+
+
     case layDSPhimAD:
-      state.arrMovie = action.mangPhim;
+      state.arrMovie = action.mangPhim
       return { ...state };
 
     case layBanner:
       state.arrBanner = action.DS;
       return { ...state };
+
     case layChiTietPhim:
 
       state.detailMovie = action.detailMovie
@@ -43,4 +51,5 @@ export const ListMovieReducer = (state = ListMovie, action) => {
     default:
       return { ...state };
   }
+
 };
