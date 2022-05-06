@@ -1,7 +1,10 @@
 import { history } from "../../../App";
 import manager from "../../../API/API";
-import { ktLogin, loginError, loginSuccess, CapNhapNDMessage } from "../Type";
+
 import { displayLoading, hideLoading } from "../LoadingAction/LoadingAction";
+
+import { ktLogin, loginError, loginSuccess,CapNhapNDMessage ,LAY_DANH_SACH_NGUOI_DUNG_AD, LAY_THONG_TIN_NGUOI_DUNG_AD } from "../Type";
+
 
 export const dangKy = (thongTinND) => {
   return async (dispatch2) => {
@@ -88,3 +91,78 @@ export const ktNDLogin = () => {
     }
   };
 };
+
+export const layDanhSachNguoiDungAdmin = (nguoiDung='') => {
+  return async (dispatch2) => {
+    try {
+      const result = await manager.layDanhSachNguoiDungAD(nguoiDung);
+      if (result.status === 200)
+        dispatch2({
+          type: LAY_DANH_SACH_NGUOI_DUNG_AD,
+          danhSachND: result.data.content,
+        });
+    } catch (error) {
+      console.log("error", error);
+      console.log("error", error.response?.data);
+    }
+  };
+};
+
+
+export const themNguoiDungAdmin = (nguoiDung) => {
+  return async (dispatch) => {
+    try {
+      let result = await manager.themNguoiDungAdmin(nguoiDung);
+      alert('Thêm người dùng thành công');
+      console.log(result.data.content);
+      // dispatch(layDanhSachNguoiDungAdmin());
+      history.push('/admin/user');
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const layThongTinNguoiDungAD = (taiKhoan) => {
+  return async (dispatch) => {
+    try {
+      let result = await manager.layThongTinNguoiDung(taiKhoan);
+      let action = {
+        type: LAY_THONG_TIN_NGUOI_DUNG_AD,
+        layThongTinND: result.data.content
+      }
+      dispatch(action)
+    } catch (error) {
+      console.log(error.response?.data)
+    }
+  }
+}
+
+export const capNhatNguoiDungAD = (nguoiDung) => {
+  return async (dispatch) => {
+      try {
+          let result = await manager.capNhatNguoiDung(nguoiDung);
+          alert('Cập nhật người dùng thành công');
+          console.log(result.data.content);
+
+          history.push('/admin/user');
+
+      } catch (error) {
+          console.log(error)
+      }
+  }
+}
+
+export const xoaNguoiDungAD = (taiKhoan) => {
+  return async (dispatch) => {
+      try {
+          let result = await manager.xoaNguoiDung(taiKhoan);
+          console.log(result.data.content);
+          alert('Xóa người dùng thành công');
+          dispatch(layDanhSachNguoiDungAdmin())
+          history.push('/admin/user');
+      } catch (error) {
+          console.log(error)
+      }
+  }
+}

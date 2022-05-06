@@ -28,7 +28,7 @@ const AdminEditFilm = (props) => {
     const [componentSize, setComponentSize] = useState('default');
     const [img, setImg] = useState('');
     const { thongTinPhimAD } = useSelector(state => state.ListMovieReducer)
-    // console.log(thongTinPhimAD);
+    console.log(thongTinPhimAD);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -52,6 +52,12 @@ const AdminEditFilm = (props) => {
             danhGia: thongTinPhimAD.danhGia,
             hinhAnh: null
         },
+        validationSchema: Yup.object({
+            tenPhim: Yup.string().required("Tài khoản không được để trống").trim(),
+            trailer: Yup.string().required("Trailer không được để trống").trim(),
+            moTa: Yup.string().required("Mô tả không được để trống").trim(),
+            ngayKhoiChieu: Yup.string().required("Ngày khởi chiếu không được để trống"),
+        }),
         onSubmit: (values) => {
             // console.log(values);
             // values.maNhom = GROUP_ID;
@@ -105,7 +111,6 @@ const AdminEditFilm = (props) => {
 
     const dateFormat = 'DD/MM/YYYY';
 
-
     const onFormLayoutChange = ({ size }) => {
         setComponentSize(size);
     };
@@ -135,16 +140,28 @@ const AdminEditFilm = (props) => {
                     </Radio.Group>
                 </Form.Item>
                 <Form.Item label="Tên phim">
-                    <Input name='tenPhim' onChange={formik.handleChange} value={formik.values.tenPhim} />
+                    <Input name='tenPhim' onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.tenPhim} />
+                    {formik.touched.tenPhim && formik.errors.tenPhim ? (
+                        <p className="alert alert-danger">{formik.errors.tenPhim}</p>
+                    ) : null}
                 </Form.Item>
                 <Form.Item label="Trailer">
-                    <Input name='trailer' onChange={formik.handleChange} value={formik.values.trailer} />
+                    <Input name='trailer' onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.trailer} />
+                    {formik.touched.trailer && formik.errors.trailer ? (
+                        <p className="alert alert-danger">{formik.errors.trailer}</p>
+                    ) : null}
                 </Form.Item>
                 <Form.Item label="Mô tả">
-                    <Input name='moTa' onChange={formik.handleChange} value={formik.values.moTa} />
+                    <Input name='moTa' onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.moTa} />
+                    {formik.touched.moTa && formik.errors.moTa ? (
+                        <p className="alert alert-danger">{formik.errors.moTa}</p>
+                    ) : null}
                 </Form.Item>
                 <Form.Item label="Ngày khởi chiếu">
-                    <DatePicker format={dateFormat} onChange={handleChangeDatePicker} value={moment(formik.values.ngayKhoiChieu)} />
+                    <DatePicker format={dateFormat} onChange={handleChangeDatePicker} onBlur={formik.handleBlur} value={moment(formik.values.ngayKhoiChieu)} />
+                    {formik.touched.ngayKhoiChieu && formik.errors.ngayKhoiChieu ? (
+                        <p className="alert alert-danger">{formik.errors.ngayKhoiChieu}</p>
+                    ) : null}
                 </Form.Item>
                 <Form.Item label="Đang chiếu" valuePropName="checked">
                     <Switch style={{ width: 20 }} onChange={handleChangeSwitch('dangChieu')} checked={formik.values.dangChieu} />

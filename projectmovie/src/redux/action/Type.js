@@ -37,4 +37,10 @@ export const SuLyGheKhachDat = "XU_LY_GHE_KHACH_DAT"
 export const DISPLAY_LOADING = "DISPLAY_LOADING"
 
 export const HIDE_LOADING = "HIDE_LOADING"
+
+export const LAY_DANH_SACH_NGUOI_DUNG_AD = "LAY_DANH_SACH_NGUOI_DUNG_AD"
+
+export const THEM_NGUOI_DUNG_AD = 'THEM_NGUOI_DUNG_AD'
+
+export const LAY_THONG_TIN_NGUOI_DUNG_AD = 'LAY_THONG_TIN_NGUOI_DUNG_AD'
 // export const

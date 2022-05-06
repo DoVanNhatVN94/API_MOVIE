@@ -78,13 +78,17 @@ export default function AdminListFilm() {
             render: (text, film) => {
                 return <Fragment>
                     <NavLink key={1} to={`/admin/films/edit/${film.maPhim}`} style={{ color: 'blue', fontSize: 25, paddingRight: 10 }}><EditOutlined /></NavLink>
+                    
                     <span onClick={() => {
                         if (window.confirm('Bạn có chắc muốn xóa phim ' + film.tenPhim + ' không?')) {
                             dispatch(xoaPhimAction(film.maPhim));
                         }
 
                     }} key={2} style={{ color: 'red', fontSize: 25, paddingRight: 10, cursor: 'pointer' }}><DeleteOutlined /></span>
-                    <NavLink key={3} to={`/admin/films/showtime/${film.maPhim}`} style={{ color: 'green', fontSize: 25, paddingRight: 10 }}><CalendarOutlined /></NavLink>
+
+                    <NavLink key={3} to={`/admin/films/showtime/${film.maPhim}`} style={{ color: 'green', fontSize: 25, paddingRight: 10 }} onClick={() => { 
+                        localStorage.setItem('filmParams',JSON.stringify(film));
+                     }}><CalendarOutlined /></NavLink>
                 </Fragment>
             },
             width: '20%',
@@ -96,21 +100,17 @@ export default function AdminListFilm() {
         console.log("params", pagination, filters, sorter, extra);
     }
 
-    function onChange(pagination, filters, sorter, extra) {
-        // console.log('params', pagination, filters, sorter, extra);
-    }
-
     const data = arrMovie;
 
     return (
         <div>
-            <h2 className='mb-5'>Quản lý phim</h2>
-            <Button style={{ width: 150 }} className='mb-4' onClick={() => {
+            <h2 className='my-4'>Quản lý phim</h2>
+            <Button type='primary' style={{ width: 150 }} className='mb-4' onClick={() => {
                 history.push('/admin/films/addnew')
             }}>Thêm phim</Button>
             <Search
                 className='mb-4'
-                placeholder="input search text"
+                placeholder="Tìm kiếm phim"
                 enterButton={<SearchOutlined />}
                 size="large"
                 onSearch={onSearch}
