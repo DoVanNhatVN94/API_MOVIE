@@ -17,7 +17,6 @@ import { useDispatch } from "react-redux";
 import { Suspense, lazy } from "react";
 import { ktNDLogin } from "./redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
 
-
 // devNam
 import { AdminTemplate } from "./component/Feutures/Temp/AdminTemplate";
 // import AdminPage from "./page/AdminPage/AdminPage";
@@ -78,7 +77,6 @@ function App() {
               component={BookMovie}
             />
           </Suspense>
-
         </Switch>
         <Modal />
 

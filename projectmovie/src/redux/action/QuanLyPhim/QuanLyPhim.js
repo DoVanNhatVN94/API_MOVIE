@@ -1,4 +1,5 @@
 import manager from "../../../API/API";
+import { displayLoading, hideLoading } from "../LoadingAction/LoadingAction";
 import { layBanner, layChiTietPhim, TypeLayDSPHIM } from "../Type";
 
 export const ActionLayDSPhim = () => {
@@ -33,19 +34,22 @@ export const ActionQLPLayDSBanner = () => {
   };
 };
 
-export const LayChiTietPhim = (maPhim) => {
+export const QLRLayChiTietPhim = (maPhim) => {
   return async (dispatch2) => {
     try {
+      dispatch2(displayLoading)
       const result = await manager.getChiTietPhim(maPhim);
       if (result.status === 200) {
-        dispatch2({
+       await dispatch2({
           type: layChiTietPhim,
-          ob: result.data.content,
+          detailMovie: result.data.content,
         });
+        dispatch2(hideLoading)
       }
     } catch (error) {
       console.log("error", error);
       console.log("error", error.response?.data);
+      dispatch2(hideLoading)
     }
   };
 };

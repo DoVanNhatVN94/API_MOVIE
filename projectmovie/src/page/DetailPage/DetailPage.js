@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useRouteMatch } from "react-router-dom";
-import { LayChiTietPhim } from "../../redux/action/QuanLyPhim/QuanLyPhim";
+import {  useRouteMatch } from "react-router-dom";
+import {  QLRLayChiTietPhim } from "../../redux/action/QuanLyPhim/QuanLyPhim";
 
 import "../../asset/css/DetailPage/DetailPage.css";
 import moment from "moment";
@@ -12,9 +12,9 @@ export default function DetailPage(props) {
   const dispatch = useDispatch();
 
   const { detailMovie } = useSelector((state) => state.ListMovieReducer);
-
+  console.log(detailMovie);
   useEffect(() => {
-    dispatch(LayChiTietPhim(match.params.id));
+    dispatch(QLRLayChiTietPhim(match.params.id));
   }, []);
 
   return (
@@ -35,7 +35,7 @@ export default function DetailPage(props) {
                   <div className="details-banner-thumb">
                     <img
                       className="img-fluid"
-                      src={detailMovie.hinhAnh}
+                      src={detailMovie?.hinhAnh}
                       alt=""
                     />
                   </div>
