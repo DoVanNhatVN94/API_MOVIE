@@ -53,3 +53,4 @@ export const ListMovieReducer = (state = ListMovie, action) => {
   }
 
 };
+

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import {ArrowRightOutlined ,ArrowLeftOutlined} from "@ant-design/icons"
+
 
 
 import Slider from "react-slick";
@@ -28,8 +28,6 @@ export default function BookTicker() {
     speed: 3000,
     autoplaySpeed: 2000,
     arrows:true,
-    // nextArrow: <ArrowRightOutlined />,
-    //   prevArrow: <ArrowLeftOutlined />
     
     // cssEase: "linear",
     // responsive: [

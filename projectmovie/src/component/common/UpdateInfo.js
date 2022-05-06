@@ -124,4 +124,6 @@ export default function UpdateInfo() {
       </form>
     </div>
   );
+
 }
+

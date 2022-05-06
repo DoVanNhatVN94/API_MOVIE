@@ -1,12 +1,5 @@
 
-import {
-  ktLogin,
-  LAY_DANH_SACH_NGUOI_DUNG_AD,
-  LAY_THONG_TIN_NGUOI_DUNG_AD,
-  CapNhapNDMessage,
-  loginError,
-  loginSuccess,
-} from "../../action/Type";
+import { CapNhapNDMessage, ktLogin, LAY_DANH_SACH_NGUOI_DUNG_AD, LAY_THONG_TIN_NGUOI_DUNG_AD, loginError, loginSuccess } from "../../action/Type";
 
 
 const user = {
@@ -35,8 +28,10 @@ export const UserReducer = (state = user, action) => {
 
       return { ...state };
 
-    case CapNhapNDMessage:
-      state.message = action.message;
+      case CapNhapNDMessage:
+        state.message = action.message;
+  
+        return { ...state };
 
 
     case LAY_DANH_SACH_NGUOI_DUNG_AD:
