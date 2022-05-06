@@ -1,71 +1,168 @@
-import axios from "axios";
-import {
-  QUAN_LY_NGUOI_DUNG_DANG_KY,
-  QUAN_LY_NGUOI_DUNG_DANG_NHAP,
-  TOKEN_MOVIE,
-} from "../../../util/setting";
 import { history } from "../../../App";
 import manager from "../../../API/API";
-import { ktLogin } from "../Type";
+
+import { displayLoading, hideLoading } from "../LoadingAction/LoadingAction";
+
+import { ktLogin, loginError, loginSuccess,CapNhapNDMessage ,LAY_DANH_SACH_NGUOI_DUNG_AD, LAY_THONG_TIN_NGUOI_DUNG_AD } from "../Type";
+
 
 export const dangKy = (thongTinND) => {
-  return (dispatch2) => {
-    let promise = axios({
-      method: "post",
-      url: QUAN_LY_NGUOI_DUNG_DANG_KY,
-      headers: {
-        TokenCybersoft: TOKEN_MOVIE,
-      },
-      data: thongTinND,
-    });
-    promise.then((result) => {
-      console.log({ result });
-      //lấy data thành công chuyển người dùng qua login
-      history.push("/login");
-    });
+  return async (dispatch2) => {
+    try {
+      const result = await manager.postDangKy(thongTinND);
+      if (result.status === 200) {
+        console.log({ result });
+        history.push("/login");
+      }
+    } catch (error) {
+      console.log("error", error);
+      console.log("error", error.response?.data);
+    }
+  };
+};
 
-    promise.catch((error) => {
-      console.log(error);
-    });
+export const capNhapND = (thongTinND) => {
+  return async (dispatch2) => {
+    try {
+      const result = await manager.putCapNhapThongTinND(thongTinND);
+        await dispatch2({
+          type: CapNhapNDMessage,
+          message: result.data.message,
+        });
+        dispatch2({
+          type: ktLogin,
+          user: result.data.content,
+        });
+     
+    } catch (error) {
+      console.log("error", error);
+      console.log("error", error.response?.data);
+    }
   };
 };
 
 export const dangNhap = (thongTinND) => {
-  return (dispatch2) => {
-    let promise = axios({
-      method: "post",
-      url: QUAN_LY_NGUOI_DUNG_DANG_NHAP,
-      headers: {
-        TokenCybersoft: TOKEN_MOVIE,
-      },
-      data: thongTinND,
-    });
-    promise.then((result) => {
-      console.log(result.data.messages);
-      const data = JSON.stringify(result.data.content.accessToken);
-      localStorage.setItem("accessToken", data);
-      history.replace();
-    });
-    promise.catch((error) => {
-      console.log(error);
-    });
+  return async (dispatch2) => {
+    try {
+      const result = await manager.postLogin(thongTinND);
+      if (result.status === 200) {
+        const data = JSON.stringify(result.data.content.accessToken);
+        const ma = JSON.stringify(result.data.content.maLoaiNguoiDung);
+        localStorage.setItem("accessToken", data);
+        localStorage.setItem("maLoaiNguoiDung", ma);
+
+        dispatch2({
+          type: ktLogin,
+          user: result.data.content,
+        });
+
+        dispatch2({
+          type: loginSuccess,
+          message: result.data.message,
+        });
+        if (history.location.pathname === "/login") history.goBack();
+      }
+    } catch (error) {
+      console.log("error", error);
+      console.log("error", error.response?.data);
+      dispatch2({
+        type: loginError,
+        message: "Tài Khoản Hoặc Mật Khẩu Không Đúng",
+      });
+    }
   };
 };
 
 export const ktNDLogin = () => {
-  return (dispatch2) => {
-    const promise = manager.postNDlogin();
-    promise.then((result) => {
-      console.log(result.data.content);
-      dispatch2({
-        type: ktLogin,
-        user: result.data.content
-      })
-      
-      
-    });
-    promise.catch((error) => {
-      console.log(error);
-    });
+  return async (dispatch2) => {
+    try {
+      dispatch2(displayLoading)
+      const result = await manager.postNDlogin();
+      if (result.status === 200)
+      await  dispatch2({
+          type: ktLogin,
+          user: result.data.content,
+        });
+        dispatch2(hideLoading)
+    } catch (error) {
+      console.log("error", error);
+      console.log("error", error.response?.data);
+      dispatch2(hideLoading)
+    }
   };
 };
+
+export const layDanhSachNguoiDungAdmin = (nguoiDung='') => {
+  return async (dispatch2) => {
+    try {
+      const result = await manager.layDanhSachNguoiDungAD(nguoiDung);
+      if (result.status === 200)
+        dispatch2({
+          type: LAY_DANH_SACH_NGUOI_DUNG_AD,
+          danhSachND: result.data.content,
+        });
+    } catch (error) {
+      console.log("error", error);
+      console.log("error", error.response?.data);
+    }
+  };
+};
+
+
+export const themNguoiDungAdmin = (nguoiDung) => {
+  return async (dispatch) => {
+    try {
+      let result = await manager.themNguoiDungAdmin(nguoiDung);
+      alert('Thêm người dùng thành công');
+      console.log(result.data.content);
+      // dispatch(layDanhSachNguoiDungAdmin());
+      history.push('/admin/user');
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const layThongTinNguoiDungAD = (taiKhoan) => {
+  return async (dispatch) => {
+    try {
+      let result = await manager.layThongTinNguoiDung(taiKhoan);
+      let action = {
+        type: LAY_THONG_TIN_NGUOI_DUNG_AD,
+        layThongTinND: result.data.content
+      }
+      dispatch(action)
+    } catch (error) {
+      console.log(error.response?.data)
+    }
+  }
+}
+
+export const capNhatNguoiDungAD = (nguoiDung) => {
+  return async (dispatch) => {
+      try {
+          let result = await manager.capNhatNguoiDung(nguoiDung);
+          alert('Cập nhật người dùng thành công');
+          console.log(result.data.content);
+
+          history.push('/admin/user');
+
+      } catch (error) {
+          console.log(error)
+      }
+  }
+}
+
+export const xoaNguoiDungAD = (taiKhoan) => {
+  return async (dispatch) => {
+      try {
+          let result = await manager.xoaNguoiDung(taiKhoan);
+          console.log(result.data.content);
+          alert('Xóa người dùng thành công');
+          dispatch(layDanhSachNguoiDungAdmin())
+          history.push('/admin/user');
+      } catch (error) {
+          console.log(error)
+      }
+  }
+}

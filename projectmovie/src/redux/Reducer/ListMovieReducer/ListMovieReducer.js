@@ -1,20 +1,19 @@
-import { layDSPhimAD } from "../../action/Type";
 
-import {
-  capNhapDanhSachPhim,
-  layBanner,
-  layChiTietPhim,
-} from "../../action/Type";
+import { layBanner, layChiTietPhim, layDSPhimAD, TypeLayDSPHIM,layThongTinPhimAD } from "../../action/Type";
+
 
 const ListMovie = {
   arrMovie: [],
   arrBanner: [],
-  detailMovie: { a: "2" },
+
+  detailMovie: {},
+  thongTinPhimAD:{}
+
 };
 
 export const ListMovieReducer = (state = ListMovie, action) => {
   switch (action.type) {
-    case capNhapDanhSachPhim:
+    case TypeLayDSPHIM:
       state.arrMovie = action.DS;
       return { ...state };
 
@@ -26,7 +25,20 @@ export const ListMovieReducer = (state = ListMovie, action) => {
       state.arrBanner = action.DS;
       return { ...state };
     case layChiTietPhim:
-      state.detailMovie = action.ob;
+
+      state.detailMovie = action.detailMovie
+
+      return { ...state };
+
+    case layDSPhimAD:
+      state.arrMovie = action.mangPhim
+
+      return { ...state };
+
+    case layThongTinPhimAD:
+      state.thongTinPhimAD = action.layThongTinPhim
+
+
       return { ...state };
     default:
       return { ...state };

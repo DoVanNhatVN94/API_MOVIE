@@ -5,42 +5,18 @@ import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import "../../asset/css/owl.css";
-import { LayDanhSachBanner } from "../../redux/action/QuanLyPhim/QuanLyPhim";
-import manager from "../../API/API";
+import {ActionQLPLayDSBanner } from "../../redux/action/QuanLyPhim/QuanLyPhim";
 
 export default function CarouselListMovie() {
   const dispatch = useDispatch();
   const { arrBanner } = useSelector((state) => state.ListMovieReducer);
   const history = useHistory();
 
-  // manager
-  //   .getDSBanner()
-  //   .then((result) => {
-  //     console.log(result.data.content);
-  //     dispatch({
-  //       type: LayDanhSachBanner,
-  //       DS: result.data.content,
-  //     });
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-  const callAPI = async () => {
-    try {
-      let result = await manager.getDSBanner()
-      console.log(result.data.content);
-      await  dispatch({
-              type: LayDanhSachBanner,
-              DS: result.data.content,
-            });
-    } 
-    catch (error) {
-      //khi bị lỗi 
-        console.log(error)
-    }}
+
+  
 
 useEffect(()=>{
-  callAPI()
+  dispatch(ActionQLPLayDSBanner())
 },[])
   const rederItem = () => {
     return arrBanner.map((banner, index) => {
@@ -51,7 +27,7 @@ useEffect(()=>{
               history.push(`/detail/${banner.maPhim}`);
             }}
           >
-            <img className="img" src={banner.hinhAnh} />
+            <img className="img" src={banner.hinhAnh} alt="" />
           </button>
         </div>
       );

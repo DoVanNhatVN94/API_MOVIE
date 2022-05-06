@@ -1,13 +1,13 @@
 const component = {
   Component: <p>Default</p>,
-  handleForm: () => {},
+  id: "",
 };
 
 export const ModalReducer = (state = component, action) => {
   switch (action.type) {
     case "OPEN_MODAL":
       state.Component = action.Component;
-      state.handleForm = action.handleForm;
+      state.id = action.id;
 
       return { ...state };
 
