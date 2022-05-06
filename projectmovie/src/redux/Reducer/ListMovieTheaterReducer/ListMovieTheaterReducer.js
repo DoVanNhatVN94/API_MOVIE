@@ -1,4 +1,4 @@
-import { LayThongTinHeThongRap, layThongTinHeThongRap, layThongTinRap,  } from "../../action/Type";
+import {  layThongTinHeThongRap, layThongTinRap,  } from "../../action/Type";
 
 const ListMT = {
   arrMT: [],
@@ -11,10 +11,6 @@ export const ListMovieTheaterReducer = (state = ListMT, action) => {
     case layThongTinHeThongRap:
       state.arrMT = action.DS;
     return {...state}
-
-    case LayThongTinHeThongRap:
-      state.arrLichChieuMT = action.DS
-      return {...state} 
 
     case layThongTinRap:
       state.arrRap=action.DS
