@@ -62,7 +62,7 @@ export const AdminTemplate = (props) => {
                     <div className="logo" />
                     <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
                         <Menu.Item key="1" icon={<UserOutlined />}>
-                            <NavLink to='/admin/users'>User</NavLink>
+                            <NavLink to='/admin'>Admin</NavLink>
                         </Menu.Item>
                         <SubMenu key="2" icon={<FileOutlined />} title='Film'>
                             <Menu.Item key="sub1" icon={<FileOutlined />}>
@@ -72,9 +72,14 @@ export const AdminTemplate = (props) => {
                                 <NavLink to='/admin/films/addnew'>Add new</NavLink>
                             </Menu.Item>
                         </SubMenu>
-                        <Menu.Item key="3" icon={<DesktopOutlined />}>
-                            Showtime
-                        </Menu.Item>
+                        <SubMenu key="3" icon={<FileOutlined />} title='User'>
+                            <Menu.Item key="sub3" icon={<FileOutlined />}>
+                                <NavLink to='/admin/user'>User</NavLink>
+                            </Menu.Item>
+                            <Menu.Item key="sub4" icon={<FileAddOutlined />}>
+                                <NavLink to='/admin/user/addnew'>Add new User</NavLink>
+                            </Menu.Item>
+                        </SubMenu>
                     </Menu>
                 </Sider>
 

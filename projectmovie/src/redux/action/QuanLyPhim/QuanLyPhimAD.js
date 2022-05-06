@@ -57,6 +57,7 @@ export const capNhatPhimUploadAction = (formData) => {
     }
 }
 
+// Xóa phim AD
 export const xoaPhimAction = (maPhim) => {
     return async (dispatch) => {
         try {
