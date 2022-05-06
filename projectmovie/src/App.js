@@ -20,10 +20,14 @@ import { ktNDLogin } from "./redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
 
 // devNam
 import { AdminTemplate } from "./component/Feutures/Temp/AdminTemplate";
+// import AdminPage from "./page/AdminPage/AdminPage";
 import AdminListFilm from "./page/AdminPage/AdminListFilm";
 import AdminAddFilm from "./page/AdminPage/AdminAddFilm";
 import AdminEditFilm from "./page/AdminPage/AdminEditFilm";
 import AdminShowTime from "./page/AdminPage/AdminShowTime";
+import QuanLyNguoiDungAD from "./page/AdminPage/QuanLyNguoiDungAD";
+import AdminEditUser from "./page/AdminPage/AdminEditUser";
+import AdminAddUser from "./page/AdminPage/AdminAddUser";
 import { DetailTemplate } from "./component/Feutures/Temp/DetailTemplate";
 import Loading from "./component/Loading/Loading";
 
@@ -52,13 +56,15 @@ function App() {
           <UserTemplate exact path="/login" component={Login} />
           <UserTemplate exact path="/register" component={Register} />
           <MainTemplate exact path="/home" component={HomePage} />
-          <AdminTemplate exact path="/admin" component={AdminListFilm} />
+          <AdminTemplate exact path="/admin" component={AdminPage} />
           <DetailTemplate exact path="/detail/:id" component={DetailPage} />
           <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
-
           <AdminTemplate exact path="/admin/films/addnew" component={AdminAddFilm} />
           <AdminTemplate exact path="/admin/films/edit/:id" component={AdminEditFilm} />
+          <AdminTemplate exact path="/admin/user/edit/:id" component={AdminEditUser} />
+          <AdminTemplate exact path="/admin/user/addnew" component={AdminAddUser} />
           <AdminTemplate exact path="/admin/films/showtime/:id" component={AdminShowTime} />
+          <AdminTemplate exact path="/admin/user" component={QuanLyNguoiDungAD} />
           <Suspense
             fallback={
               <Space style={{ width: "100%" }}>
@@ -75,7 +81,7 @@ function App() {
 
         </Switch>
         <Modal />
-        
+
         <BackTop />
       </div>
     </Router>

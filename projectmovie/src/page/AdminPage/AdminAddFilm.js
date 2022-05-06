@@ -41,6 +41,12 @@ const AdminAddFilm = () => {
             danhGia: 0,
             hinhAnh: {}
         },
+        validationSchema: Yup.object({
+            tenPhim: Yup.string().required("Tài khoản không được để trống").trim(),
+            trailer: Yup.string().required("Trailer không được để trống").trim(),
+            moTa: Yup.string().required("Mô tả không được để trống").trim(),
+            ngayKhoiChieu: Yup.string().required("Ngày khởi chiếu không được để trống"),
+        }),
         onSubmit: (values) => {
             console.log(values);
             let formData = new FormData();
@@ -119,16 +125,28 @@ const AdminAddFilm = () => {
                     </Radio.Group>
                 </Form.Item>
                 <Form.Item label="Tên phim">
-                    <Input name='tenPhim' onChange={formik.handleChange} />
+                    <Input name='tenPhim' onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                    {formik.touched.tenPhim && formik.errors.tenPhim ? (
+                        <p className="alert alert-danger">{formik.errors.tenPhim}</p>
+                    ) : null}
                 </Form.Item>
                 <Form.Item label="Trailer">
-                    <Input name='trailer' onChange={formik.handleChange} />
+                    <Input name='trailer' onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                    {formik.touched.trailer && formik.errors.trailer ? (
+                        <p className="alert alert-danger">{formik.errors.trailer}</p>
+                    ) : null}
                 </Form.Item>
                 <Form.Item label="Mô tả">
-                    <Input name='moTa' onChange={formik.handleChange} />
+                    <Input name='moTa' onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                    {formik.touched.moTa && formik.errors.moTa ? (
+                        <p className="alert alert-danger">{formik.errors.moTa}</p>
+                    ) : null}
                 </Form.Item>
                 <Form.Item label="Ngày khởi chiếu">
-                    <DatePicker format={'DD/MM/YYYY'} onChange={handleChangeDatePicker} />
+                    <DatePicker format={'DD/MM/YYYY'} onChange={handleChangeDatePicker} onBlur={formik.handleBlur} />
+                    {formik.touched.ngayKhoiChieu && formik.errors.ngayKhoiChieu ? (
+                        <p className="alert alert-danger">{formik.errors.ngayKhoiChieu}</p>
+                    ) : null}
                 </Form.Item>
                 <Form.Item label="Đang chiếu" valuePropName="checked">
                     <Switch style={{ width: 20 }} onChange={handleChangeSwitch('dangChieu')} />
@@ -140,7 +158,7 @@ const AdminAddFilm = () => {
                     <Switch style={{ width: 20 }} onChange={handleChangeSwitch('hot')} />
                 </Form.Item>
                 <Form.Item label="Số sao">
-                    <InputNumber onChange={handleChangeInputNumber('danhGia')} />
+                    <InputNumber onChange={handleChangeInputNumber('danhGia')}/>
                 </Form.Item>
                 <Form.Item label="Hình ảnh">
                     <input type='file' onChange={handleChangeFile} accept='image/jpeg,image/gif,image/png' />

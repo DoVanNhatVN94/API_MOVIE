@@ -2,6 +2,8 @@ import React from 'react'
 
 export default function AdminPage() {
   return (
-    <div>AdminPage</div>
+    <div>
+      <h2 className='mt-4'>Trang của quản trị viên</h2>
+    </div>
   )
 }
