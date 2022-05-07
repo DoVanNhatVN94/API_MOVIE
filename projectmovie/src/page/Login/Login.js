@@ -21,7 +21,7 @@ export default function Login(props) {
       [name]: value,
     });
   };
-  console.log(user);
+
   const onFinish = (values) => {
     const { taiKhoan, matKhau } = values;
     setUserAccount({
