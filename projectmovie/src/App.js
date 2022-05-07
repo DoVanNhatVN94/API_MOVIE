@@ -39,6 +39,17 @@ export const history = createBrowserHistory();
 function App() {
   const dispatch = useDispatch();
 
+  const style = {
+    height: 40,
+    width: 40,
+    lineHeight: '40px',
+    borderRadius: 4,
+    backgroundColor: 'wheat',
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 14,
+  };
+
   const maND = JSON.parse(localStorage.getItem("maLoaiNguoiDung"));
   const checkLogin = maND === "QuanTri";
   dispatch(ktNDLogin());
@@ -80,7 +91,9 @@ function App() {
         </Switch>
         <Modal />
 
-        <BackTop />
+        <BackTop>
+          <div style={style}>UP</div>
+        </BackTop>
       </div>
     </Router>
   );

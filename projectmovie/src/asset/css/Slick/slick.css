@@ -1,3 +1,7 @@
+.slick_item{
+    height: 500px;
+}
+
 .btn_button{
     background-color: black;
 
@@ -6,12 +10,19 @@
     transition: all 0.5s;
 }
 .btn_button:hover{
+    box-shadow: 8px 0px 0px 0px #DCD0C0, 0px 8px 0px 0px #B1938B, -8px 0px 0px 0px #4E4E56, 0px 0px 0px 8px #DA635D, 5px 5px 17px 16px rgba(0,0,0,0);
     transform: scale(0.9);
 }
+
 .slick_tenPhim{
     font-size: 16px;
     color: wheat;
-    
+    background: black;
+    transition: all 0.5s;
+}
+.slick_tenPhim:hover{
+    padding: 5px;
+    font-size: 18px;
 }
 .slick_body{
     background-color: black;

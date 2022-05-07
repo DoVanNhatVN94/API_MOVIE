@@ -53,5 +53,3 @@ export const QLRLayChiTietPhim = (maPhim) => {
       dispatch2(hideLoading)
     }
   };
-};
-
