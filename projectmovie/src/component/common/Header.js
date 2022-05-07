@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useRouteMatch } from "react-router-dom";
 
 import { UserOutlined } from "@ant-design/icons";
 
@@ -9,10 +9,10 @@ import Register from "../../page/Register/Register";
 import Infor from "./Infor";
 
 export default function Header() {
+  const match = useRouteMatch()
   const dispatch = useDispatch();
   const history = useHistory();
   const { thongTinND } = useSelector((state) => state.UserReducer);
-  //  const activeStyle = {color: "black", background: "brown" }
 
   const checkButtonLogin = () => {
     const check = localStorage.getItem("accessToken");
@@ -119,7 +119,8 @@ export default function Header() {
                 </NavLink>
               </li>
             </ul>
-            <form className="d-flex w-50 m-auto">{checkButtonLogin()}</form>
+            <form className="d-flex w-50 m-auto">
+              {match.path==='/login'?"":checkButtonLogin()}</form>
           </div>
         </div>
       </nav>

@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Tabs } from "antd";
+import React, { Fragment, useEffect } from "react";
+import { Popover, Tabs } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { TTLichChieuHTR } from "../../redux/action/QuanLyRap/QuanLyRap";
 import { useHistory } from "react-router-dom";
@@ -8,21 +8,37 @@ const { TabPane } = Tabs;
 
 export default function BookTickerTheater() {
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
   const { DSCumRap } = useSelector((state) => state.ListMovieTheaterReducer);
-  
+
   useEffect(() => {
     dispatch(TTLichChieuHTR());
   }, []);
-  const renderLichChieuTheoCumRap=(danhSachPhim)=>{
-      return danhSachPhim.map((phim,index)=>{
-        return <button style={{height:200,width:100,backgroundColor:"black",margin:'5px'}} key={index} onClick={()=>{
-            history.push(`/detail/${phim.maPhim}`)
-        }}>
-          <img src={phim.hinhAnh} alt={phim.tenPhim} className=" img-fluid "/>
-        </button>
-      })
-  }
+  const renderLichChieuTheoCumRap = (danhSachPhim) => {
+    return danhSachPhim.map((phim, index) => {
+      return (
+        <Popover key={index} title={phim.tenPhim}>
+          <button
+            style={{
+              height: 200,
+              width: 100,
+              backgroundColor: "black",
+              margin: "5px",
+            }}
+            onClick={() => {
+              history.push(`/detail/${phim.maPhim}`);
+            }}
+          >
+            <img
+              src={phim.hinhAnh}
+              alt={phim.tenPhim}
+              className=" img-fluid "
+            />
+          </button>
+        </Popover>
+      );
+    });
+  };
 
   const renderHeTHongRapCumRap = (lstCumRap) => {
     if (lstCumRap.length === 0)
@@ -48,14 +64,14 @@ export default function BookTickerTheater() {
             }
             key={index}
           >
-           <div className="text-center p-2">
-             <h3 className="text-primary">{rap.tenCumRap}</h3>
-             <h4>{rap.diaChi}</h4>
-             <h4>Danh Sach Phim Cum Rap</h4>
-             <div className="d-flex flex-wrap ">
-               {renderLichChieuTheoCumRap(rap.danhSachPhim)}
-             </div>
-           </div>
+            <div className="text-center p-2">
+              <h3 className="text-primary">{rap.tenCumRap}</h3>
+              <h4>{rap.diaChi}</h4>
+              <h4>Danh Sach Phim Cum Rap</h4>
+              <div className="d-flex flex-wrap ">
+                {renderLichChieuTheoCumRap(rap.danhSachPhim)}
+              </div>
+            </div>
           </TabPane>
         );
       });

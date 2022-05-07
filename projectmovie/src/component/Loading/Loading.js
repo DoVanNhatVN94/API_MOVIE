@@ -22,8 +22,8 @@ export default function () {
             zIndex: 99,
           }}
         >
-          <div className=" fs-3 text-white">
-            <LoadingOutlined /> Loading
+          <div className=" fs-3 text-white d-flex align-items-center">
+            <LoadingOutlined /> <span className="pl-2">Loading</span>
           </div>
         </div>
       ) : (
