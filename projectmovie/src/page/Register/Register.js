@@ -1,13 +1,45 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import React from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 
 import { dangKy } from "../../redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
 import { GROUP_ID } from "../../util/setting";
+import {layDanhSachNguoiDungAdmin} from "../../redux/action/QuanLyNguoiDung/QuanLyNguoiDung"
+
+
 
 export default function Register() {
   let dispatch = useDispatch();
+
+  let {danhSachND} = useSelector(state=>state.UserReducer)
+
+  const taoDSNDEmail = danhSachND?.map(nd=>{
+    return nd.email
+  })
+   const taoDSNDTaiKhoan = danhSachND?.map(nd=>{
+    return nd.taiKhoan
+  })
+  console.log(taoDSNDEmail);
+  useEffect(()=>{
+    dispatch(layDanhSachNguoiDungAdmin())
+  },[])
+
+  useLayoutEffect(() => {
+    const setProperty = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    setProperty();
+
+    window.addEventListener('resize', setProperty);
+
+    return () => window.removeEventListener('resize', setProperty);
+  }, []);
+
+
+
   const formik = useFormik({
     initialValues: {
       taiKhoan: "",
@@ -20,14 +52,17 @@ export default function Register() {
     },
     validationSchema: Yup.object({
       taiKhoan: Yup.string()
-        .required("Tai khoan khong duoc de trong")
-        .max(15, "Tài khoản ko quá 15 ky tự")
+        .required("Tai khoản không được để trống")
+        .max(15, "Tài khoản không quá 15 ký tự")
         .min(3, "Tài khoản tối thiểu 3 ký tự")
-        .trim("ko de khoảng trang"),
+        .trim("Tài khoản không được chứa khoảng trắng")
+        .notOneOf(taoDSNDTaiKhoan,"Tài đã được sử dụng")
+        ,
       matKhau: Yup.string().required("Tai khoan khong duoc de trong"),
       email: Yup.string()
         .required("Tai khoan khong duoc de trong")
-        .email("ko đúng email"),
+        .email("ko đúng định dạng email")
+        .notOneOf(taoDSNDEmail,"Email đã được sử dụng"),
       soDT: Yup.string().required("Tai khoan khong duoc de trong"),
       //matches : kiểm tra biểu thức
       hoTen: Yup.string()
@@ -38,8 +73,6 @@ export default function Register() {
         ),
     }),
     onSubmit: (values) => {
-      console.log({ values });
-
       let action = dangKy(values);
       dispatch(action);
     },
@@ -115,11 +148,12 @@ export default function Register() {
           ) : null}
         </div>
 
-        <button type="submit" className="btn btn-primary">
+        <button 
+         type="submit" className="btn btn-primary">
           Dăng Ký
         </button>
-        
       </form>
+      
     </div>
   );
 }

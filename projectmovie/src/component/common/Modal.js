@@ -24,6 +24,7 @@ export default function Modal() {
       );
   };
 
+
   return (
     <Fragment>
       <div
@@ -82,7 +83,6 @@ export default function Modal() {
                   className="btn btn-outline-secondary"
                   data-bs-dismiss="modal"
                   onClick={() => {
-                    console.log(maND === "QuanTri");
                     if (maND === "QuanTri") history.push("/admin");
                   }}
                 >

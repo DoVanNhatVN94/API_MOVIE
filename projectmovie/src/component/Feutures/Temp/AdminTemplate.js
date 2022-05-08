@@ -1,4 +1,4 @@
-import { NavLink, Route } from "react-router-dom";
+import { NavLink, Route, useHistory } from "react-router-dom";
 import { Fragment, React } from "react";
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
@@ -10,6 +10,7 @@ import {
     FileAddOutlined,
     MenuUnfoldOutlined,
     MenuFoldOutlined,
+    LoginOutlined,
     HomeOutlined
 } from '@ant-design/icons';
 import { useState } from 'react';
@@ -17,6 +18,8 @@ import SubMenu from "antd/lib/menu/SubMenu";
 const { Header, Content, Footer, Sider } = Layout;
 
 export const AdminTemplate = (props) => {
+
+    const history = useHistory()
 
     const [state, setState] = useState({
         collapsed: false,
@@ -65,8 +68,12 @@ export const AdminTemplate = (props) => {
                 </Sider>    
 
                 <Layout className="site-layout">
-                    <Header className="site-layout-background" style={{ padding: 0 }}>
+                    <Header className="site-layout-background d-flex align-items-center justify-content-between" style={{ padding: 0 }}>
                         {state.collapsed ? <MenuUnfoldOutlined style={{ color: "white", fontSize: "20px" }} onClick={onCollapse} /> : <MenuFoldOutlined style={{ color: "white", fontSize: "20px" }} onClick={onCollapse} />}
+                        {<LoginOutlined style={{ color: "white", fontSize: "20px", padding: "0 10px" }}onClick={() => {
+              localStorage.clear();
+              history.push("/home");
+            }} />}
                     </Header>
                     <Content
                         style={{
