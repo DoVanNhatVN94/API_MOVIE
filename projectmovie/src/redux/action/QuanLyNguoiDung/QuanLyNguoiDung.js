@@ -2,13 +2,14 @@ import { history } from "../../../App";
 import manager from "../../../API/API";
 import { ktLogin, loginError, loginSuccess, LAY_DANH_SACH_NGUOI_DUNG_AD, LAY_THONG_TIN_NGUOI_DUNG_AD, CapNhapNDMessage } from "../Type";
 import { displayLoading, hideLoading } from "../LoadingAction/LoadingAction";
+import { Alert } from "react-bootstrap";
 
 export const dangKy = (thongTinND) => {
   return async (dispatch2) => {
     try {
       const result = await manager.postDangKy(thongTinND);
       console.log({ result });
-      history.push("/login");
+      history.push("/home");
     } catch (error) {
       console.log("error", error);
       console.log("error", error.response?.data);

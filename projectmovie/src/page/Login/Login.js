@@ -3,15 +3,16 @@ import { useDispatch } from "react-redux";
 import { dangNhap } from "../../redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
 import { Form, Input, Button, Checkbox } from "antd";
 import Register from "../Register/Register";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
 export default function Login(props) {
-  
   let [user, setUserAccount] = useState({
     taiKhoan: "",
     matKhau: "",
   });
-
-  // const history = useHistory();
+  const match = useRouteMatch()
+  const history = useHistory()
+ 
   const dispatch = useDispatch();
   const hanleInput = (event) => {
     let { value, name } = event.target;
@@ -104,14 +105,21 @@ export default function Login(props) {
           span: 16,
         }}
       >
-        <Button type="primary" htmlType="submit"  data-bs-toggle="modal"
-          data-bs-target="#staticBackdrop">
+        <Button
+          type="primary"
+          htmlType="submit"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
           login
         </Button>
         <Button
           type="success"
           htmlType="button"
           onClick={() => {
+            if(match.url==="/login")
+            history.push('/register')
+            else
             dispatch({
               type: "OPEN_MODAL",
               Component: <Register />,
@@ -120,7 +128,7 @@ export default function Login(props) {
           }}
         >
           Register
-        </Button>   
+        </Button>
       </Form.Item>
     </Form>
   );

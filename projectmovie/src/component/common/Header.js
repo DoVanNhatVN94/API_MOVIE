@@ -120,7 +120,7 @@ export default function Header() {
               </li>
             </ul>
             <form className="d-flex w-50 m-auto">
-              {match.path==='/login'?"":checkButtonLogin()}</form>
+              {match.path==='/login'?"":match.path==='/register'?'': checkButtonLogin()}</form>
           </div>
         </div>
       </nav>
