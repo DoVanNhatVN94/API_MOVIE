@@ -10,33 +10,11 @@ import {
     FileAddOutlined,
     MenuUnfoldOutlined,
     MenuFoldOutlined,
+    HomeOutlined
 } from '@ant-design/icons';
 import { useState } from 'react';
 import SubMenu from "antd/lib/menu/SubMenu";
 const { Header, Content, Footer, Sider } = Layout;
-
-function getItem(label, key, icon, children) {
-    return {
-        key,
-        icon,
-        children,
-        label,
-    };
-}
-
-const items = [
-    getItem('Option 1', '1', <PieChartOutlined />),
-    getItem('Option 2', '2', <DesktopOutlined />),
-    getItem('User', 'sub1', <UserOutlined />, [
-        getItem('Tom', '3'),
-        getItem('Bill', '4'),
-        getItem('Alex', '5'),
-    ]),
-    getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-    getItem('Files', '9', <FileOutlined />),
-];
-
-
 
 export const AdminTemplate = (props) => {
 
@@ -80,8 +58,11 @@ export const AdminTemplate = (props) => {
                                 <NavLink to='/admin/user/addnew'>Add new User</NavLink>
                             </Menu.Item>
                         </SubMenu>
+                        <Menu.Item key="4" icon={<HomeOutlined />}>
+                            <NavLink to='/home'>Home</NavLink>
+                        </Menu.Item>
                     </Menu>
-                </Sider>
+                </Sider>    
 
                 <Layout className="site-layout">
                     <Header className="site-layout-background" style={{ padding: 0 }}>
