@@ -62,7 +62,7 @@ export const AdminTemplate = (props) => {
                             <NavLink to='/home'>Home</NavLink>
                         </Menu.Item>
                     </Menu>
-                </Sider>
+                </Sider>    
 
                 <Layout className="site-layout">
                     <Header className="site-layout-background" style={{ padding: 0 }}>
