@@ -44,15 +44,15 @@ export const dangNhap = (thongTinND) => {
       if (result.status === 200) {
         const data = JSON.stringify(result.data.content.accessToken);
         const ma = JSON.stringify(result.data.content.maLoaiNguoiDung);
-        localStorage.setItem("accessToken", data);
-        localStorage.setItem("maLoaiNguoiDung", ma);
+      await  localStorage.setItem("accessToken", data);
+      await  localStorage.setItem("maLoaiNguoiDung", ma);
 
-        dispatch2({
+      await  dispatch2({
           type: ktLogin,
           user: result.data.content,
         });
 
-        dispatch2({
+       await dispatch2({
           type: loginSuccess,
           message: result.data.message,
         });

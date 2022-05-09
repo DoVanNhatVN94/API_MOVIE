@@ -14,7 +14,7 @@ import { UserTemplate } from "./component/Feutures/Temp/UserTemplate";
 import Modal from "./component/common/Modal";
 import BookMovie from "./page/BookMovie/BookMovie";
 import { useDispatch } from "react-redux";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { ktNDLogin } from "./redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
 
 // devNam
@@ -33,6 +33,8 @@ import Loading from "./component/Loading/Loading";
 const BookTemplateLazy = lazy(() =>
   import("./component/Feutures/Temp/BookTemplate")
 );
+export const maND = JSON?.parse(localStorage.getItem("maLoaiNguoiDung"));
+export const checkLogin = maND === "QuanTri";
 
 export const history = createBrowserHistory();
 
@@ -42,17 +44,16 @@ function App() {
   const style = {
     height: 40,
     width: 40,
-    lineHeight: '40px',
+    lineHeight: "40px",
     borderRadius: 4,
-    backgroundColor: 'wheat',
-    color: '#fff',
-    textAlign: 'center',
+    backgroundColor: "wheat",
+    color: "#fff",
+    textAlign: "center",
     fontSize: 14,
   };
-
-  const maND = JSON.parse(localStorage.getItem("maLoaiNguoiDung"));
-  const checkLogin = maND === "QuanTri";
-  dispatch(ktNDLogin());
+  useEffect(() => {
+    dispatch(ktNDLogin());
+  }, []);
 
   return (
     <Router history={history}>
@@ -69,12 +70,36 @@ function App() {
           <AdminTemplate exact path="/admin" component={AdminPage} />
           <DetailTemplate exact path="/detail/:id" component={DetailPage} />
           <AdminTemplate exact path="/admin/films" component={AdminListFilm} />
-          <AdminTemplate exact path="/admin/films/addnew" component={AdminAddFilm} />
-          <AdminTemplate exact path="/admin/films/edit/:id" component={AdminEditFilm} />
-          <AdminTemplate exact path="/admin/user/edit/:id" component={AdminEditUser} />
-          <AdminTemplate exact path="/admin/user/addnew" component={AdminAddUser} />
-          <AdminTemplate exact path="/admin/films/showtime/:id" component={AdminShowTime} />
-          <AdminTemplate exact path="/admin/user" component={QuanLyNguoiDungAD} />
+          <AdminTemplate
+            exact
+            path="/admin/films/addnew"
+            component={AdminAddFilm}
+          />
+          <AdminTemplate
+            exact
+            path="/admin/films/edit/:id"
+            component={AdminEditFilm}
+          />
+          <AdminTemplate
+            exact
+            path="/admin/user/edit/:id"
+            component={AdminEditUser}
+          />
+          <AdminTemplate
+            exact
+            path="/admin/user/addnew"
+            component={AdminAddUser}
+          />
+          <AdminTemplate
+            exact
+            path="/admin/films/showtime/:id"
+            component={AdminShowTime}
+          />
+          <AdminTemplate
+            exact
+            path="/admin/user"
+            component={QuanLyNguoiDungAD}
+          />
           <Suspense
             fallback={
               <Space style={{ width: "100%" }}>

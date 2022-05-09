@@ -1,16 +1,28 @@
-import {useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import React from "react";
+import React, { useEffect } from "react";
 
-import { capNhapND } from '../../redux/action/QuanLyNguoiDung/QuanLyNguoiDung'
-import { GROUP_ID } from '../../util/setting';
+import {
+  capNhapND,
+  layDanhSachNguoiDungAdmin,
+} from "../../redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
+import { GROUP_ID } from "../../util/setting";
 
 export default function UpdateInfo() {
   const { thongTinND } = useSelector((state) => state.UserReducer);
-  console.log(thongTinND);
+  const { danhSachND } = useSelector((state) => state.UserReducer);
 
-  let dispatch = useDispatch()
+  let dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(layDanhSachNguoiDungAdmin());
+  }, []);
+
+  const taoDSNDEmail = danhSachND?.map((nd) => {
+    if(thongTinND?.email!==nd.email)
+    return nd.email;
+  });
+
 
   const formik = useFormik({
     initialValues: {
@@ -19,22 +31,28 @@ export default function UpdateInfo() {
       email: "",
       soDT: "",
       maNhom: GROUP_ID,
-      maLoaiNguoiDung:"KhachHang",
+      maLoaiNguoiDung: "KhachHang",
       hoTen: "",
     },
     validationSchema: Yup.object({
-      taiKhoan: Yup.string().required("Tai khoan khong duoc de trong").max(15,"Tài khoản ko quá 15 ky tự").min(3,"Tài khoản tối thiểu 3 ký tự").trim('ko de khoảng trang'),
-      matKhau: Yup.string().required("Mật Khẩu khong duoc de trong"),
-      email: Yup.string().required("email khong duoc de trong").email("Không đúng định dạng email"),
-      soDT: Yup.string().required("Số ĐT khong duoc de trong"),
+      taiKhoan: Yup.string(),
+      matKhau: Yup.string().required("Mật khẩu không được để trống"),
+      email: Yup.string()
+        .required("Email khong duoc de trong")
+        .email("Email ko đúng định dạng email")
+        .notOneOf(taoDSNDEmail, "Email đã được sử dụng"),
+      soDT: Yup.string().required("Số điện thoai khong duoc de trong"),
       //matches : kiểm tra biểu thức
-      hoTen: Yup.string().required("Họ và tên khong duoc de trong").matches(/^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý\\s]+$/,"Tên chỉ có ký tự chữ hoy"),
-      
+      hoTen: Yup.string()
+        .required("Họ Tên khong duoc de trong")
+        .matches(
+          /^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý\\s]+$/,
+          "Tên chỉ có ký tự chữ hoy"
+        ),
     }),
     onSubmit: (values) => {
-
-      let action = capNhapND(values)
-      dispatch(action)
+      let action = capNhapND(values);
+      dispatch(action);
     },
   });
 
@@ -44,7 +62,7 @@ export default function UpdateInfo() {
         <div className="mb-3">
           <label>Tai khoan</label>
           <input
-          disabled
+            disabled
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             type="text"
@@ -52,9 +70,9 @@ export default function UpdateInfo() {
             className="form-control"
             defaultValue={thongTinND.taiKhoan}
           />
-           {formik.touched.taiKhoan && formik.errors.taiKhoan ? (
-         <div className="alert alert-danger">{formik.errors.taiKhoan}</div>
-       ) : null}
+          {formik.touched.taiKhoan && formik.errors.taiKhoan ? (
+            <div className="alert alert-danger">{formik.errors.taiKhoan}</div>
+          ) : null}
         </div>
         <div className="mb-3">
           <label>Mat khau</label>
@@ -66,9 +84,9 @@ export default function UpdateInfo() {
             className="form-control"
             defaultValue={thongTinND.matKhau}
           />
-           {formik.touched.matKhau && formik.errors.matKhau ? (
-         <div className="alert alert-danger">{formik.errors.matKhau}</div>
-       ) : null}
+          {formik.touched.matKhau && formik.errors.matKhau ? (
+            <div className="alert alert-danger">{formik.errors.matKhau}</div>
+          ) : null}
         </div>
         <div className="mb-3">
           <label>Email </label>
@@ -80,9 +98,9 @@ export default function UpdateInfo() {
             className="form-control"
             defaultValue={thongTinND.email}
           />
-           {formik.touched.email && formik.errors.email ? (
-         <div className="alert alert-danger">{formik.errors.email}</div>
-       ) : null}
+          {formik.touched.email && formik.errors.email ? (
+            <div className="alert alert-danger">{formik.errors.email}</div>
+          ) : null}
         </div>
         <div className="mb-3">
           <label>Sdt </label>
@@ -95,8 +113,8 @@ export default function UpdateInfo() {
             defaultValue={thongTinND.soDT}
           />
           {formik.touched.soDT && formik.errors.soDT ? (
-         <div className="alert alert-danger">{formik.errors.soDT}</div>
-       ) : null}
+            <div className="alert alert-danger">{formik.errors.soDT}</div>
+          ) : null}
         </div>
         <div className="mb-3">
           <label>Ho Ten </label>
@@ -108,22 +126,27 @@ export default function UpdateInfo() {
             className="form-control"
             defaultValue={thongTinND.hoTen}
           />
-           {formik.touched.hoTen && formik.errors.hoTen ? (
-         <div className="alert alert-danger">{formik.errors.hoTen}</div>
-       ) : null}
+          {formik.touched.hoTen && formik.errors.hoTen ? (
+            <div className="alert alert-danger">{formik.errors.hoTen}</div>
+          ) : null}
         </div>
 
-        <button data-bs-toggle="modal"
-          data-bs-target="#staticBackdrop" type="submit" className="btn btn-primary">
+        <button
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+          type="submit"
+          className="btn btn-primary"
+        >
           Cập Nhập
         </button>
-        <button  data-bs-dismiss="modal"
-                aria-label="Close" className='btn btn-outline-danger my-2'>
+        <button
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          className="btn btn-outline-danger my-2"
+        >
           Hủy Cập Nhập
         </button>
       </form>
     </div>
   );
-
 }
-

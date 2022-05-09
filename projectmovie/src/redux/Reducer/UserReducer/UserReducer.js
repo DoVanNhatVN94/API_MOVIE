@@ -4,6 +4,7 @@ import { CapNhapNDMessage, ktLogin, LAY_DANH_SACH_NGUOI_DUNG_AD, LAY_THONG_TIN_N
 
 const user = {
   thongTinND: {},
+  maND:"",
   message: "",
 
   danhSachND: [],
@@ -15,7 +16,7 @@ export const UserReducer = (state = user, action) => {
   switch (action.type) {
     case ktLogin:
       state.thongTinND = action.user;
-
+      state.maND= action.user.maLoaiNguoiDung;
       return { ...state };
 
     case loginSuccess:

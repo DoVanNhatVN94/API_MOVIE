@@ -7,8 +7,8 @@ import { Result } from "antd";
 export default function Modal() {
   const history = useHistory();
   let { Component, id } = useSelector((state) => state.ModalReducer);
-  const { message } = useSelector((state) => state.UserReducer);
-  const maND = JSON.parse(localStorage.getItem("maLoaiNguoiDung"));
+  const { message,maND } = useSelector((state) => state.UserReducer);
+
   const check = localStorage.getItem("accessToken");
   const checkButtonLogin = () => {
     if (check === null)
@@ -23,7 +23,7 @@ export default function Modal() {
         </button>
       );
   };
-
+console.log(maND);
 
   return (
     <Fragment>
@@ -83,7 +83,8 @@ export default function Modal() {
                   className="btn btn-outline-secondary"
                   data-bs-dismiss="modal"
                   onClick={() => {
-                    if (maND === "QuanTri") history.push("/admin");
+                    if(maND==="QuanTri")
+                     history.push("/admin");
                   }}
                 >
                   Close
