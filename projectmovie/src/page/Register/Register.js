@@ -17,28 +17,14 @@ export default function Register() {
   const taoDSNDEmail = danhSachND?.map(nd=>{
     return nd.email
   })
+  console.log(taoDSNDEmail);
    const taoDSNDTaiKhoan = danhSachND?.map(nd=>{
     return nd.taiKhoan
   })
-  console.log(taoDSNDEmail);
+  console.log(taoDSNDTaiKhoan);
   useEffect(()=>{
     dispatch(layDanhSachNguoiDungAdmin())
   },[])
-
-  useLayoutEffect(() => {
-    const setProperty = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    };
-
-    setProperty();
-
-    window.addEventListener('resize', setProperty);
-
-    return () => window.removeEventListener('resize', setProperty);
-  }, []);
-
-
 
   const formik = useFormik({
     initialValues: {
@@ -56,17 +42,17 @@ export default function Register() {
         .max(15, "Tài khoản không quá 15 ký tự")
         .min(3, "Tài khoản tối thiểu 3 ký tự")
         .trim("Tài khoản không được chứa khoảng trắng")
-        .notOneOf(taoDSNDTaiKhoan,"Tài đã được sử dụng")
+        .notOneOf(taoDSNDTaiKhoan,"Tài khoản này đã được sử dụng")
         ,
-      matKhau: Yup.string().required("Tai khoan khong duoc de trong"),
+      matKhau: Yup.string().required("Mật khẩu không được để trống"),
       email: Yup.string()
-        .required("Tai khoan khong duoc de trong")
-        .email("ko đúng định dạng email")
+        .required("Email khong duoc de trong")
+        .email("Email ko đúng định dạng email")
         .notOneOf(taoDSNDEmail,"Email đã được sử dụng"),
-      soDT: Yup.string().required("Tai khoan khong duoc de trong"),
+      soDT: Yup.string().required("Số điện thoai khong duoc de trong"),
       //matches : kiểm tra biểu thức
       hoTen: Yup.string()
-        .required("Tai khoan khong duoc de trong")
+        .required("Họ Tên khong duoc de trong")
         .matches(
           /^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý\\s]+$/,
           "Tên chỉ có ký tự chữ hoy"

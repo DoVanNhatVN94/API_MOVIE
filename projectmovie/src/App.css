@@ -56,5 +56,5 @@ ul {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  /* max-height: calc(var(--vh, 1vh) * 100 - 100px); */
+
 }

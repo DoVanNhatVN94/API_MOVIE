@@ -9,10 +9,10 @@ import Register from "../../page/Register/Register";
 import Infor from "./Infor";
 
 export default function Header() {
-  const match = useRouteMatch()
+  const match = useRouteMatch();
   const dispatch = useDispatch();
   const history = useHistory();
-  const { thongTinND } = useSelector((state) => state.UserReducer);
+  const { thongTinND, maND } = useSelector((state) => state.UserReducer);
 
   const checkButtonLogin = () => {
     const check = localStorage.getItem("accessToken");
@@ -84,6 +84,19 @@ export default function Header() {
         </Fragment>
       );
   };
+  const checkNavAdmin = () => {
+    if (maND === "QuanTri")
+      return (
+        <NavLink
+          activeClassName="myActive"
+          activeStyle={{ color: "wheat", border: "2px solid wheat" }}
+          className="nav-link p-3 text-center fs-4"
+          to="/admin"
+        >
+          Admin
+        </NavLink>
+      );
+  };
 
   return (
     <Fragment>
@@ -118,9 +131,18 @@ export default function Header() {
                   Home
                 </NavLink>
               </li>
+              <li>
+                 {checkNavAdmin()}
+              </li>
+             
             </ul>
             <form className="d-flex w-50 m-auto">
-              {match.path==='/login'?"":match.path==='/register'?'': checkButtonLogin()}</form>
+              {match.path === "/login"
+                ? ""
+                : match.path === "/register"
+                ? ""
+                : checkButtonLogin()}
+            </form>
           </div>
         </div>
       </nav>
