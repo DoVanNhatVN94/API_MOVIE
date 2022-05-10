@@ -18,6 +18,8 @@ import { useState } from 'react';
 
 import SubMenu from "antd/lib/menu/SubMenu";
 import { checkLogin } from "../../../App";
+import { useDispatch } from "react-redux";
+import { dangSuat } from "../../../redux/action/Type";
 const { Header, Content, Footer, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
@@ -47,6 +49,8 @@ const items = [
 
 export const AdminTemplate = (props) => {
   const history = useHistory();
+
+  const dispatch = useDispatch()
 
   const [state, setState] = useState({
     collapsed: false,
@@ -125,6 +129,7 @@ export const AdminTemplate = (props) => {
                       }}
                       onClick={async () => {
                         await localStorage.clear();
+                        await dispatch({type:dangSuat})
                         history.push("/");
                       }}
                     />
