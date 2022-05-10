@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useRouteMatch } from "react-router-dom";
 
@@ -7,12 +7,17 @@ import { UserOutlined } from "@ant-design/icons";
 import Login from "../../page/Login/Login";
 import Register from "../../page/Register/Register";
 import Infor from "./Infor";
+import { ktNDLogin } from "../../redux/action/QuanLyNguoiDung/QuanLyNguoiDung";
+import { dangSuat } from "../../redux/action/Type";
 
 export default function Header() {
   const match = useRouteMatch();
   const dispatch = useDispatch();
   const history = useHistory();
   const { thongTinND, maND } = useSelector((state) => state.UserReducer);
+  useEffect(()=>{
+    dispatch(ktNDLogin())
+  },[])  
 
   const checkButtonLogin = () => {
     const check = localStorage.getItem("accessToken");
@@ -74,8 +79,9 @@ export default function Header() {
           </button>
           <button
             className="btn btn-outline-danger m-1"
-            onClick={() => {
-              localStorage.clear();
+            onClick={async()  => {
+             await localStorage.clear();
+             await dispatch({type:dangSuat})
               history.push("/home");
             }}
           >

@@ -23,8 +23,6 @@ export default function Modal() {
         </button>
       );
   };
-console.log(maND);
-
   return (
     <Fragment>
       <div

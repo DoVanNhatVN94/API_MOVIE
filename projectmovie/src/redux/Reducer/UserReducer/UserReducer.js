@@ -1,5 +1,5 @@
 
-import { CapNhapNDMessage, ktLogin, LAY_DANH_SACH_NGUOI_DUNG_AD, LAY_THONG_TIN_NGUOI_DUNG_AD, loginError, loginSuccess } from "../../action/Type";
+import { CapNhapNDMessage, dangSuat, ktLogin, LAY_DANH_SACH_NGUOI_DUNG_AD, LAY_THONG_TIN_NGUOI_DUNG_AD, loginError, loginSuccess } from "../../action/Type";
 
 
 const user = {
@@ -17,6 +17,10 @@ export const UserReducer = (state = user, action) => {
     case ktLogin:
       state.thongTinND = action.user;
       state.maND= action.user.maLoaiNguoiDung;
+      return { ...state };
+
+    case dangSuat:
+      state.maND=""
       return { ...state };
 
     case loginSuccess:
