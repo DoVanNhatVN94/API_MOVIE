@@ -17,6 +17,7 @@ export default function Header() {
   const { thongTinND, maND } = useSelector((state) => state.UserReducer);
   useEffect(()=>{
     dispatch(ktNDLogin())
+    console.log("header");
   },[])  
 
   const checkButtonLogin = () => {

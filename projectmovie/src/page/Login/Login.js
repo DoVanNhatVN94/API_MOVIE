@@ -10,9 +10,9 @@ export default function Login(props) {
     taiKhoan: "",
     matKhau: "",
   });
-  const match = useRouteMatch()
-  const history = useHistory()
- 
+  const match = useRouteMatch();
+  const history = useHistory();
+
   const dispatch = useDispatch();
   const hanleInput = (event) => {
     let { value, name } = event.target;
@@ -117,14 +117,13 @@ export default function Login(props) {
           type="success"
           htmlType="button"
           onClick={() => {
-            if(match.url==="/login")
-            history.push('/register')
+            if (match.url === "/login") history.push("/register");
             else
-            dispatch({
-              type: "OPEN_MODAL",
-              Component: <Register />,
-              id: "Register",
-            });
+              dispatch({
+                type: "OPEN_MODAL",
+                Component: <Register />,
+                id: "Register",
+              });
           }}
         >
           Register
