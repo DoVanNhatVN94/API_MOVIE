@@ -1,5 +1,7 @@
+import Login from "../../../page/Login/Login"
+
 const component = {
-  Component: <p>Default</p>,
+  Component: <p>Hello</p>,
   id: "",
 };
 

@@ -1,16 +1,17 @@
+/** @format */
 
 import axios from "axios";
 
-const acces_stoken=JSON.parse(localStorage.getItem('accessToken'));
-export const Acces_stoken ="Bearer "+acces_stoken
+const acces_stoken = JSON?.parse(localStorage.getItem("accessToken"));
 
+export const Acces_stoken = "Bearer " + acces_stoken;
 
 export const TOKEN_MOVIE =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCDEkMOgIE7hurVuZyAwNSIsIkhldEhhblN0cmluZyI6IjE1LzA5LzIwMjIiLCJIZXRIYW5UaW1lIjoiMTY2MzIwMDAwMDAwMCIsIm5iZiI6MTYzNDgzNTYwMCwiZXhwIjoxNjYzMzQ3NjAwfQ.uVU26Zzhj9Tt11v92mEFOSGk1Ow-on5dWy9q9vuSVt4";
 
-export const DOMAIN = "https://movienew.cybersoft.edu.vn"
+export const DOMAIN = "https://movienew.cybersoft.edu.vn";
 
-export const DOMAIN_BE = "https://localhost:5001"
+export const DOMAIN_BE = "https://localhost:5001";
 
 export const GROUP_ID = "GP02";
 
@@ -29,8 +30,6 @@ export const QUAN_LY_DAT_VE_LAY_DANH_SACH_PHONG_VE =
 
 export const QUAN_LY_NGUOI_DUNG_DANG_KY =
   "https://movienew.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy";
-
-
 
 export const QUAN_LY_PHIM_THEM_PHIM_UPLOAD_HINH =
   "https://movienew.cybersoft.edu.vn/api/QuanLyPhim/ThemPhimUploadHinh";
@@ -58,12 +57,11 @@ export const http = axios.create({
 });
 
 http.interceptors.request.use(
-  
   (confirm) => {
     confirm.headers = {
       ...confirm.headers,
       TokenCybersoft: TOKEN_MOVIE,
-      Authorization: Acces_stoken
+      Authorization: Acces_stoken,
     };
     return confirm;
   },
